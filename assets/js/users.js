@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  User Management JS
- File : users.js
+ Google Sheet Based Version
 =====================================================*/
 
 
@@ -17,10 +17,16 @@ const API_URL =
 
 
 
+/*=====================================================
+ PAGE LOAD
+=====================================================*/
+
 
 document.addEventListener(
+
 "DOMContentLoaded",
-()=>{
+
+function(){
 
 loadUsers();
 
@@ -34,87 +40,38 @@ loadUsers();
 
 
 
-
 /*=====================================================
- API CALL
- CORS SAFE
+ LOAD USERS JSONP
 =====================================================*/
 
 
-async function apiCall(payload){
+function loadUsers(){
 
 
-const response =
+const callbackName =
 
-await fetch(
-API_URL,
-{
-
-
-method:"POST",
-
-
-body:
-
-JSON.stringify(payload)
-
-
-}
-);
+"usersCallback";
 
 
 
-return await response.json();
+window[callbackName] =
 
+function(response){
 
-}
-
-
-
-
-
-
-
-
-/*=====================================================
- LOAD USERS
-=====================================================*/
-
-
-async function loadUsers(){
-
-
-try{
 
 
 console.log(
-"Loading Users..."
+"Users Response",
+response
 );
 
 
 
-const result =
-
-await apiCall({
-
-action:"users"
-
-});
-
-
-
-console.log(result);
-
-
-
-
-if(
-result.success
-){
+if(response.success){
 
 
 renderUsers(
-result.data
+response.data
 );
 
 
@@ -123,36 +80,62 @@ result.data
 else{
 
 
-alert(
-result.message
-);
-
-
-}
-
-
-
-}
-
-
-catch(error){
-
-
 console.error(
-error
+response.message
 );
 
 
 alert(
-"Server Connection Failed"
+response.message
 );
 
 
 }
 
 
-}
 
+removeScript();
+
+
+};
+
+
+
+
+
+
+const script =
+
+document.createElement(
+"script"
+);
+
+
+
+script.id =
+"usersAPI";
+
+
+
+script.src =
+
+API_URL
+
++
+"?action=users&callback="
+
++
+callbackName;
+
+
+
+document.body.appendChild(
+script
+);
+
+
+
+}
 
 
 
@@ -171,10 +154,17 @@ function renderUsers(users){
 
 const table =
 
-document
-.getElementById(
+document.getElementById(
 "userTable"
 );
+
+
+
+if(!table){
+
+return;
+
+}
 
 
 
@@ -182,8 +172,11 @@ table.innerHTML="";
 
 
 
+
 users.forEach(
-user=>{
+
+function(user){
+
 
 
 const row =
@@ -194,22 +187,33 @@ document.createElement(
 
 
 
-row.innerHTML =
+row.innerHTML = `
 
-
-`
 
 <td>
-${user.username}
+${user.username || ""}
 </td>
 
-<td>
-${user.name}
-</td>
 
 <td>
-${user.role}
+${user.name || ""}
 </td>
+
+
+<td>
+${user.role || ""}
+</td>
+
+
+<td>
+${user.nyayaPanchayat || ""}
+</td>
+
+
+<td>
+${user.schoolCode || ""}
+</td>
+
 
 <td>
 
@@ -227,6 +231,7 @@ user.active
 
 </td>
 
+
 `;
 
 
@@ -240,8 +245,8 @@ table.appendChild(row);
 );
 
 
-}
 
+}
 
 
 
@@ -251,140 +256,26 @@ table.appendChild(row);
 
 
 /*=====================================================
- CREATE USER
+ REMOVE JSONP SCRIPT
 =====================================================*/
 
 
-async function createUser(){
+function removeScript(){
 
 
-const user = {
+const script =
 
-
-username:
-
-document
-.getElementById("username")
-.value,
-
-
-
-password:
-
-document
-.getElementById("password")
-.value,
-
-
-
-role:
-
-document
-.getElementById("role")
-.value,
-
-
-
-name:
-
-document
-.getElementById("name")
-.value
-
-
-};
-
-
-
-
-
-if(
-!user.username ||
-!user.password ||
-!user.name
-){
-
-
-alert(
-"Please fill all fields"
-);
-
-
-return;
-
-
-}
-
-
-
-
-
-try{
-
-
-const result =
-
-await apiCall({
-
-action:"createUser",
-
-user:user
-
-});
-
-
-
-
-console.log(result);
-
-
-
-
-if(
-result.success
-){
-
-
-alert(
-"User Created Successfully"
+document.getElementById(
+"usersAPI"
 );
 
 
 
-loadUsers();
+if(script){
 
-
-
-}
-
-else{
-
-
-alert(
-result.message
-);
-
+script.remove();
 
 }
-
-
-
-}
-
-
-catch(error){
-
-
-console.error(error);
-
-
-alert(
-"Create User Failed"
-);
-
-
-}
-
 
 
 }
