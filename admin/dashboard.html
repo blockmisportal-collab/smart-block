@@ -10,20 +10,26 @@
 
 
 <title>
-SMART FORM ENTERPRISE v6.0 - Admin Dashboard
+SMART FORM ENTERPRISE v6.1 - Admin Dashboard
 </title>
 
 
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 margin:0;
+
 padding:0;
+
 font-family:
 "Segoe UI",
 Arial,
 sans-serif;
+
 }
 
 
@@ -34,15 +40,94 @@ background:#f4f7fb;
 
 min-height:100vh;
 
+display:flex;
+
 }
 
 
 
-.header{
+/*=====================
+ SIDEBAR
+=====================*/
+
+
+.sidebar{
+
+width:250px;
 
 background:#0d47a1;
 
 color:white;
+
+min-height:100vh;
+
+padding:20px;
+
+}
+
+
+
+.logo{
+
+font-size:22px;
+
+font-weight:bold;
+
+margin-bottom:30px;
+
+}
+
+
+
+.menu{
+
+list-style:none;
+
+}
+
+
+
+.menu li{
+
+padding:14px;
+
+margin-bottom:8px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+
+
+.menu li:hover{
+
+background:#1565c0;
+
+}
+
+
+
+/*=====================
+ MAIN
+=====================*/
+
+
+.main{
+
+flex:1;
+
+}
+
+
+
+/* HEADER */
+
+
+.header{
+
+background:white;
 
 padding:20px;
 
@@ -52,13 +137,8 @@ justify-content:space-between;
 
 align-items:center;
 
-}
-
-
-
-.header h1{
-
-font-size:24px;
+box-shadow:
+0 2px 10px rgba(0,0,0,.1);
 
 }
 
@@ -82,12 +162,18 @@ cursor:pointer;
 
 
 
+/* CONTENT */
+
+
 .container{
 
 padding:25px;
 
 }
 
+
+
+/* PROFILE */
 
 
 .profile{
@@ -98,10 +184,10 @@ padding:20px;
 
 border-radius:15px;
 
+margin-bottom:25px;
+
 box-shadow:
 0 5px 20px rgba(0,0,0,.1);
-
-margin-bottom:25px;
 
 }
 
@@ -113,6 +199,9 @@ color:#0d47a1;
 
 }
 
+
+
+/* CARDS */
 
 
 .cards{
@@ -149,8 +238,6 @@ box-shadow:
 
 color:#555;
 
-margin-bottom:15px;
-
 }
 
 
@@ -163,18 +250,23 @@ font-weight:bold;
 
 color:#0d47a1;
 
+margin-top:15px;
+
 }
 
 
 
 .status{
 
-color:green !important;
+color:green!important;
 
-font-size:24px !important;
+font-size:24px!important;
 
 }
 
+
+
+/* FOOTER */
 
 
 .footer{
@@ -199,18 +291,86 @@ color:#777;
 <body>
 
 
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+
+<div class="logo">
+
+SMART FORM
+<br>
+
+ENTERPRISE v6.1
+
+</div>
+
+
+
+<ul class="menu">
+
+
+<li>
+🏠 Dashboard
+</li>
+
+
+<li>
+👥 User Management
+</li>
+
+
+<li>
+🏫 School Management
+</li>
+
+
+<li>
+📝 Form Builder
+</li>
+
+
+<li>
+📊 Reports MIS
+</li>
+
+
+<li>
+⚙ Settings
+</li>
+
+
+
+</ul>
+
+
+</div>
+
+
+
+
+
+<!-- MAIN -->
+
+
+<div class="main">
+
+
+
 <header class="header">
 
 
 <div>
 
-<h1>
-SMART FORM ENTERPRISE v6.0
-</h1>
+
+<h2>
+ADMIN DASHBOARD
+</h2>
 
 
 <p>
-ADMIN DASHBOARD
+SMART FORM ENTERPRISE
 </p>
 
 
@@ -233,7 +393,10 @@ LOGOUT
 
 
 
+
+
 <div class="container">
+
 
 
 <div class="profile">
@@ -262,6 +425,8 @@ ADMIN
 
 
 </div>
+
+
 
 
 
@@ -322,9 +487,24 @@ Active Users
 <div class="card">
 
 <h3>
-System Status
+Pending Forms
 </h3>
 
+<p id="pendingForms">
+0
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+System Status
+</h3>
 
 <p
 id="systemStatus"
@@ -349,9 +529,11 @@ ONLINE
 
 
 
+
+
 <div class="footer">
 
-SMART FORM ENTERPRISE v6.0
+SMART FORM ENTERPRISE v6.1
 
 <br>
 
@@ -361,11 +543,15 @@ Google Apps Script + Google Sheets
 
 
 
+</div>
 
 
-<!-- ONLY ONE JS FILE -->
+
+
+
 
 <script src="../assets/js/dashboard.js"></script>
+
 
 
 </body>
