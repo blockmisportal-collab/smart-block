@@ -1,17 +1,11 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.0
- Admin Dashboard JavaScript
- File : dashboard.js
+ Admin Dashboard JS
 =====================================================*/
 
 
 "use strict";
 
-
-
-/*=====================================================
- API CONFIGURATION
-=====================================================*/
 
 
 const API_URL =
@@ -22,19 +16,11 @@ const API_URL =
 
 
 
-/*=====================================================
- PAGE LOAD
-=====================================================*/
-
-
 document.addEventListener(
 
 "DOMContentLoaded",
 
 function(){
-
-
-loadUser();
 
 
 loadDashboard();
@@ -51,67 +37,6 @@ setupLogout();
 
 
 
-
-/*=====================================================
- LOAD LOGIN USER
-=====================================================*/
-
-
-function loadUser(){
-
-
-const user =
-
-sessionStorage.getItem("USER");
-
-
-
-if(user){
-
-
-const data =
-
-JSON.parse(user);
-
-
-
-if(document.getElementById("userName")){
-
-
-document.getElementById("userName")
-.innerHTML =
-data.name || "Administrator";
-
-
-}
-
-
-
-if(document.getElementById("userRole")){
-
-
-document.getElementById("userRole")
-.innerHTML =
-data.role || "ADMIN";
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-/*=====================================================
- LOAD DASHBOARD DATA
-=====================================================*/
 
 
 async function loadDashboard(){
@@ -141,17 +66,15 @@ headers:{
 
 "Content-Type":
 
-"application/json"
-
+"text/plain"
 
 },
 
 
+
 body:JSON.stringify({
 
-
 action:"dashboard"
-
 
 })
 
@@ -180,37 +103,44 @@ result
 
 
 
-
 if(result.success){
 
 
+document.getElementById(
+"totalSchools"
+).innerHTML =
 
-updateDashboard(
+result.data.totalSchools;
 
-result.data
 
-);
 
+document.getElementById(
+"totalResponses"
+).innerHTML =
+
+result.data.totalResponses;
+
+
+
+document.getElementById(
+"activeUsers"
+).innerHTML =
+
+result.data.activeUsers;
+
+
+
+document.getElementById(
+"systemStatus"
+).innerHTML =
+
+result.data.systemStatus;
 
 
 }
 
-else{
-
-
-console.error(
-
-result.message
-
-);
-
 
 }
-
-
-}
-
-
 
 catch(error){
 
@@ -227,7 +157,6 @@ error
 }
 
 
-
 }
 
 
@@ -236,125 +165,39 @@ error
 
 
 
-
-/*=====================================================
- UPDATE DASHBOARD UI
-=====================================================*/
-
-
-function updateDashboard(data){
-
-
-
-if(document.getElementById("totalSchools")){
-
-
-document.getElementById("totalSchools")
-.innerHTML =
-
-data.totalSchools || 0;
-
-
-}
-
-
-
-
-
-if(document.getElementById("totalResponses")){
-
-
-document.getElementById("totalResponses")
-.innerHTML =
-
-data.totalResponses || 0;
-
-
-}
-
-
-
-
-
-if(document.getElementById("activeUsers")){
-
-
-document.getElementById("activeUsers")
-.innerHTML =
-
-data.activeUsers || 0;
-
-
-}
-
-
-
-
-
-if(document.getElementById("systemStatus")){
-
-
-document.getElementById("systemStatus")
-.innerHTML =
-
-data.systemStatus || "OFFLINE";
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-/*=====================================================
- LOGOUT
-=====================================================*/
 
 function setupLogout(){
 
 
-const btn = document.getElementById("logoutBtn");
+const btn =
 
-
-if(!btn){
-
-console.log("Logout Button Not Found");
-
-return;
-
-}
+document.getElementById(
+"logoutBtn"
+);
 
 
 
-btn.onclick = function(){
+if(btn){
 
 
-console.log("Logout Clicked");
+btn.onclick=function(){
 
 
-// Clear Session
-
-sessionStorage.removeItem("USER");
 
 sessionStorage.clear();
 
 
 
-// Redirect Login
+window.location.href=
 
-window.location.replace(
-"../login.html"
-);
+"../login.html";
+
 
 
 };
+
+
+}
 
 
 }
