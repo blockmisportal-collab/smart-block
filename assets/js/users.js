@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- User Management
- Google Sheet API
+ User Management JS
+ Google Sheet Based
 =====================================================*/
 
 
@@ -17,11 +17,16 @@ const API_URL =
 
 
 
+/*=====================================================
+ PAGE LOAD
+=====================================================*/
+
+
 document.addEventListener(
 
 "DOMContentLoaded",
 
-()=>{
+function(){
 
 loadUsers();
 
@@ -35,8 +40,12 @@ loadUsers();
 
 
 
-async function loadUsers(){
+/*=====================================================
+ LOAD USERS FROM API
+=====================================================*/
 
+
+async function loadUsers(){
 
 
 const table =
@@ -51,7 +60,7 @@ table.innerHTML =
 
 `
 <tr>
-<td colspan="6">
+<td colspan="7">
 Loading...
 </td>
 </tr>
@@ -78,7 +87,7 @@ await response.json();
 
 
 console.log(
-"USERS API",
+"USER DATA",
 result
 );
 
@@ -100,15 +109,17 @@ result.data
 else{
 
 
-table.innerHTML=
+table.innerHTML =
 
 `
 <tr>
-<td colspan="6">
+
+<td colspan="7">
 
 ${result.message}
 
 </td>
+
 </tr>
 `;
 
@@ -123,19 +134,23 @@ ${result.message}
 catch(error){
 
 
-console.error(error);
+console.error(
+error
+);
 
 
 
-table.innerHTML=
+table.innerHTML =
 
 `
 <tr>
-<td colspan="6">
+
+<td colspan="7">
 
 Server Connection Failed
 
 </td>
+
 </tr>
 `;
 
@@ -152,8 +167,13 @@ Server Connection Failed
 
 
 
-function renderUsers(users){
 
+/*=====================================================
+ RENDER USERS
+=====================================================*/
+
+
+function renderUsers(users){
 
 
 const table =
@@ -164,14 +184,64 @@ document.getElementById(
 
 
 
-table.innerHTML="";
+table.innerHTML = "";
+
 
 
 
 
 users.forEach(
 
-user=>{
+function(user){
+
+
+
+const username =
+
+user.username || "";
+
+
+
+const name =
+
+user.name || "";
+
+
+
+const role =
+
+user.role || "";
+
+
+
+const nyaya =
+
+user.nyayaPanchayat || "";
+
+
+
+const schoolCode =
+
+user.schoolCode || "";
+
+
+
+const schoolName =
+
+user.schoolName || "";
+
+
+
+const active =
+
+user.active === true ||
+String(user.active)
+.toUpperCase()
+==="TRUE";
+
+
+
+
 
 
 table.innerHTML +=
@@ -183,21 +253,7 @@ table.innerHTML +=
 
 <td>
 
-${user.username || ""}
-
-</td>
-
-
-<td>
-
-${user.name || ""}
-
-</td>
-
-
-<td>
-
-${user.role || ""}
+${username}
 
 </td>
 
@@ -205,7 +261,7 @@ ${user.role || ""}
 
 <td>
 
-${user.nyayaPanchayat || ""}
+${name}
 
 </td>
 
@@ -213,18 +269,43 @@ ${user.nyayaPanchayat || ""}
 
 <td>
 
-${user.schoolCode || ""}
+${role}
 
 </td>
 
 
 
 <td>
+
+${nyaya}
+
+</td>
+
+
+
+<td>
+
+${schoolCode}
+
+</td>
+
+
+
+<td>
+
+${schoolName}
+
+</td>
+
+
+
+<td>
+
 
 <span class="badge">
 
 ${
-user.active
+active
 ?
 "ACTIVE"
 :
@@ -233,18 +314,19 @@ user.active
 
 </span>
 
+
 </td>
 
 
 
 </tr>
 
-
 `;
 
 
 
 }
+
 
 );
 
@@ -256,4 +338,11 @@ user.active
 
 
 
-window.loadUsers = loadUsers;
+
+/*=====================================================
+ GLOBAL REFRESH BUTTON
+=====================================================*/
+
+
+window.loadUsers =
+loadUsers;
