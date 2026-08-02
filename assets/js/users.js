@@ -277,33 +277,33 @@ ${role}
 
 <td>
 
-${nyaya}
+${schoolCode || "-"}
 
 </td>
 
 
-
 <td>
 
-${schoolCode}
+${schoolName || "-"}
 
 </td>
 
 
-
 <td>
-
-${schoolName}
-
-</td>
-
-
-
-<td>
-
 
 <span class="badge">
 
+${
+active
+?
+"ACTIVE"
+:
+"INACTIVE"
+}
+
+</span>
+
+</td>
 ${
 active
 ?
