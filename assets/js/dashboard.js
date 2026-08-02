@@ -1,212 +1,91 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.0
- Admin Dashboard JavaScript
- File : dashboard.js
- Version : JSONP API
+ Admin Dashboard JS
+ JSONP Version (CORS FIX)
 =====================================================*/
 
 
 "use strict";
 
 
-
-/*=====================================================
- API URL
-=====================================================*/
-
-
+// Google Apps Script Web App URL
 const API_URL =
-
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
 
-
-
-/*=====================================================
- PAGE LOAD
-=====================================================*/
-
-
 document.addEventListener(
-
 "DOMContentLoaded",
-
 function(){
 
 
-loadUser();
+console.log("Loading Dashboard...");
 
 
 loadDashboard();
 
 
-setupLogout();
+logoutHandler();
 
 
-}
-
-);
-
-
-
-
-
-
-
-/*=====================================================
- LOAD USER
-=====================================================*/
-
-
-function loadUser(){
-
-
-try{
-
-
-const user =
-
-JSON.parse(
-
-sessionStorage.getItem("USER")
-
-);
-
-
-
-if(!user){
-
-return;
-
-}
-
-
-
-const name =
-document.getElementById(
-"userName"
-);
-
-
-
-const role =
-document.getElementById(
-"userRole"
-);
-
-
-
-if(name){
-
-name.innerHTML =
-user.name || "Administrator";
-
-}
-
-
-
-if(role){
-
-role.innerHTML =
-user.role || "ADMIN";
-
-}
-
-
-
-}
-
-catch(error){
-
-
-console.error(error);
-
-
-}
-
-
-}
-
-
-
+});
 
 
 
 
 
 /*=====================================================
- LOAD DASHBOARD JSONP
+ LOAD DASHBOARD
 =====================================================*/
 
 
 function loadDashboard(){
 
 
-
 const callbackName =
-
 "dashboardCallback";
 
 
 
 window[callbackName] =
-
-function(response){
-
+function(result){
 
 
 console.log(
-
-"Dashboard Response",
-
-response
-
+"Dashboard Response:",
+result
 );
 
 
 
-if(response.success){
+if(result.success){
+
+
+document
+.getElementById("totalSchools")
+.innerHTML =
+result.data.totalSchools;
 
 
 
-document.getElementById(
-
-"totalSchools"
-
-).innerHTML =
-
-response.data.totalSchools;
+document
+.getElementById("totalResponses")
+.innerHTML =
+result.data.totalResponses;
 
 
 
-document.getElementById(
-
-"totalResponses"
-
-).innerHTML =
-
-response.data.totalResponses;
+document
+.getElementById("activeUsers")
+.innerHTML =
+result.data.activeUsers;
 
 
 
-document.getElementById(
-
-"activeUsers"
-
-).innerHTML =
-
-response.data.activeUsers;
-
-
-
-document.getElementById(
-
-"systemStatus"
-
-).innerHTML =
-
-response.data.systemStatus;
+document
+.getElementById("systemStatus")
+.innerHTML =
+result.data.systemStatus;
 
 
 
@@ -216,15 +95,14 @@ else{
 
 
 console.error(
-
-response.message
-
+result.message
 );
 
 
 }
 
 
+removeScript();
 
 };
 
@@ -233,34 +111,19 @@ response.message
 
 
 const script =
-
 document.createElement("script");
 
 
+script.id =
+"dashboardAPI";
+
 
 script.src =
-
-API_URL +
-
-"?action=dashboard&callback="
-
+API_URL
 +
-
+"?action=dashboard&callback="
++
 callbackName;
-
-
-
-script.onerror = function(){
-
-
-console.error(
-
-"Dashboard API Failed"
-
-);
-
-
-};
 
 
 
@@ -274,6 +137,30 @@ document.body.appendChild(script);
 
 
 
+/*=====================================================
+ REMOVE JSONP SCRIPT
+=====================================================*/
+
+
+function removeScript(){
+
+
+const old =
+document.getElementById(
+"dashboardAPI"
+);
+
+
+if(old){
+
+old.remove();
+
+}
+
+
+}
+
+
 
 
 
@@ -282,42 +169,42 @@ document.body.appendChild(script);
 =====================================================*/
 
 
-function setupLogout(){
+function logoutHandler(){
 
 
 const btn =
-
 document.getElementById(
-
 "logoutBtn"
-
 );
 
 
 
-if(btn){
+if(!btn){
+
+return;
+
+}
 
 
 
-btn.onclick=function(){
+btn.addEventListener(
+"click",
+function(){
 
 
+
+localStorage.clear();
 
 sessionStorage.clear();
 
 
 
 window.location.href =
-
 "../login.html";
 
 
 
-};
-
-
-
-}
+});
 
 
 }
