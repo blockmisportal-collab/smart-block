@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- User Management JS
- Production Version
+ USER MANAGEMENT JS
+ FINAL PRODUCTION VERSION
 =====================================================*/
 
 
@@ -23,15 +23,12 @@ const API_URL =
 
 
 document.addEventListener(
-
 "DOMContentLoaded",
-
 function(){
 
 loadUsers();
 
 }
-
 );
 
 
@@ -48,11 +45,8 @@ loadUsers();
 async function loadUsers(){
 
 
-const table =
-
-document.getElementById(
-"userTable"
-);
+const table = 
+document.getElementById("userTable");
 
 
 
@@ -81,38 +75,28 @@ try{
 
 const response = await fetch(
 
-API_URL +
-
-"?action=users"
+API_URL + "?action=users"
 
 );
 
 
 
-const result =
-
-await response.json();
+const result = await response.json();
 
 
 
 console.log(
-"USER API RESPONSE",
+"USER RESPONSE",
 result
 );
 
 
 
 
-if(
-result.success
-){
+if(result.success){
 
 
-renderUsers(
-
-result.data
-
-);
+renderUsers(result.data);
 
 
 }
@@ -132,10 +116,7 @@ ${result.message}
 </tr>
 `;
 
-
-
 }
-
 
 
 }
@@ -143,9 +124,7 @@ ${result.message}
 catch(error){
 
 
-console.error(
-error
-);
+console.error(error);
 
 
 
@@ -161,14 +140,10 @@ Server Connection Failed
 </tr>
 `;
 
-
-
 }
 
 
 }
-
-
 
 
 
@@ -177,19 +152,16 @@ Server Connection Failed
 
 
 /*=====================================================
- RENDER USER TABLE
+ RENDER USERS
 =====================================================*/
 
 
 function renderUsers(users){
 
 
-
 const table =
 
-document.getElementById(
-"userTable"
-);
+document.getElementById("userTable");
 
 
 
@@ -198,18 +170,14 @@ table.innerHTML = "";
 
 
 
-
-users.forEach(
-
-(user)=>{
+users.forEach(function(user){
 
 
-const active =
+
+let active =
 
 String(user.active)
-
 .toUpperCase()
-
 ==="TRUE";
 
 
@@ -224,76 +192,50 @@ table.innerHTML +=
 
 
 <td>
-
 ${user.username || "-"}
-
 </td>
 
 
-
 <td>
-
 ${user.name || "-"}
-
 </td>
 
 
-
 <td>
-
 ${user.role || "-"}
-
 </td>
 
 
-
 <td>
-
 ${user.nyayaPanchayat || "-"}
-
 </td>
 
 
-
 <td>
-
 ${user.schoolCode || "-"}
-
 </td>
 
 
-
 <td>
-
 ${user.schoolName || "-"}
-
 </td>
 
 
-
 <td>
-
 
 <span class="badge">
 
 ${
 active
-
 ?
-
 "ACTIVE"
-
 :
-
 "INACTIVE"
-
 }
 
 </span>
 
-
 </td>
-
 
 
 </tr>
@@ -302,14 +244,11 @@ active
 
 
 
-}
-
-
-);
-
+});
 
 
 }
+
 
 
 
@@ -317,10 +256,8 @@ active
 
 
 /*=====================================================
- REFRESH BUTTON
+ REFRESH FUNCTION
 =====================================================*/
 
 
-window.loadUsers =
-
-loadUsers;
+window.loadUsers = loadUsers;
