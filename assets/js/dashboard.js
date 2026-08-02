@@ -1,11 +1,18 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.0
- Admin Dashboard JS
+ Admin Dashboard JavaScript
+ File : dashboard.js
+ Version : JSONP API
 =====================================================*/
 
 
 "use strict";
 
+
+
+/*=====================================================
+ API URL
+=====================================================*/
 
 
 const API_URL =
@@ -15,11 +22,20 @@ const API_URL =
 
 
 
+
+/*=====================================================
+ PAGE LOAD
+=====================================================*/
+
+
 document.addEventListener(
 
 "DOMContentLoaded",
 
-()=>{
+function(){
+
+
+loadUser();
 
 
 loadDashboard();
@@ -37,96 +53,63 @@ setupLogout();
 
 
 
-async function loadDashboard(){
+
+/*=====================================================
+ LOAD USER
+=====================================================*/
+
+
+function loadUser(){
 
 
 try{
 
 
-const response = await fetch(
+const user =
 
-API_URL,
+JSON.parse(
 
-{
+sessionStorage.getItem("USER")
 
-
-method:"POST",
-
-
-headers:{
+);
 
 
-"Content-Type":
 
-"text/plain;charset=utf-8"
+if(!user){
 
-
-},
-
-
-body:JSON.stringify({
-
-action:"dashboard"
-
-})
-
+return;
 
 }
 
+
+
+const name =
+document.getElementById(
+"userName"
 );
 
 
 
-const result =
-
-await response.json();
-
-
-
-console.log(
-
-"Dashboard Response",
-
-result
-
+const role =
+document.getElementById(
+"userRole"
 );
 
 
 
-if(result.success){
+if(name){
 
+name.innerHTML =
+user.name || "Administrator";
 
-document.getElementById(
-"totalSchools"
-).innerText =
-
-result.data.totalSchools;
-
-
-
-document.getElementById(
-"totalResponses"
-).innerText =
-
-result.data.totalResponses;
+}
 
 
 
-document.getElementById(
-"activeUsers"
-).innerText =
+if(role){
 
-result.data.activeUsers;
-
-
-
-document.getElementById(
-"systemStatus"
-).innerText =
-
-result.data.systemStatus;
-
-
+role.innerHTML =
+user.role || "ADMIN";
 
 }
 
@@ -137,11 +120,104 @@ result.data.systemStatus;
 catch(error){
 
 
+console.error(error);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/*=====================================================
+ LOAD DASHBOARD JSONP
+=====================================================*/
+
+
+function loadDashboard(){
+
+
+
+const callbackName =
+
+"dashboardCallback";
+
+
+
+window[callbackName] =
+
+function(response){
+
+
+
+console.log(
+
+"Dashboard Response",
+
+response
+
+);
+
+
+
+if(response.success){
+
+
+
+document.getElementById(
+
+"totalSchools"
+
+).innerHTML =
+
+response.data.totalSchools;
+
+
+
+document.getElementById(
+
+"totalResponses"
+
+).innerHTML =
+
+response.data.totalResponses;
+
+
+
+document.getElementById(
+
+"activeUsers"
+
+).innerHTML =
+
+response.data.activeUsers;
+
+
+
+document.getElementById(
+
+"systemStatus"
+
+).innerHTML =
+
+response.data.systemStatus;
+
+
+
+}
+
+else{
+
+
 console.error(
 
-"Dashboard Error",
-
-error
+response.message
 
 );
 
@@ -150,10 +226,60 @@ error
 
 
 
+};
+
+
+
+
+
+const script =
+
+document.createElement("script");
+
+
+
+script.src =
+
+API_URL +
+
+"?action=dashboard&callback="
+
++
+
+callbackName;
+
+
+
+script.onerror = function(){
+
+
+console.error(
+
+"Dashboard API Failed"
+
+);
+
+
+};
+
+
+
+document.body.appendChild(script);
+
+
+
 }
 
 
 
+
+
+
+
+
+/*=====================================================
+ LOGOUT
+=====================================================*/
 
 
 function setupLogout(){
@@ -172,10 +298,13 @@ document.getElementById(
 if(btn){
 
 
+
 btn.onclick=function(){
 
 
+
 sessionStorage.clear();
+
 
 
 window.location.href =
@@ -183,7 +312,9 @@ window.location.href =
 "../login.html";
 
 
+
 };
+
 
 
 }
