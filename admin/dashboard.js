@@ -1,140 +1,37 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.0
- Admin Dashboard Controller
- File : dashboard.js
- Version : Production Final
+ Admin Dashboard JS
 =====================================================*/
 
 
 "use strict";
 
 
-
-/*=====================================================
- API URL
-=====================================================*/
-
-
 const API_URL =
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
-"https://script.google.com/macros/s/AKfycbzq-jTpW9im77vKBpZISbZ9aGPfkLKQ1gVyIzK2st6rFF3cAmk7IUjm94PxXD6bsNCevg/exec";
-
-
-
-
-
-/*=====================================================
- PAGE LOAD
-=====================================================*/
 
 
 document.addEventListener(
-
 "DOMContentLoaded",
-
 function(){
 
 
-loadUser();
-
 loadDashboard();
 
-bindEvents();
+
+});
 
 
-}
-
-);
-
-
-
-
-
-
-/*=====================================================
- LOAD USER
-=====================================================*/
-
-
-function loadUser(){
-
-
-const user =
-
-JSON.parse(
-
-sessionStorage.getItem("USER")
-
-);
-
-
-
-if(!user){
-
-
-window.location.href="../login.html";
-
-return;
-
-
-}
-
-
-
-document.getElementById(
-
-"userName"
-
-).innerHTML =
-
-user.name || "Administrator";
-
-
-
-document.getElementById(
-
-"userRole"
-
-).innerHTML =
-
-user.role || "";
-
-
-
-}
-
-
-
-
-
-
-
-
-/*=====================================================
- DASHBOARD API
-=====================================================*/
 
 
 async function loadDashboard(){
 
 
-
 try{
 
 
-const token =
-
-JSON.parse(
-
-sessionStorage.getItem("USER")
-
-).token;
-
-
-
-
 const response =
-
 await fetch(API_URL,{
 
 
@@ -145,8 +42,7 @@ headers:{
 
 
 "Content-Type":
-
-"text/plain;charset=utf-8"
+"application/json"
 
 
 },
@@ -155,10 +51,7 @@ headers:{
 body:JSON.stringify({
 
 
-action:"dashboard",
-
-
-token:token
+action:"dashboard"
 
 
 })
@@ -168,16 +61,49 @@ token:token
 
 
 
-
 const result =
-
 await response.json();
 
 
 
+console.log(result);
 
 
-if(!result.success){
+
+if(result.success){
+
+
+document
+.getElementById("totalSchools")
+.innerHTML =
+result.data.totalSchools;
+
+
+
+document
+.getElementById("totalResponses")
+.innerHTML =
+result.data.totalResponses;
+
+
+
+document
+.getElementById("activeUsers")
+.innerHTML =
+result.data.activeUsers;
+
+
+
+document
+.getElementById("systemStatus")
+.innerHTML =
+result.data.systemStatus;
+
+
+
+}
+
+else{
 
 
 console.log(
@@ -185,65 +111,7 @@ result.message
 );
 
 
-return;
-
-
 }
-
-
-
-
-
-const data =
-
-result.data;
-
-
-
-
-
-document.getElementById(
-
-"totalSchools"
-
-).innerHTML =
-
-data.totalSchools;
-
-
-
-
-document.getElementById(
-
-"totalResponses"
-
-).innerHTML =
-
-data.totalResponses;
-
-
-
-
-document.getElementById(
-
-"activeUsers"
-
-).innerHTML =
-
-data.activeUsers;
-
-
-
-
-document.getElementById(
-
-"systemStatus"
-
-).innerHTML =
-
-data.systemStatus;
-
-
 
 
 }
@@ -255,54 +123,6 @@ console.error(error);
 
 
 }
-
-}
-
-
-
-
-
-
-
-
-/*=====================================================
- EVENTS
-=====================================================*/
-
-
-function bindEvents(){
-
-
-
-const logout =
-
-document.getElementById(
-
-"logoutBtn"
-
-);
-
-
-
-if(logout){
-
-
-logout.onclick =
-
-function(){
-
-
-sessionStorage.clear();
-
-
-window.location.href="../login.html";
-
-
-};
-
-
-}
-
 
 
 }
