@@ -17,15 +17,58 @@ const API_URL =
 
 
 
+
 document.addEventListener(
 "DOMContentLoaded",
-function(){
-
+()=>{
 
 loadUsers();
 
+}
 
-});
+);
+
+
+
+
+
+
+
+
+/*=====================================================
+ API CALL
+ CORS SAFE
+=====================================================*/
+
+
+async function apiCall(payload){
+
+
+const response =
+
+await fetch(
+API_URL,
+{
+
+
+method:"POST",
+
+
+body:
+
+JSON.stringify(payload)
+
+
+}
+);
+
+
+
+return await response.json();
+
+
+}
+
 
 
 
@@ -44,40 +87,19 @@ async function loadUsers(){
 try{
 
 
-const response =
-
-await fetch(API_URL,{
-
-
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":
-"application/json"
-
-
-},
-
-
-body:JSON.stringify({
-
-
-action:"users"
-
-
-})
-
-
-});
+console.log(
+"Loading Users..."
+);
 
 
 
 const result =
 
-await response.json();
+await apiCall({
+
+action:"users"
+
+});
 
 
 
@@ -85,7 +107,10 @@ console.log(result);
 
 
 
-if(result.success){
+
+if(
+result.success
+){
 
 
 renderUsers(
@@ -109,11 +134,11 @@ result.message
 
 }
 
+
 catch(error){
 
 
 console.error(
-"User API Error",
 error
 );
 
@@ -135,6 +160,7 @@ alert(
 
 
 
+
 /*=====================================================
  DISPLAY USERS
 =====================================================*/
@@ -145,7 +171,8 @@ function renderUsers(users){
 
 const table =
 
-document.getElementById(
+document
+.getElementById(
 "userTable"
 );
 
@@ -155,10 +182,8 @@ table.innerHTML="";
 
 
 
-
 users.forEach(
-function(user){
-
+user=>{
 
 
 const row =
@@ -169,38 +194,38 @@ document.createElement(
 
 
 
-row.innerHTML = `
+row.innerHTML =
 
+
+`
 
 <td>
 ${user.username}
 </td>
 
-
 <td>
 ${user.name}
 </td>
-
 
 <td>
 ${user.role}
 </td>
 
-
 <td>
-
 
 <span class="badge">
 
-${user.active ? 
-"ACTIVE":
-"INACTIVE"}
+${
+user.active
+?
+"ACTIVE"
+:
+"INACTIVE"
+}
 
 </span>
 
-
 </td>
-
 
 `;
 
@@ -210,10 +235,13 @@ table.appendChild(row);
 
 
 
-});
+}
+
+);
 
 
 }
+
 
 
 
@@ -228,7 +256,6 @@ table.appendChild(row);
 
 
 async function createUser(){
-
 
 
 const user = {
@@ -265,7 +292,6 @@ document
 .value
 
 
-
 };
 
 
@@ -292,54 +318,31 @@ return;
 
 
 
+
 try{
 
 
-const response =
+const result =
 
-await fetch(API_URL,{
-
-
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":
-"application/json"
-
-
-},
-
-
-body:JSON.stringify({
-
+await apiCall({
 
 action:"createUser",
 
-
 user:user
-
-
-})
-
 
 });
 
 
 
 
-
-const result =
-
-await response.json();
+console.log(result);
 
 
 
 
-
-if(result.success){
+if(
+result.success
+){
 
 
 alert(
@@ -351,8 +354,8 @@ alert(
 loadUsers();
 
 
-}
 
+}
 
 else{
 
