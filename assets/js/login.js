@@ -1,6 +1,6 @@
 /*=====================================================
- SMART FORM ENTERPRISE v6.0
- Login JavaScript
+ SMART FORM ENTERPRISE v6.1
+ Login JavaScript UPDATED
 ======================================================*/
 
 "use strict";
@@ -54,7 +54,7 @@ document.getElementById("password")
 
 if(!username){
 
-message.innerHTML=
+message.innerHTML =
 "Please Enter Username";
 
 return;
@@ -65,7 +65,7 @@ return;
 
 if(!password){
 
-message.innerHTML=
+message.innerHTML =
 "Please Enter Password";
 
 return;
@@ -110,19 +110,53 @@ password:password
 
 })
 
+
 });
 
 
-const result =
-await response.json();
+
+
+const text =
+await response.text();
 
 
 
-console.log(result);
+console.log(
+"SERVER RESPONSE:",
+text
+);
+
+
+
+let result;
+
+
+
+try{
+
+
+result =
+JSON.parse(text);
+
+
+}
+
+catch(e){
+
+
+throw new Error(
+"Invalid Server Response"
+);
+
+
+}
+
+
 
 
 
 if(result.success){
+
 
 
 sessionStorage.setItem(
@@ -137,15 +171,17 @@ result.data
 
 
 
-message.style.color="green";
+message.style.color =
+"green";
 
-message.innerHTML=
+
+message.innerHTML =
 "Login Successful";
 
 
 
 setTimeout(
-function(){
+()=>{
 
 redirect(
 result.data.role
@@ -158,10 +194,11 @@ result.data.role
 
 
 }
+
 else{
 
 
-message.innerHTML=
+message.innerHTML =
 result.message ||
 "Login Failed";
 
@@ -175,10 +212,15 @@ result.message ||
 catch(error){
 
 
-console.error(error);
+console.error(
+"LOGIN ERROR:",
+error
+);
 
 
-message.innerHTML=
+
+message.innerHTML =
+error.message ||
 "Server Connection Failed";
 
 
@@ -192,8 +234,8 @@ button.innerHTML=
 "LOGIN";
 
 
-
 });
+
 
 
 
@@ -213,8 +255,10 @@ switch(role){
 
 case "ADMIN":
 
-window.location.href=
+
+window.location.href =
 "admin/dashboard.html";
+
 
 break;
 
@@ -222,8 +266,10 @@ break;
 
 case "BEO":
 
-window.location.href=
+
+window.location.href =
 "beo/dashboard.html";
+
 
 break;
 
@@ -231,8 +277,10 @@ break;
 
 case "NODAL":
 
-window.location.href=
+
+window.location.href =
 "nodal/dashboard.html";
+
 
 break;
 
@@ -240,8 +288,10 @@ break;
 
 case "SCHOOL":
 
-window.location.href=
+
+window.location.href =
 "school/dashboard.html";
+
 
 break;
 
@@ -249,13 +299,13 @@ break;
 
 default:
 
+
 alert(
 "Invalid User Role : "+role
 );
 
 
 }
-
 
 
 }
