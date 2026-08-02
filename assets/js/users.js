@@ -1,24 +1,36 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- User Management JS
- POST API VERSION
+ User Management
+ Google Sheet API
 =====================================================*/
+
 
 "use strict";
 
 
+
 const API_URL =
+
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
 
+
+
 document.addEventListener(
+
 "DOMContentLoaded",
-function(){
+
+()=>{
 
 loadUsers();
 
-});
+}
+
+);
+
+
+
 
 
 
@@ -26,11 +38,17 @@ loadUsers();
 async function loadUsers(){
 
 
+
 const table =
-document.getElementById("userTable");
+
+document.getElementById(
+"userTable"
+);
+
 
 
 table.innerHTML =
+
 `
 <tr>
 <td colspan="6">
@@ -45,41 +63,31 @@ try{
 
 
 const response = await fetch(
-API_URL,
-{
 
-method:"POST",
-
-headers:
-{
-"Content-Type":"text/plain"
-},
-
-body:JSON.stringify({
-
-action:"users"
-
-})
-
-}
+API_URL +
+"?action=users"
 
 );
 
 
 
 const result =
+
 await response.json();
 
 
 
 console.log(
-"USER RESPONSE",
+"USERS API",
 result
 );
 
 
 
-if(result.success){
+
+if(
+result.success
+){
 
 
 renderUsers(
@@ -92,14 +100,19 @@ result.data
 else{
 
 
-table.innerHTML =
+table.innerHTML=
+
 `
 <tr>
 <td colspan="6">
+
 ${result.message}
+
 </td>
 </tr>
 `;
+
+
 
 }
 
@@ -114,20 +127,27 @@ console.error(error);
 
 
 
-table.innerHTML =
+table.innerHTML=
+
 `
 <tr>
 <td colspan="6">
+
 Server Connection Failed
+
 </td>
 </tr>
 `;
 
+
+
+}
+
+
 }
 
 
 
-}
 
 
 
@@ -135,8 +155,12 @@ Server Connection Failed
 function renderUsers(users){
 
 
+
 const table =
-document.getElementById("userTable");
+
+document.getElementById(
+"userTable"
+);
 
 
 
@@ -144,7 +168,10 @@ table.innerHTML="";
 
 
 
-users.forEach(user=>{
+
+users.forEach(
+
+user=>{
 
 
 table.innerHTML +=
@@ -153,29 +180,43 @@ table.innerHTML +=
 
 <tr>
 
+
 <td>
+
 ${user.username || ""}
+
 </td>
 
 
 <td>
+
 ${user.name || ""}
+
 </td>
 
 
 <td>
+
 ${user.role || ""}
+
 </td>
 
 
+
 <td>
+
 ${user.nyayaPanchayat || ""}
+
 </td>
+
 
 
 <td>
+
 ${user.schoolCode || ""}
+
 </td>
+
 
 
 <td>
@@ -195,13 +236,18 @@ user.active
 </td>
 
 
+
 </tr>
+
 
 `;
 
 
 
-});
+}
+
+);
+
 
 
 }
@@ -209,5 +255,5 @@ user.active
 
 
 
-window.loadUsers =
-loadUsers;
+
+window.loadUsers = loadUsers;
