@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  User Management JS
- Google Sheet Based
+ POST API VERSION
 =====================================================*/
 
 "use strict";
@@ -18,44 +18,72 @@ function(){
 
 loadUsers();
 
+});
+
+
+
+
+async function loadUsers(){
+
+
+const table =
+document.getElementById("userTable");
+
+
+table.innerHTML =
+`
+<tr>
+<td colspan="6">
+Loading...
+</td>
+</tr>
+`;
+
+
+
+try{
+
+
+const response = await fetch(
+API_URL,
+{
+
+method:"POST",
+
+headers:
+{
+"Content-Type":"text/plain"
+},
+
+body:JSON.stringify({
+
+action:"users"
+
+})
+
 }
 
 );
 
 
 
+const result =
+await response.json();
 
-
-/*=====================================================
- LOAD USERS
-=====================================================*/
-
-
-function loadUsers(){
-
-
-const callback =
-"usersCallback";
-
-
-
-window[callback] = function(response){
 
 
 console.log(
-"USER DATA",
-response
+"USER RESPONSE",
+result
 );
 
 
 
-if(
-response.success
-){
+if(result.success){
 
 
 renderUsers(
-response.data
+result.data
 );
 
 
@@ -64,69 +92,51 @@ response.data
 else{
 
 
-alert(
-response.message
-);
-
-
-}
-
-
-};
-
-
-
-const script =
-document.createElement("script");
-
-
-script.src =
-API_URL +
-"?action=users&callback=" +
-callback;
-
-
-
-script.id =
-"userApiScript";
-
-
-
-document.body.appendChild(
-script
-);
-
-
+table.innerHTML =
+`
+<tr>
+<td colspan="6">
+${result.message}
+</td>
+</tr>
+`;
 
 }
 
 
 
+}
+
+catch(error){
+
+
+console.error(error);
 
 
 
+table.innerHTML =
+`
+<tr>
+<td colspan="6">
+Server Connection Failed
+</td>
+</tr>
+`;
+
+}
 
 
-/*=====================================================
- RENDER USERS
-=====================================================*/
+
+}
+
+
 
 
 function renderUsers(users){
 
 
 const table =
-document.getElementById(
-"userTable"
-);
-
-
-
-if(!table){
-
-return;
-
-}
+document.getElementById("userTable");
 
 
 
@@ -134,104 +144,37 @@ table.innerHTML="";
 
 
 
-users.forEach(
-function(user){
+users.forEach(user=>{
 
 
-
-const username =
-user.username ||
-user.Username ||
-"";
-
-
-
-const name =
-user.name ||
-user.Name ||
-"";
-
-
-
-const role =
-user.role ||
-user.Role ||
-"";
-
-
-
-const nyaya =
-user.nyayaPanchayat ||
-user.NyayaPanchayat ||
-"";
-
-
-
-const schoolCode =
-user.schoolCode ||
-user.SchoolCode ||
-"";
-
-
-
-const schoolName =
-user.schoolName ||
-user.SchoolName ||
-"";
-
-
-
-const active =
-String(
-user.active ||
-user.Active ||
-""
-)
-.toUpperCase()
-==="TRUE";
-
-
-
-
-
-const row =
-document.createElement(
-"tr"
-);
-
-
-
-row.innerHTML =
+table.innerHTML +=
 
 `
 
+<tr>
+
 <td>
-${username}
+${user.username || ""}
 </td>
 
 
 <td>
-${name}
+${user.name || ""}
 </td>
 
 
 <td>
-${role}
+${user.role || ""}
 </td>
 
 
 <td>
-${nyaya}
+${user.nyayaPanchayat || ""}
 </td>
 
 
 <td>
-${schoolCode}
-</td>
-
-
-<td>
-${schoolName}
+${user.schoolCode || ""}
 </td>
 
 
@@ -239,23 +182,26 @@ ${schoolName}
 
 <span class="badge">
 
-${active ? "ACTIVE":"INACTIVE"}
+${
+user.active
+?
+"ACTIVE"
+:
+"INACTIVE"
+}
 
 </span>
 
 </td>
 
+
+</tr>
+
 `;
 
 
 
-table.appendChild(row);
-
-
-
-}
-
-);
+});
 
 
 }
@@ -263,10 +209,5 @@ table.appendChild(row);
 
 
 
-
-/*=====================================================
- REFRESH BUTTON SUPPORT
-=====================================================*/
-
-
-window.loadUsers = loadUsers;
+window.loadUsers =
+loadUsers;
