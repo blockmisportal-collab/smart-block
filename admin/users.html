@@ -57,17 +57,9 @@ align-items:center;
 
 
 
-.header h1{
-
-margin:0;
-
-}
-
-
-
 .btn{
 
-background:#d32f2f;
+background:#1976d2;
 
 color:white;
 
@@ -78,6 +70,16 @@ padding:10px 18px;
 border-radius:8px;
 
 cursor:pointer;
+
+margin-left:5px;
+
+}
+
+
+
+.logout{
+
+background:#d32f2f;
 
 }
 
@@ -101,8 +103,6 @@ border-radius:15px;
 
 box-shadow:
 0 5px 20px rgba(0,0,0,.1);
-
-margin-bottom:20px;
 
 }
 
@@ -156,28 +156,6 @@ color:white;
 
 
 
-.create{
-
-background:#1976d2;
-
-}
-
-
-
-input,select{
-
-padding:10px;
-
-margin:5px;
-
-border:1px solid #ccc;
-
-border-radius:5px;
-
-}
-
-
-
 </style>
 
 
@@ -188,7 +166,7 @@ border-radius:5px;
 
 
 
-<div class="header">
+<header class="header">
 
 
 <div>
@@ -204,7 +182,22 @@ USER MANAGEMENT
 </div>
 
 
-<button class="btn"
+
+<div>
+
+
+<button
+class="btn"
+onclick="loadUsers()">
+
+🔄 Refresh
+
+</button>
+
+
+
+<button
+class="btn logout"
 onclick="location.href='dashboard.html'">
 
 BACK
@@ -215,81 +208,32 @@ BACK
 </div>
 
 
+</header>
+
+
+
 
 
 
 <div class="container">
 
 
-
 <div class="card">
 
 
 <h2>
-Create New User
+Registered Users
 </h2>
 
 
-<input id="username"
-placeholder="Username">
-
-
-<input id="password"
-placeholder="Password">
-
-
-<select id="role">
-
-<option value="ADMIN">
-ADMIN
-</option>
-
-<option value="NODAL">
-NODAL
-</option>
-
-<option value="SCHOOL">
-SCHOOL
-</option>
-
-</select>
-
-
-
-<input id="name"
-placeholder="Full Name">
-
-
-<button
-class="btn create"
-onclick="createUser()">
-
-CREATE USER
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h2>
-User List
-</h2>
-
+<br>
 
 
 <table>
 
 
 <thead>
+
 
 <tr>
 
@@ -309,6 +253,16 @@ Role
 
 
 <th>
+Nyaya Panchayat
+</th>
+
+
+<th>
+School Code
+</th>
+
+
+<th>
 Status
 </th>
 
@@ -322,6 +276,19 @@ Status
 
 <tbody id="userTable">
 
+
+<tr>
+
+<td colspan="6">
+
+Loading...
+
+</td>
+
+
+</tr>
+
+
 </tbody>
 
 
@@ -331,8 +298,6 @@ Status
 
 
 </div>
-
-
 
 
 </div>
