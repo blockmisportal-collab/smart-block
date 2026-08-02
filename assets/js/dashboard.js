@@ -15,12 +15,11 @@ const API_URL =
 
 
 
-
 document.addEventListener(
 
 "DOMContentLoaded",
 
-function(){
+()=>{
 
 
 loadDashboard();
@@ -38,17 +37,10 @@ setupLogout();
 
 
 
-
 async function loadDashboard(){
 
 
 try{
-
-
-console.log(
-"Loading Dashboard..."
-);
-
 
 
 const response = await fetch(
@@ -66,10 +58,10 @@ headers:{
 
 "Content-Type":
 
-"text/plain"
+"text/plain;charset=utf-8"
+
 
 },
-
 
 
 body:JSON.stringify({
@@ -80,7 +72,6 @@ action:"dashboard"
 
 
 }
-
 
 );
 
@@ -102,13 +93,12 @@ result
 
 
 
-
 if(result.success){
 
 
 document.getElementById(
 "totalSchools"
-).innerHTML =
+).innerText =
 
 result.data.totalSchools;
 
@@ -116,7 +106,7 @@ result.data.totalSchools;
 
 document.getElementById(
 "totalResponses"
-).innerHTML =
+).innerText =
 
 result.data.totalResponses;
 
@@ -124,7 +114,7 @@ result.data.totalResponses;
 
 document.getElementById(
 "activeUsers"
-).innerHTML =
+).innerText =
 
 result.data.activeUsers;
 
@@ -132,12 +122,14 @@ result.data.activeUsers;
 
 document.getElementById(
 "systemStatus"
-).innerHTML =
+).innerText =
 
 result.data.systemStatus;
 
 
+
 }
+
 
 
 }
@@ -147,7 +139,7 @@ catch(error){
 
 console.error(
 
-"Dashboard API Error",
+"Dashboard Error",
 
 error
 
@@ -157,10 +149,8 @@ error
 }
 
 
+
 }
-
-
-
 
 
 
@@ -172,7 +162,9 @@ function setupLogout(){
 const btn =
 
 document.getElementById(
+
 "logoutBtn"
+
 );
 
 
@@ -183,15 +175,12 @@ if(btn){
 btn.onclick=function(){
 
 
-
 sessionStorage.clear();
 
 
-
-window.location.href=
+window.location.href =
 
 "../login.html";
-
 
 
 };
