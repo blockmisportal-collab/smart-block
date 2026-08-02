@@ -1,31 +1,19 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  User Management JS
- Google Sheet Based Version
+ Google Sheet Based
 =====================================================*/
-
 
 "use strict";
 
 
-
 const API_URL =
-
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
 
-
-
-/*=====================================================
- PAGE LOAD
-=====================================================*/
-
-
 document.addEventListener(
-
 "DOMContentLoaded",
-
 function(){
 
 loadUsers();
@@ -38,36 +26,32 @@ loadUsers();
 
 
 
-
-
 /*=====================================================
- LOAD USERS JSONP
+ LOAD USERS
 =====================================================*/
 
 
 function loadUsers(){
 
 
-const callbackName =
-
+const callback =
 "usersCallback";
 
 
 
-window[callbackName] =
-
-function(response){
-
+window[callback] = function(response){
 
 
 console.log(
-"Users Response",
+"USER DATA",
 response
 );
 
 
 
-if(response.success){
+if(
+response.success
+){
 
 
 renderUsers(
@@ -80,11 +64,6 @@ response.data
 else{
 
 
-console.error(
-response.message
-);
-
-
 alert(
 response.message
 );
@@ -93,39 +72,23 @@ response.message
 }
 
 
-
-removeScript();
-
-
 };
 
 
 
-
-
-
 const script =
+document.createElement("script");
 
-document.createElement(
-"script"
-);
+
+script.src =
+API_URL +
+"?action=users&callback=" +
+callback;
 
 
 
 script.id =
-"usersAPI";
-
-
-
-script.src =
-
-API_URL
-
-+
-"?action=users&callback="
-
-+
-callbackName;
+"userApiScript";
 
 
 
@@ -145,7 +108,7 @@ script
 
 
 /*=====================================================
- DISPLAY USERS
+ RENDER USERS
 =====================================================*/
 
 
@@ -153,7 +116,6 @@ function renderUsers(users){
 
 
 const table =
-
 document.getElementById(
 "userTable"
 );
@@ -172,46 +134,104 @@ table.innerHTML="";
 
 
 
-
 users.forEach(
-
 function(user){
 
 
 
-const row =
+const username =
+user.username ||
+user.Username ||
+"";
 
+
+
+const name =
+user.name ||
+user.Name ||
+"";
+
+
+
+const role =
+user.role ||
+user.Role ||
+"";
+
+
+
+const nyaya =
+user.nyayaPanchayat ||
+user.NyayaPanchayat ||
+"";
+
+
+
+const schoolCode =
+user.schoolCode ||
+user.SchoolCode ||
+"";
+
+
+
+const schoolName =
+user.schoolName ||
+user.SchoolName ||
+"";
+
+
+
+const active =
+String(
+user.active ||
+user.Active ||
+""
+)
+.toUpperCase()
+==="TRUE";
+
+
+
+
+
+const row =
 document.createElement(
 "tr"
 );
 
 
 
-row.innerHTML = `
+row.innerHTML =
 
+`
 
 <td>
-${user.username || ""}
+${username}
 </td>
 
 
 <td>
-${user.name || ""}
+${name}
 </td>
 
 
 <td>
-${user.role || ""}
+${role}
 </td>
 
 
 <td>
-${user.nyayaPanchayat || ""}
+${nyaya}
 </td>
 
 
 <td>
-${user.schoolCode || ""}
+${schoolCode}
+</td>
+
+
+<td>
+${schoolName}
 </td>
 
 
@@ -219,18 +239,11 @@ ${user.schoolCode || ""}
 
 <span class="badge">
 
-${
-user.active
-?
-"ACTIVE"
-:
-"INACTIVE"
-}
+${active ? "ACTIVE":"INACTIVE"}
 
 </span>
 
 </td>
-
 
 `;
 
@@ -245,37 +258,15 @@ table.appendChild(row);
 );
 
 
-
 }
-
-
-
 
 
 
 
 
 /*=====================================================
- REMOVE JSONP SCRIPT
+ REFRESH BUTTON SUPPORT
 =====================================================*/
 
 
-function removeScript(){
-
-
-const script =
-
-document.getElementById(
-"usersAPI"
-);
-
-
-
-if(script){
-
-script.remove();
-
-}
-
-
-}
+window.loadUsers = loadUsers;
