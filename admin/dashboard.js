@@ -1,10 +1,18 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.0
  Admin Dashboard JS
+ File : dashboard.js
+ Version : Production Final
 =====================================================*/
 
 
 "use strict";
+
+
+
+/*=====================================================
+ API URL
+=====================================================*/
 
 
 const API_URL =
@@ -12,17 +20,94 @@ const API_URL =
 
 
 
+
+/*=====================================================
+ PAGE LOAD
+=====================================================*/
+
+
 document.addEventListener(
 "DOMContentLoaded",
 function(){
 
 
+loadUser();
+
+
 loadDashboard();
+
+
+logout();
 
 
 });
 
 
+
+
+
+/*=====================================================
+ LOAD USER SESSION
+=====================================================*/
+
+
+function loadUser(){
+
+
+try{
+
+
+const user =
+JSON.parse(
+sessionStorage.getItem("USER")
+);
+
+
+
+if(!user){
+
+return;
+
+}
+
+
+
+document
+.getElementById("userName")
+.innerHTML =
+user.name || "Administrator";
+
+
+
+document
+.getElementById("userRole")
+.innerHTML =
+user.role || "ADMIN";
+
+
+
+}
+
+catch(error){
+
+
+console.error(error);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+/*=====================================================
+ LOAD DASHBOARD DATA
+=====================================================*/
 
 
 async function loadDashboard(){
@@ -31,8 +116,11 @@ async function loadDashboard(){
 try{
 
 
+
 const response =
-await fetch(API_URL,{
+await fetch(
+API_URL,
+{
 
 
 method:"POST",
@@ -57,7 +145,11 @@ action:"dashboard"
 })
 
 
-});
+}
+
+);
+
+
 
 
 
@@ -66,11 +158,17 @@ await response.json();
 
 
 
-console.log(result);
+console.log(
+"Dashboard:",
+result
+);
+
+
 
 
 
 if(result.success){
+
 
 
 document
@@ -106,7 +204,7 @@ result.data.systemStatus;
 else{
 
 
-console.log(
+console.error(
 result.message
 );
 
@@ -114,15 +212,79 @@ result.message
 }
 
 
+
 }
 
 catch(error){
 
 
-console.error(error);
+console.error(
+"Dashboard API Error:",
+error
+);
+
+
+
+document
+.getElementById("systemStatus")
+.innerHTML =
+"OFFLINE";
+
 
 
 }
+
+
+
+}
+
+
+
+
+
+
+
+
+/*=====================================================
+ LOGOUT
+=====================================================*/
+
+
+function logout(){
+
+
+
+const btn =
+document
+.getElementById("logoutBtn");
+
+
+
+if(!btn){
+
+return;
+
+}
+
+
+
+btn.onclick=function(){
+
+
+
+sessionStorage.removeItem(
+"USER"
+);
+
+
+
+window.location.href =
+"../login.html";
+
+
+
+};
+
 
 
 }
