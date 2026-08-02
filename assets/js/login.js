@@ -29,15 +29,25 @@ form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     message.innerHTML = "";
+    message.style.color = "red";
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (username === "") {
+        message.innerHTML = "Please Enter Username";
+        return;
+    }
+
+    if (password === "") {
+        message.innerHTML = "Please Enter Password";
+        return;
+    }
 
     button.disabled = true;
     button.innerHTML = "Please Wait...";
 
-    const username =
-        document.getElementById("username").value.trim();
-
-    const password =
-        document.getElementById("password").value.trim();
+    console.log("Connecting API...");
 
     try {
 
@@ -45,10 +55,10 @@ form.addEventListener("submit", async function (e) {
 
             method: "POST",
 
+            mode: "cors",
+
             headers: {
-
                 "Content-Type": "application/json"
-
             },
 
             body: JSON.stringify({
@@ -65,58 +75,50 @@ form.addEventListener("submit", async function (e) {
 
         const result = await response.json();
 
+        console.log(result);
+
         if (result.success) {
 
             sessionStorage.setItem(
 
                 "USER",
 
-                JSON.stringify(result.user)
+                JSON.stringify(result.data)
 
             );
 
             message.style.color = "green";
-
             message.innerHTML = "Login Successful";
 
-            setTimeout(() => {
+            setTimeout(function () {
 
-                redirect(result.user.role);
+                redirect(result.data.role);
 
             }, 1000);
 
-        }
-
-        else {
+        } else {
 
             message.style.color = "red";
-
             message.innerHTML = result.message;
 
         }
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
         message.style.color = "red";
-
-        message.innerHTML =
-
-            "Unable to connect server.";
+        message.innerHTML = "Server Connection Failed";
 
     }
 
     button.disabled = false;
-
     button.innerHTML = "LOGIN";
 
 });
 
 /*=====================================================
- REDIRECT
+ ROLE REDIRECT
 ======================================================*/
 
 function redirect(role) {
@@ -124,36 +126,23 @@ function redirect(role) {
     switch (role) {
 
         case "ADMIN":
-
-            window.location.href =
-                "admin/dashboard.html";
-
+            window.location.href = "admin/dashboard.html";
             break;
 
         case "BEO":
-
-            window.location.href =
-                "beo/dashboard.html";
-
+            window.location.href = "beo/dashboard.html";
             break;
 
         case "NODAL":
-
-            window.location.href =
-                "nodal/dashboard.html";
-
+            window.location.href = "nodal/dashboard.html";
             break;
 
         case "SCHOOL":
-
-            window.location.href =
-                "school/dashboard.html";
-
+            window.location.href = "school/dashboard.html";
             break;
 
         default:
-
-            alert("Invalid Role");
+            alert("Invalid User Role : " + role);
 
     }
 
