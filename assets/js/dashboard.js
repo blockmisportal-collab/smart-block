@@ -1,16 +1,19 @@
 /*=====================================================
- SMART FORM ENTERPRISE v6.0
+ SMART FORM ENTERPRISE v6.1
  Admin Dashboard JS
- JSONP Version (CORS FIX)
+ Production Version
 =====================================================*/
 
 
 "use strict";
 
 
-// Google Apps Script Web App URL
+
 const API_URL =
+
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
 
 
 
@@ -19,13 +22,18 @@ document.addEventListener(
 function(){
 
 
-console.log("Loading Dashboard...");
+console.log(
+"Loading Dashboard..."
+);
+
 
 
 loadDashboard();
 
 
-logoutHandler();
+
+setupLogout();
+
 
 
 });
@@ -34,58 +42,111 @@ logoutHandler();
 
 
 
+
+
+
 /*=====================================================
- LOAD DASHBOARD
+ LOAD DASHBOARD DATA
 =====================================================*/
 
 
 function loadDashboard(){
 
 
+
 const callbackName =
+
 "dashboardCallback";
 
 
 
+
 window[callbackName] =
-function(result){
+
+function(response){
+
 
 
 console.log(
 "Dashboard Response:",
-result
+response
 );
 
 
 
-if(result.success){
 
-
-document
-.getElementById("totalSchools")
-.innerHTML =
-result.data.totalSchools;
+if(
+response.success
+){
 
 
 
-document
-.getElementById("totalResponses")
-.innerHTML =
-result.data.totalResponses;
+const data =
+response.data;
 
 
 
 document
-.getElementById("activeUsers")
+.getElementById(
+"totalSchools"
+)
 .innerHTML =
-result.data.activeUsers;
+data.totalSchools || 0;
+
+
 
 
 
 document
-.getElementById("systemStatus")
+.getElementById(
+"totalResponses"
+)
 .innerHTML =
-result.data.systemStatus;
+data.totalResponses || 0;
+
+
+
+
+
+document
+.getElementById(
+"activeUsers"
+)
+.innerHTML =
+data.activeUsers || 0;
+
+
+
+
+
+if(
+document.getElementById(
+"pendingForms"
+)
+){
+
+
+document
+.getElementById(
+"pendingForms"
+)
+.innerHTML =
+data.pendingForms || 0;
+
+
+}
+
+
+
+
+
+document
+.getElementById(
+"systemStatus"
+)
+.innerHTML =
+data.systemStatus || "OFFLINE";
+
 
 
 
@@ -95,14 +156,21 @@ else{
 
 
 console.error(
-result.message
+
+"Dashboard Error:",
+
+response.message
+
 );
 
 
 }
 
 
-removeScript();
+
+removeJSONPScript();
+
+
 
 };
 
@@ -110,28 +178,45 @@ removeScript();
 
 
 
+
 const script =
-document.createElement("script");
+
+document.createElement(
+"script"
+);
+
 
 
 script.id =
-"dashboardAPI";
+
+"dashboardJSONP";
+
 
 
 script.src =
+
 API_URL
+
 +
 "?action=dashboard&callback="
+
 +
 callbackName;
 
 
 
-document.body.appendChild(script);
+
+document.body.appendChild(
+script
+);
 
 
 
 }
+
+
+
+
 
 
 
@@ -142,23 +227,28 @@ document.body.appendChild(script);
 =====================================================*/
 
 
-function removeScript(){
+function removeJSONPScript(){
 
 
-const old =
+const script =
+
 document.getElementById(
-"dashboardAPI"
+"dashboardJSONP"
 );
 
 
-if(old){
 
-old.remove();
+if(script){
+
+script.remove();
+
+}
+
 
 }
 
 
-}
+
 
 
 
@@ -169,42 +259,73 @@ old.remove();
 =====================================================*/
 
 
-function logoutHandler(){
+function setupLogout(){
 
 
-const btn =
+
+const logoutBtn =
+
 document.getElementById(
 "logoutBtn"
 );
 
 
 
-if(!btn){
+
+if(!logoutBtn){
+
+
+console.error(
+"Logout Button Missing"
+);
+
 
 return;
+
 
 }
 
 
 
-btn.addEventListener(
+
+
+
+logoutBtn.addEventListener(
+
 "click",
+
 function(){
+
+
+
+console.log(
+"Logout Clicked"
+);
+
 
 
 
 localStorage.clear();
 
+
 sessionStorage.clear();
 
 
 
+
+
 window.location.href =
+
 "../login.html";
 
 
 
-});
+}
+
+
+
+);
+
 
 
 }
