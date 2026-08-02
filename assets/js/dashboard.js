@@ -317,42 +317,44 @@ data.systemStatus || "OFFLINE";
  LOGOUT
 =====================================================*/
 
-
 function setupLogout(){
 
 
-const btn =
-
-document.getElementById("logoutBtn");
+const btn = document.getElementById("logoutBtn");
 
 
+if(!btn){
 
-if(btn){
+console.log("Logout Button Not Found");
+
+return;
+
+}
 
 
-btn.addEventListener(
 
-"click",
+btn.onclick = function(){
 
-function(){
 
+console.log("Logout Clicked");
+
+
+// Clear Session
+
+sessionStorage.removeItem("USER");
 
 sessionStorage.clear();
 
 
 
-window.location.href =
+// Redirect Login
 
-"../login.html";
-
-
-
-}
-
+window.location.replace(
+"../login.html"
 );
 
 
-}
+};
 
 
 }
