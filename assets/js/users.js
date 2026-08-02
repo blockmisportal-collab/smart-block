@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  User Management JS
- Google Sheet Based
+ Production Version
 =====================================================*/
 
 
@@ -41,7 +41,7 @@ loadUsers();
 
 
 /*=====================================================
- LOAD USERS FROM API
+ LOAD USERS
 =====================================================*/
 
 
@@ -53,6 +53,14 @@ const table =
 document.getElementById(
 "userTable"
 );
+
+
+
+if(!table){
+
+return;
+
+}
 
 
 
@@ -74,6 +82,7 @@ try{
 const response = await fetch(
 
 API_URL +
+
 "?action=users"
 
 );
@@ -87,7 +96,7 @@ await response.json();
 
 
 console.log(
-"USER DATA",
+"USER API RESPONSE",
 result
 );
 
@@ -100,7 +109,9 @@ result.success
 
 
 renderUsers(
+
 result.data
+
 );
 
 
@@ -113,13 +124,11 @@ table.innerHTML =
 
 `
 <tr>
-
 <td colspan="7">
 
 ${result.message}
 
 </td>
-
 </tr>
 `;
 
@@ -144,13 +153,11 @@ table.innerHTML =
 
 `
 <tr>
-
 <td colspan="7">
 
 Server Connection Failed
 
 </td>
-
 </tr>
 `;
 
@@ -168,12 +175,14 @@ Server Connection Failed
 
 
 
+
 /*=====================================================
- RENDER USERS
+ RENDER USER TABLE
 =====================================================*/
 
 
 function renderUsers(users){
+
 
 
 const table =
@@ -192,53 +201,16 @@ table.innerHTML = "";
 
 users.forEach(
 
-function(user){
-
-
-
-const username =
-
-user.username || "";
-
-
-
-const name =
-
-user.name || "";
-
-
-
-const role =
-
-user.role || "";
-
-
-
-const nyaya =
-
-user.nyayaPanchayat || "";
-
-
-
-const schoolCode =
-
-user.schoolCode || "";
-
-
-
-const schoolName =
-
-user.schoolName || "";
-
+(user)=>{
 
 
 const active =
 
-user.active === true ||
 String(user.active)
-.toUpperCase()
-==="TRUE";
 
+.toUpperCase()
+
+==="TRUE";
 
 
 
@@ -253,7 +225,7 @@ table.innerHTML +=
 
 <td>
 
-${username}
+${user.username || "-"}
 
 </td>
 
@@ -261,7 +233,7 @@ ${username}
 
 <td>
 
-${name}
+${user.name || "-"}
 
 </td>
 
@@ -269,7 +241,7 @@ ${name}
 
 <td>
 
-${role}
+${user.role || "-"}
 
 </td>
 
@@ -277,39 +249,44 @@ ${role}
 
 <td>
 
-${schoolCode || "-"}
+${user.nyayaPanchayat || "-"}
 
 </td>
 
 
+
 <td>
 
-${schoolName || "-"}
+${user.schoolCode || "-"}
 
 </td>
 
 
+
 <td>
+
+${user.schoolName || "-"}
+
+</td>
+
+
+
+<td>
+
 
 <span class="badge">
 
 ${
 active
-?
-"ACTIVE"
-:
-"INACTIVE"
-}
 
-</span>
-
-</td>
-${
-active
 ?
+
 "ACTIVE"
+
 :
+
 "INACTIVE"
+
 }
 
 </span>
@@ -340,9 +317,10 @@ active
 
 
 /*=====================================================
- GLOBAL REFRESH BUTTON
+ REFRESH BUTTON
 =====================================================*/
 
 
 window.loadUsers =
+
 loadUsers;
