@@ -1,14 +1,25 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- Login JavaScript UPDATED
+ Login JavaScript
+ CORS Compatible Version
 ======================================================*/
 
 "use strict";
 
 
+
+/*=====================================================
+ GOOGLE APPS SCRIPT WEB APP URL
+======================================================*/
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
+
+
+/*=====================================================
+ ELEMENTS
+======================================================*/
 
 
 const form =
@@ -22,6 +33,12 @@ document.getElementById("message");
 const button =
 document.getElementById("loginBtn");
 
+
+
+
+/*=====================================================
+ LOGIN SUBMIT
+======================================================*/
 
 
 form.addEventListener(
@@ -39,14 +56,16 @@ message.style.color="red";
 
 
 const username =
-document.getElementById("username")
+document
+.getElementById("username")
 .value
 .trim();
 
 
 
 const password =
-document.getElementById("password")
+document
+.getElementById("password")
 .value
 .trim();
 
@@ -54,10 +73,13 @@ document.getElementById("password")
 
 if(!username){
 
+
 message.innerHTML =
-"Please Enter Username";
+"Username Required";
+
 
 return;
+
 
 }
 
@@ -65,10 +87,13 @@ return;
 
 if(!password){
 
+
 message.innerHTML =
-"Please Enter Password";
+"Password Required";
+
 
 return;
+
 
 }
 
@@ -76,8 +101,8 @@ return;
 
 button.disabled=true;
 
-button.innerHTML=
-"Please Wait...";
+button.innerHTML =
+"PLEASE WAIT...";
 
 
 
@@ -85,22 +110,31 @@ try{
 
 
 const response =
+
 await fetch(
+
 API_URL,
+
 {
+
 
 method:"POST",
 
 
 headers:{
 
+
 "Content-Type":
 "text/plain;charset=utf-8"
+
 
 },
 
 
-body:JSON.stringify({
+
+body:
+
+JSON.stringify({
 
 action:"login",
 
@@ -111,20 +145,25 @@ password:password
 })
 
 
-});
+}
+
+);
 
 
 
 
-const text =
+
+const responseText =
 await response.text();
 
 
 
 console.log(
-"SERVER RESPONSE:",
-text
+"API RESPONSE:",
+responseText
 );
+
+
 
 
 
@@ -136,12 +175,12 @@ try{
 
 
 result =
-JSON.parse(text);
+JSON.parse(responseText);
 
 
 }
 
-catch(e){
+catch(error){
 
 
 throw new Error(
@@ -155,8 +194,11 @@ throw new Error(
 
 
 
-if(result.success){
+if(result.success === true){
 
+
+
+/* SAVE USER SESSION */
 
 
 sessionStorage.setItem(
@@ -165,6 +207,7 @@ sessionStorage.setItem(
 
 JSON.stringify(
 result.data
+
 )
 
 );
@@ -180,15 +223,22 @@ message.innerHTML =
 
 
 
+
+
 setTimeout(
-()=>{
+
+function(){
+
 
 redirect(
 result.data.role
 );
 
+
 },
+
 1000
+
 );
 
 
@@ -199,8 +249,10 @@ else{
 
 
 message.innerHTML =
+
 result.message ||
-"Login Failed";
+
+"Invalid Login";
 
 
 }
@@ -219,8 +271,12 @@ error
 
 
 
+message.style.color =
+"red";
+
+
 message.innerHTML =
-error.message ||
+
 "Server Connection Failed";
 
 
@@ -230,27 +286,36 @@ error.message ||
 
 button.disabled=false;
 
-button.innerHTML=
+
+button.innerHTML =
 "LOGIN";
 
 
-});
+}
+
+);
 
 
 
 
+
+/*=====================================================
+ ROLE REDIRECT
+======================================================*/
 
 
 function redirect(role){
 
 
 role =
+
 String(role)
 .toUpperCase();
 
 
 
 switch(role){
+
 
 
 case "ADMIN":
@@ -301,11 +366,14 @@ default:
 
 
 alert(
-"Invalid User Role : "+role
+"Invalid User Role : "
++
+role
 );
 
 
 }
+
 
 
 }
