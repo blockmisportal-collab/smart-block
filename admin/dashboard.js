@@ -1,18 +1,10 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.0
  Admin Dashboard JS
- File : dashboard.js
- Version : Production Final
 =====================================================*/
 
 
 "use strict";
-
-
-
-/*=====================================================
- API URL
-=====================================================*/
 
 
 const API_URL =
@@ -20,24 +12,12 @@ const API_URL =
 
 
 
-
-/*=====================================================
- PAGE LOAD
-=====================================================*/
-
-
 document.addEventListener(
 "DOMContentLoaded",
-function(){
-
-
-loadUser();
+()=>{
 
 
 loadDashboard();
-
-
-logout();
 
 
 });
@@ -46,81 +26,14 @@ logout();
 
 
 
-/*=====================================================
- LOAD USER SESSION
-=====================================================*/
-
-
-function loadUser(){
-
-
-try{
-
-
-const user =
-JSON.parse(
-sessionStorage.getItem("USER")
-);
-
-
-
-if(!user){
-
-return;
-
-}
-
-
-
-document
-.getElementById("userName")
-.innerHTML =
-user.name || "Administrator";
-
-
-
-document
-.getElementById("userRole")
-.innerHTML =
-user.role || "ADMIN";
-
-
-
-}
-
-catch(error){
-
-
-console.error(error);
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-/*=====================================================
- LOAD DASHBOARD DATA
-=====================================================*/
-
-
 async function loadDashboard(){
 
 
 try{
 
 
-
 const response =
-await fetch(
-API_URL,
-{
+await fetch(API_URL,{
 
 
 method:"POST",
@@ -145,11 +58,7 @@ action:"dashboard"
 })
 
 
-}
-
-);
-
-
+});
 
 
 
@@ -173,28 +82,28 @@ if(result.success){
 
 document
 .getElementById("totalSchools")
-.innerHTML =
+.innerText =
 result.data.totalSchools;
 
 
 
 document
 .getElementById("totalResponses")
-.innerHTML =
+.innerText =
 result.data.totalResponses;
 
 
 
 document
 .getElementById("activeUsers")
-.innerHTML =
+.innerText =
 result.data.activeUsers;
 
 
 
 document
 .getElementById("systemStatus")
-.innerHTML =
+.innerText =
 result.data.systemStatus;
 
 
@@ -219,19 +128,11 @@ catch(error){
 
 
 console.error(
-"Dashboard API Error:",
+"Dashboard Error:",
 error
 );
 
 
-
-document
-.getElementById("systemStatus")
-.innerHTML =
-"OFFLINE";
-
-
-
 }
 
 
@@ -242,49 +143,32 @@ document
 
 
 
-
-
-
-/*=====================================================
+/*========================
  LOGOUT
-=====================================================*/
+========================*/
 
 
-function logout(){
-
-
-
-const btn =
-document
-.getElementById("logoutBtn");
-
-
-
-if(!btn){
-
-return;
-
-}
-
-
-
-btn.onclick=function(){
-
-
-
-sessionStorage.removeItem(
-"USER"
+const logoutBtn =
+document.getElementById(
+"logoutBtn"
 );
 
+
+
+if(logoutBtn){
+
+
+logoutBtn.onclick=function(){
+
+
+sessionStorage.clear();
 
 
 window.location.href =
 "../login.html";
 
 
-
 };
-
 
 
 }
