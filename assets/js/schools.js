@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- SCHOOL MANAGEMENT JS
- FINAL STABLE VERSION
+ SCHOOL MANAGEMENT FINAL JS
+ FIXED VERSION
 =====================================================*/
 
 "use strict";
@@ -17,20 +17,20 @@ let ALL_SCHOOLS = [];
 
 document.addEventListener(
 "DOMContentLoaded",
-function(){
+()=>{
 
 
 loadSchools();
 
 
 
-const searchBox =
+const search =
 document.getElementById("searchBox");
 
 
-if(searchBox){
+if(search){
 
-searchBox.addEventListener(
+search.addEventListener(
 "input",
 filterSchools
 );
@@ -39,20 +39,18 @@ filterSchools
 
 
 
-
-const nyayaFilter =
+const filter =
 document.getElementById("nyayaFilter");
 
 
-if(nyayaFilter){
+if(filter){
 
-nyayaFilter.addEventListener(
+filter.addEventListener(
 "change",
 filterSchools
 );
 
 }
-
 
 
 
@@ -62,10 +60,8 @@ document.querySelector(".refresh");
 
 if(refresh){
 
-refresh.addEventListener(
-"click",
-loadSchools
-);
+refresh.onclick =
+loadSchools;
 
 }
 
@@ -77,19 +73,18 @@ loadSchools
 
 
 
-
 async function loadSchools(){
 
 
-const tbody =
+
+const table =
 document.getElementById(
 "schoolTableBody"
 );
 
 
 
-tbody.innerHTML =
-
+table.innerHTML =
 `
 <tr>
 <td colspan="5">
@@ -105,22 +100,18 @@ try{
 
 const response =
 await fetch(
-
 API_URL,
-
 {
 
 method:"POST",
 
-headers:{
-
+headers:
+{
 "Content-Type":
 "text/plain;charset=utf-8"
-
 },
 
 body:
-
 JSON.stringify({
 
 action:"schools"
@@ -139,7 +130,7 @@ await response.text();
 
 
 console.log(
-"SCHOOL API RESPONSE",
+"School API Response",
 text
 );
 
@@ -150,12 +141,11 @@ JSON.parse(text);
 
 
 
-
-
 if(!result.success){
 
 throw new Error(
-result.message
+result.message ||
+"API Error"
 );
 
 }
@@ -163,44 +153,22 @@ result.message
 
 
 
-
 ALL_SCHOOLS =
-
-Array.isArray(result.data)
-
-?
-
-result.data
-
-:
-
-[];
-
-
-
-
-
-console.log(
-"FINAL SCHOOL ARRAY",
-ALL_SCHOOLS
-);
-
+(result.data || [])
+.map(normalizeSchool);
 
 
 
 
 document.getElementById(
 "totalSchools"
-).innerHTML =
-
+)
+.innerHTML =
 ALL_SCHOOLS.length;
 
 
 
-
-
 createNyayaFilter();
-
 
 
 
@@ -210,32 +178,89 @@ ALL_SCHOOLS
 
 
 
-
 }
 
 catch(error){
 
 
 console.error(
-"SCHOOL ERROR",
+"School Load Error",
 error
 );
 
 
-
-tbody.innerHTML =
-
+table.innerHTML =
 `
 <tr>
 <td colspan="5">
+
 Server Connection Failed
+
 </td>
 </tr>
 `;
 
 
+}
+
 
 }
+
+
+
+
+
+
+
+function normalizeSchool(item){
+
+
+return {
+
+
+udise:
+
+String(
+item.udise ||
+item.UDISECode ||
+item.UDISE ||
+""
+),
+
+
+
+schoolName:
+
+item.schoolName ||
+item.SchoolName ||
+"",
+
+
+
+nyayaPanchayat:
+
+item.nyayaPanchayat ||
+item.NyayaPanchayat ||
+"",
+
+
+
+schoolType:
+
+item.schoolType ||
+item.SchoolType ||
+"",
+
+
+
+status:
+
+item.status ||
+item.Status ||
+"ACTIVE"
+
+
+};
 
 
 
@@ -265,49 +290,21 @@ return;
 
 
 
+let list =
+[
+...new Set(
 
-let list=[];
+ALL_SCHOOLS
 
+.map(
+x=>x.nyayaPanchayat
+)
 
+.filter(Boolean)
 
+)
 
-ALL_SCHOOLS.forEach(
-
-school=>{
-
-
-let value =
-
-String(
-
-school.NyayaPanchayat ||
-
-school.nyayaPanchayat ||
-
-""
-
-);
-
-
-
-if(
-
-value !== "" &&
-
-!list.includes(value)
-
-){
-
-list.push(value);
-
-}
-
-
-}
-
-);
-
-
+];
 
 
 
@@ -315,10 +312,7 @@ list.sort();
 
 
 
-
-
 select.innerHTML =
-
 `
 <option value="">
 All Nyaya Panchayat
@@ -327,29 +321,22 @@ All Nyaya Panchayat
 
 
 
-
 list.forEach(
-
 item=>{
 
 
 select.innerHTML +=
-
 `
 <option value="${item}">
 ${item}
 </option>
 `;
 
-}
 
-);
-
+});
 
 
 }
-
-
 
 
 
@@ -363,85 +350,68 @@ function renderSchools(data){
 
 
 
-const tbody =
+const table =
 document.getElementById(
 "schoolTableBody"
 );
 
 
 
-tbody.innerHTML="";
-
-
+table.innerHTML="";
 
 
 
 if(
-
 !data ||
-
 data.length===0
-
 ){
 
 
-tbody.innerHTML =
-
+table.innerHTML =
 `
 <tr>
-
 <td colspan="5">
 
 No School Found
 
 </td>
-
 </tr>
 `;
 
+
 return;
+
 
 }
 
 
 
-
-
 data.forEach(
-
 school=>{
 
 
-tbody.innerHTML +=
+table.innerHTML +=
 
 `
 <tr>
 
 <td>
-
-${school.UDISECode || "-"}
-
+${school.udise}
 </td>
 
 
 <td>
-
-${school.SchoolName || "-"}
-
+${school.schoolName}
 </td>
 
 
 <td>
-
-${school.NyayaPanchayat || "-"}
-
+${school.nyayaPanchayat}
 </td>
 
 
 <td>
-
-${school.SchoolType || "-"}
-
+${school.schoolType}
 </td>
 
 
@@ -449,7 +419,7 @@ ${school.SchoolType || "-"}
 
 <span class="status">
 
-${school.Status || "ACTIVE"}
+${school.status}
 
 </span>
 
@@ -461,9 +431,7 @@ ${school.Status || "ACTIVE"}
 
 
 
-}
-
-);
+});
 
 
 
@@ -481,99 +449,59 @@ function filterSchools(){
 
 
 
-const search =
-
-document
-.getElementById("searchBox")
-.value
+let search =
+(
+document.getElementById(
+"searchBox"
+)?.value || ""
+)
 .toLowerCase()
 .trim();
 
 
 
 
-
-const nyaya =
-
-document
-.getElementById("nyayaFilter")
-.value
-.trim();
+let nyaya =
+document.getElementById(
+"nyayaFilter"
+)?.value || "";
 
 
 
 
 
 
-const filtered =
-
-
+let filtered =
 ALL_SCHOOLS.filter(
-
 school=>{
 
 
-const code =
+let text =
 
-String(
-school.UDISECode || ""
+(
+school.udise +
+" " +
+school.schoolName +
+" " +
+school.nyayaPanchayat +
+" " +
+school.schoolType
 )
 
 .toLowerCase();
-
-
-
-
-const name =
-
-String(
-school.SchoolName || ""
-)
-
-.toLowerCase();
-
-
-
-
-
-const np =
-
-String(
-school.NyayaPanchayat || ""
-);
-
 
 
 
 
 return
 
-
-(
-
-search === "" ||
-
-code.includes(search) ||
-
-name.includes(search) ||
-
-np.toLowerCase()
-.includes(search)
-
-)
-
-
+text.includes(search)
 
 &&
 
-
-
 (
-
-nyaya === "" ||
-
-np === nyaya
-
+nyaya==="" ||
+school.nyayaPanchayat===nyaya
 );
 
 
@@ -581,8 +509,6 @@ np === nyaya
 }
 
 );
-
-
 
 
 
@@ -593,7 +519,6 @@ filtered
 
 
 }
-
 
 
 
