@@ -1,25 +1,9 @@
-/*=====================================================
- SMART FORM ENTERPRISE v6.1
- USER MANAGEMENT JS
- FINAL PRODUCTION VERSION
-=====================================================*/
-
-
 "use strict";
 
 
-
 const API_URL =
-
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
-
-
-
-
-/*=====================================================
- PAGE LOAD
-=====================================================*/
 
 
 document.addEventListener(
@@ -28,38 +12,23 @@ function(){
 
 loadUsers();
 
-}
-);
+});
 
 
 
-
-
-
-
-/*=====================================================
- LOAD USERS
-=====================================================*/
 
 
 async function loadUsers(){
 
 
-const table = 
-document.getElementById("userTable");
+const tbody =
+document.getElementById("userTableBody");
 
 
-
-if(!table){
-
-return;
-
-}
+try{
 
 
-
-table.innerHTML =
-
+tbody.innerHTML =
 `
 <tr>
 <td colspan="7">
@@ -70,168 +39,87 @@ Loading...
 
 
 
-try{
+const response =
+await fetch(
 
+API_URL,
 
-const response = await fetch(
+{
 
-API_URL + "?action=users"
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
+},
+
+body:JSON.stringify({
+
+action:"users"
+
+})
+
+}
 
 );
 
 
 
-const result = await response.json();
+const result =
+await response.json();
 
 
 
-console.log(
-"USER RESPONSE",
-result
+console.log(result);
+
+
+
+if(
+!result.success
+){
+
+throw new Error(
+result.message
 );
 
-
-
-
-if(result.success){
-
-
-renderUsers(result.data);
-
-
-}
-
-else{
-
-
-table.innerHTML =
-
-`
-<tr>
-<td colspan="7">
-
-${result.message}
-
-</td>
-</tr>
-`;
-
-}
-
-
-}
-
-catch(error){
-
-
-console.error(error);
-
-
-
-table.innerHTML =
-
-`
-<tr>
-<td colspan="7">
-
-Server Connection Failed
-
-</td>
-</tr>
-`;
-
-}
-
-
 }
 
 
 
+tbody.innerHTML="";
 
 
 
-
-/*=====================================================
- RENDER USERS
-=====================================================*/
-
-
-function renderUsers(users){
-
-
-const table =
-
-document.getElementById("userTable");
+result.data.forEach(
+function(user){
 
 
 
-table.innerHTML = "";
-
-
-
-
-users.forEach(function(user){
-
-
-
-let active =
-
-String(user.active)
-.toUpperCase()
-==="TRUE";
-
-
-
-
-
-table.innerHTML +=
-
+tbody.innerHTML +=
 `
 
 <tr>
 
+<td>${user.username || "-"}</td>
 
-<td>
-${user.username || "-"}
-</td>
+<td>${user.name || "-"}</td>
 
+<td>${user.role || "-"}</td>
 
-<td>
-${user.name || "-"}
-</td>
+<td>${user.nyayaPanchayat || "-"}</td>
 
+<td>${user.schoolCode || "-"}</td>
 
-<td>
-${user.role || "-"}
-</td>
-
-
-<td>
-${user.nyayaPanchayat || "-"}
-</td>
-
-
-<td>
-${user.schoolCode || "-"}
-</td>
-
-
-<td>
-${user.schoolName || "-"}
-</td>
+<td>${user.schoolName || "-"}</td>
 
 
 <td>
 
-<span class="badge">
+<span class="status">
 
-${
-active
-?
-"ACTIVE"
-:
-"INACTIVE"
-}
+${user.active ? "ACTIVE":"INACTIVE"}
 
 </span>
 
@@ -249,15 +137,44 @@ active
 
 }
 
+catch(error){
+
+
+console.error(
+"USER ERROR",
+error
+);
+
+
+tbody.innerHTML=
+`
+
+<tr>
+
+<td colspan="7">
+
+Server Connection Failed
+
+</td>
+
+</tr>
+
+`;
+
+
+}
+
+
+
+}
 
 
 
 
 
+function goBack(){
 
-/*=====================================================
- REFRESH FUNCTION
-=====================================================*/
+window.location.href=
+"dashboard.html";
 
-
-window.loadUsers = loadUsers;
+}
