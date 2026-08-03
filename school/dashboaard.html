@@ -1,1 +1,395 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<title>
+SMART FORM ENTERPRISE v6.1 - School Dashboard
+</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+font-family:"Segoe UI",Arial,sans-serif;
+background:#f4f7fb;
+
+}
+
+
+
+.header{
+
+background:#0d47a1;
+color:white;
+padding:20px 30px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+
+
+.header h1{
+margin:0;
+font-size:28px;
+}
+
+
+
+.btn{
+
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+
+
+.logout{
+
+background:#d32f2f;
+color:white;
+
+}
+
+
+
+.container{
+
+padding:25px;
+
+}
+
+
+
+.card{
+
+background:white;
+padding:25px;
+border-radius:15px;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.12);
+
+margin-bottom:20px;
+
+}
+
+
+
+.info{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+
+}
+
+
+
+.box{
+
+background:#f5f9ff;
+padding:20px;
+border-radius:10px;
+
+}
+
+
+
+.title{
+
+color:#0d47a1;
+font-weight:bold;
+
+}
+
+
+
+.value{
+
+font-size:22px;
+margin-top:8px;
+
+}
+
+
+
+.menu{
+
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+
+
+.menu button{
+
+background:#1565c0;
+color:white;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+
+<div>
+
+<h1>
+SMART FORM ENTERPRISE v6.1
+</h1>
+
+<p>
+SCHOOL DASHBOARD
+</p>
+
+
+</div>
+
+
+<button 
+class="btn logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>
+Welcome
+<span id="userName">
+School User
+</span>
+</h2>
+
+
+
+<div class="info">
+
+
+<div class="box">
+
+<div class="title">
+School Name
+</div>
+
+<div class="value"
+id="schoolName">
+-
+</div>
+
+</div>
+
+
+
+<div class="box">
+
+<div class="title">
+UDISE Code
+</div>
+
+<div class="value"
+id="udiseCode">
+-
+</div>
+
+</div>
+
+
+
+<div class="box">
+
+<div class="title">
+Role
+</div>
+
+<div class="value"
+id="userRole">
+SCHOOL
+</div>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Available Services
+</h2>
+
+
+<div class="menu">
+
+
+<button onclick="openForms()">
+📋 Forms
+</button>
+
+
+
+<button>
+📊 Reports
+</button>
+
+
+
+<button>
+👤 Profile
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+function loadUser(){
+
+
+let user =
+JSON.parse(
+localStorage.getItem("USER")
+||
+"{}"
+);
+
+
+
+document.getElementById(
+"userName"
+).innerText =
+user.name || user.username || "School User";
+
+
+
+document.getElementById(
+"schoolName"
+).innerText =
+user.schoolName || "-";
+
+
+
+document.getElementById(
+"udiseCode"
+).innerText =
+user.schoolCode || "-";
+
+
+
+document.getElementById(
+"userRole"
+).innerText =
+user.role || "SCHOOL";
+
+
+
+}
+
+
+
+function logout(){
+
+
+localStorage.clear();
+
+
+window.location.href="../index.html";
+
+
+}
+
+
+
+
+function openForms(){
+
+
+window.location.href="forms.html";
+
+
+}
+
+
+
+
+loadUser();
+
+
+
+</script>
+
+
+</body>
+
+</html>
