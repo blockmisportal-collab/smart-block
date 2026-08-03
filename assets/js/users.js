@@ -1,76 +1,82 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  USER MANAGEMENT FINAL JS
+ CORS SAFE VERSION
 ======================================================*/
 
-
 "use strict";
-
 
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
-
 let ALL_USERS = [];
 
 
 
-
+/*=====================================================
+ PAGE LOAD
+=====================================================*/
 
 document.addEventListener(
 "DOMContentLoaded",
-function(){
+()=>{
 
 
 loadUsers();
 
 
 
-const refresh =
+const refreshBtn =
 document.getElementById("refreshBtn");
 
 
-if(refresh){
+if(refreshBtn){
 
-refresh.addEventListener(
-"click",
-function(){
-
-loadUsers();
-
-});
+refreshBtn.onclick =
+()=>loadUsers();
 
 }
 
 
 
-
-document
-.getElementById("searchBox")
-.addEventListener(
-"input",
-filterUsers
-);
+const search =
+document.getElementById("searchBox");
 
 
+if(search){
 
-document
-.getElementById("roleFilter")
-.addEventListener(
-"change",
-filterUsers
-);
+search.oninput =
+filterUsers;
+
+}
 
 
 
-document
-.getElementById("statusFilter")
-.addEventListener(
-"change",
-filterUsers
-);
+const role =
+document.getElementById("roleFilter");
+
+
+if(role){
+
+role.onchange =
+filterUsers;
+
+}
+
+
+
+const status =
+document.getElementById("statusFilter");
+
+
+if(status){
+
+status.onchange =
+filterUsers;
+
+}
 
 
 
@@ -80,11 +86,12 @@ filterUsers
 
 
 
-
+/*=====================================================
+ LOAD USERS API
+=====================================================*/
 
 
 async function loadUsers(){
-
 
 
 const tbody =
@@ -94,17 +101,26 @@ document.getElementById(
 
 
 
+if(!tbody){
+
+alert(
+"userTableBody ID Missing"
+);
+
+return;
+
+}
+
+
+
 tbody.innerHTML =
 `
-
 <tr>
 <td colspan="7">
 Loading...
 </td>
 </tr>
-
 `;
-
 
 
 
@@ -120,7 +136,6 @@ API_URL,
 
 method:"POST",
 
-
 headers:{
 
 "Content-Type":
@@ -135,7 +150,6 @@ action:"users"
 
 })
 
-
 }
 
 );
@@ -148,7 +162,7 @@ await response.text();
 
 
 console.log(
-"USER API:",
+"USERS RESPONSE",
 text
 );
 
@@ -163,7 +177,8 @@ JSON.parse(text);
 if(!result.success){
 
 throw new Error(
-result.message
+result.message ||
+"API Error"
 );
 
 }
@@ -172,16 +187,28 @@ result.message
 
 
 ALL_USERS =
-result.data || [];
+Array.isArray(result.data)
+?
+result.data
+:
+[];
 
 
 
-document
-.getElementById(
+
+const total =
+document.getElementById(
 "totalUsers"
-)
-.innerHTML =
+);
+
+
+
+if(total){
+
+total.innerHTML =
 ALL_USERS.length;
+
+}
 
 
 
@@ -192,11 +219,12 @@ ALL_USERS
 
 
 }
+
 catch(error){
 
 
-
 console.error(
+"USER ERROR",
 error
 );
 
@@ -229,16 +257,27 @@ Server Connection Failed
 
 
 
-
+/*=====================================================
+ DISPLAY USERS
+=====================================================*/
 
 
 function renderUsers(users){
+
 
 
 const tbody =
 document.getElementById(
 "userTableBody"
 );
+
+
+
+if(!tbody){
+
+return;
+
+}
 
 
 
@@ -266,7 +305,6 @@ No User Found
 
 `;
 
-
 return;
 
 }
@@ -274,18 +312,16 @@ return;
 
 
 
-
-
 users.forEach(
-
-function(user){
-
+(user)=>{
 
 
-let active =
+
+const active =
 (
 user.active===true ||
-String(user.active).toUpperCase()
+String(user.active)
+.toUpperCase()
 ==="TRUE"
 );
 
@@ -297,11 +333,9 @@ tbody.innerHTML +=
 
 <tr>
 
-
 <td>
 ${user.username || ""}
 </td>
-
 
 
 <td>
@@ -309,11 +343,9 @@ ${user.name || ""}
 </td>
 
 
-
 <td>
 ${user.role || ""}
 </td>
-
 
 
 <td>
@@ -321,11 +353,9 @@ ${user.nyayapanchayat || ""}
 </td>
 
 
-
 <td>
 ${user.schoolCode || ""}
 </td>
-
 
 
 <td>
@@ -333,9 +363,7 @@ ${user.schoolName || ""}
 </td>
 
 
-
 <td>
-
 
 <span class="status ${active?"active":"inactive"}">
 
@@ -343,16 +371,12 @@ ${active?"ACTIVE":"INACTIVE"}
 
 </span>
 
-
 </td>
-
 
 
 </tr>
 
-
 `;
-
 
 
 
@@ -368,66 +392,95 @@ ${active?"ACTIVE":"INACTIVE"}
 
 
 
-
+/*=====================================================
+ SEARCH FILTER
+=====================================================*/
 
 
 function filterUsers(){
 
 
 
-let search =
-document
-.getElementById("searchBox")
-.value
-.toLowerCase();
+const search =
+document.getElementById(
+"searchBox"
+);
 
 
 
-let role =
-document
-.getElementById("roleFilter")
-.value;
+const role =
+document.getElementById(
+"roleFilter"
+);
 
 
 
-let status =
-document
-.getElementById("statusFilter")
-.value;
-
+const status =
+document.getElementById(
+"statusFilter"
+);
 
 
 
 
-let filtered =
+let s =
+search?
+search.value.toLowerCase()
+:
+"";
+
+
+
+let r =
+role?
+role.value
+:
+"";
+
+
+
+let st =
+status?
+status.value
+:
+"";
+
+
+
+
+const filtered =
 ALL_USERS.filter(
 
-function(user){
+(user)=>{
 
 
+const text =
 
-let text =
 (
-String(user.username)+
-String(user.name)+
-String(user.schoolCode)+
-String(user.schoolName)
+
+(user.username || "")+
+(user.name || "")+
+(user.schoolCode || "")+
+(user.schoolName || "")
+
 )
 .toLowerCase();
 
 
 
 
-let active =
+
+const active =
 (
 user.active===true ||
-String(user.active).toUpperCase()
+String(user.active)
+.toUpperCase()
 ==="TRUE"
 );
 
 
 
-let userStatus =
+const userStatus =
 active?
 "ACTIVE":
 "INACTIVE";
@@ -438,33 +491,33 @@ active?
 
 return
 
-
-text.includes(search)
-
-&&
-
-(role==="" ||
-user.role===role)
-
+text.includes(s)
 
 &&
 
-(status==="" ||
-userStatus===status);
+(
+r==="" ||
+user.role===r
+)
+
+&&
+
+(
+st==="" ||
+userStatus===st
+);
 
 
 
 }
 
-
-
 );
 
 
 
-
-
-renderUsers(filtered);
+renderUsers(
+filtered
+);
 
 
 
