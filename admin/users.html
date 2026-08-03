@@ -5,31 +5,30 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
 SMART FORM ENTERPRISE v6.1 - User Management
 </title>
 
 
-<link rel="stylesheet"
-href="../assets/css/style.css">
-
-
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 
 body{
 
 margin:0;
-font-family:Arial, sans-serif;
+font-family:Arial,Helvetica,sans-serif;
 background:#f4f7fb;
 
 }
 
 
+/* HEADER */
 
 .header{
 
@@ -44,7 +43,6 @@ align-items:center;
 }
 
 
-
 .header h1{
 
 margin:0;
@@ -53,26 +51,31 @@ font-size:28px;
 }
 
 
+.header p{
 
-.btn{
-
-border:none;
-padding:10px 20px;
-border-radius:6px;
-cursor:pointer;
-font-size:15px;
+margin:5px 0 0;
 
 }
 
+
+
+button{
+
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+
+}
 
 
 .refresh{
 
-background:#1987e8;
+background:#1685e8;
 color:white;
 
 }
-
 
 
 .back{
@@ -84,34 +87,59 @@ color:white;
 
 
 
+
 .container{
 
-padding:30px;
+padding:25px;
 
 }
+
 
 
 
 .card{
 
 background:white;
-border-radius:15px;
 padding:25px;
+border-radius:15px;
 
 box-shadow:
-0 5px 20px rgba(0,0,0,.1);
+0 5px 20px rgba(0,0,0,.12);
 
 }
 
 
 
-.title{
+.topbar{
 
-font-size:25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+
+
+.count{
+
+font-size:18px;
 font-weight:bold;
-margin-bottom:20px;
+color:#124ca3;
 
 }
+
+
+
+input,select{
+
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+
+}
+
 
 
 
@@ -119,6 +147,7 @@ table{
 
 width:100%;
 border-collapse:collapse;
+margin-top:20px;
 
 }
 
@@ -132,7 +161,6 @@ color:white;
 }
 
 
-
 th,td{
 
 padding:12px;
@@ -143,24 +171,36 @@ border-bottom:1px solid #ddd;
 
 
 
-tbody tr:hover{
+tr:hover{
 
-background:#f1f5ff;
+background:#f3f7ff;
 
 }
 
 
 
+
 .status{
 
-background:green;
-color:white;
-
 padding:6px 14px;
-
 border-radius:20px;
-
+color:white;
 font-size:13px;
+
+}
+
+
+
+.active{
+
+background:green;
+
+}
+
+
+.inactive{
+
+background:red;
 
 }
 
@@ -171,13 +211,11 @@ font-size:13px;
 text-align:center;
 padding:20px;
 
-font-size:18px;
-
 }
 
 
 
-@media(max-width:800px){
+@media(max-width:900px){
 
 
 table{
@@ -187,15 +225,7 @@ font-size:12px;
 }
 
 
-.container{
-
-padding:10px;
-
 }
-
-
-}
-
 
 </style>
 
@@ -206,8 +236,6 @@ padding:10px;
 <body>
 
 
-
-<!-- HEADER -->
 
 <div class="header">
 
@@ -223,16 +251,13 @@ SMART FORM ENTERPRISE v6.1
 USER MANAGEMENT
 </p>
 
-
 </div>
-
 
 
 <div>
 
-
 <button 
-class="btn refresh"
+class="refresh"
 id="refreshBtn">
 
 🔄 Refresh
@@ -240,9 +265,8 @@ id="refreshBtn">
 </button>
 
 
-
 <button
-class="btn back"
+class="back"
 onclick="goBack()">
 
 BACK
@@ -265,11 +289,88 @@ BACK
 <div class="card">
 
 
-<div class="title">
 
+<h2>
 Registered Users
+</h2>
+
+
+
+
+<div class="topbar">
+
+
+<div class="count">
+
+Total Users :
+<span id="totalUsers">
+0
+</span>
+
 
 </div>
+
+
+
+<input 
+type="text"
+id="searchBox"
+placeholder="Search User...">
+
+
+
+<select id="roleFilter">
+
+
+<option value="">
+All Roles
+</option>
+
+
+<option value="ADMIN">
+ADMIN
+</option>
+
+
+<option value="NODAL">
+NODAL
+</option>
+
+
+<option value="SCHOOL">
+SCHOOL
+</option>
+
+
+</select>
+
+
+
+
+<select id="statusFilter">
+
+
+<option value="">
+All Status
+</option>
+
+
+<option value="ACTIVE">
+ACTIVE
+</option>
+
+
+<option value="INACTIVE">
+INACTIVE
+</option>
+
+
+</select>
+
+
+
+</div>
+
 
 
 
@@ -279,8 +380,8 @@ Registered Users
 
 <thead>
 
-
 <tr>
+
 
 <th>
 Username
@@ -317,6 +418,7 @@ Status
 </th>
 
 
+
 </tr>
 
 
@@ -330,8 +432,7 @@ Status
 
 <tr>
 
-<td colspan="7"
-class="loading">
+<td colspan="7" class="loading">
 
 Loading...
 
@@ -341,6 +442,7 @@ Loading...
 </tr>
 
 
+
 </tbody>
 
 
@@ -348,11 +450,11 @@ Loading...
 </table>
 
 
-</div>
-
 
 </div>
 
+
+</div>
 
 
 
@@ -370,7 +472,6 @@ window.location.href=
 
 
 </script>
-
 
 
 
