@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 
 <title>
@@ -14,25 +14,17 @@ SMART FORM ENTERPRISE v6.1 - User Management
 </title>
 
 
+<link rel="stylesheet"
+href="../assets/css/style.css">
+
+
 <style>
-
-*{
-
-box-sizing:border-box;
-
-font-family:
-"Segoe UI",
-Arial,
-sans-serif;
-
-}
-
 
 
 body{
 
 margin:0;
-
+font-family:Arial, sans-serif;
 background:#f4f7fb;
 
 }
@@ -41,16 +33,12 @@ background:#f4f7fb;
 
 .header{
 
-background:#0d47a1;
-
+background:#124ca3;
 color:white;
-
-padding:20px;
+padding:25px;
 
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
 
 }
@@ -60,6 +48,7 @@ align-items:center;
 .header h1{
 
 margin:0;
+font-size:28px;
 
 }
 
@@ -67,17 +56,20 @@ margin:0;
 
 .btn{
 
-background:#1976d2;
-
-color:white;
-
 border:none;
-
-padding:10px 18px;
-
-border-radius:8px;
-
+padding:10px 20px;
+border-radius:6px;
 cursor:pointer;
+font-size:15px;
+
+}
+
+
+
+.refresh{
+
+background:#1987e8;
+color:white;
 
 }
 
@@ -85,7 +77,8 @@ cursor:pointer;
 
 .back{
 
-background:#d32f2f;
+background:#e53935;
+color:white;
 
 }
 
@@ -93,7 +86,7 @@ background:#d32f2f;
 
 .container{
 
-padding:25px;
+padding:30px;
 
 }
 
@@ -102,10 +95,8 @@ padding:25px;
 .card{
 
 background:white;
-
-padding:20px;
-
 border-radius:15px;
+padding:25px;
 
 box-shadow:
 0 5px 20px rgba(0,0,0,.1);
@@ -114,52 +105,96 @@ box-shadow:
 
 
 
+.title{
+
+font-size:25px;
+font-weight:bold;
+margin-bottom:20px;
+
+}
+
+
+
 table{
 
 width:100%;
-
 border-collapse:collapse;
 
 }
 
 
 
-th{
+thead{
 
-background:#0d47a1;
-
+background:#124ca3;
 color:white;
+
+}
+
+
+
+th,td{
 
 padding:12px;
-
-}
-
-
-
-td{
-
-padding:10px;
-
+text-align:center;
 border-bottom:1px solid #ddd;
 
-text-align:center;
+}
+
+
+
+tbody tr:hover{
+
+background:#f1f5ff;
 
 }
 
 
 
-.badge{
+.status{
 
 background:green;
-
 color:white;
 
-padding:6px 12px;
+padding:6px 14px;
 
 border-radius:20px;
 
+font-size:13px;
+
 }
 
+
+
+.loading{
+
+text-align:center;
+padding:20px;
+
+font-size:18px;
+
+}
+
+
+
+@media(max-width:800px){
+
+
+table{
+
+font-size:12px;
+
+}
+
+
+.container{
+
+padding:10px;
+
+}
+
+
+}
 
 
 </style>
@@ -172,6 +207,8 @@ border-radius:20px;
 
 
 
+<!-- HEADER -->
+
 <div class="header">
 
 
@@ -181,9 +218,11 @@ border-radius:20px;
 SMART FORM ENTERPRISE v6.1
 </h1>
 
+
 <p>
 USER MANAGEMENT
 </p>
+
 
 </div>
 
@@ -192,18 +231,19 @@ USER MANAGEMENT
 <div>
 
 
-<button
-class="btn"
-onclick="loadUsers()">
+<button 
+class="btn refresh"
+id="refreshBtn">
 
 🔄 Refresh
 
 </button>
 
 
+
 <button
 class="btn back"
-onclick="location.href='dashboard.html'">
+onclick="goBack()">
 
 BACK
 
@@ -219,16 +259,18 @@ BACK
 
 
 
-
 <div class="container">
 
 
 <div class="card">
 
 
-<h2>
+<div class="title">
+
 Registered Users
-</h2>
+
+</div>
+
 
 
 
@@ -236,6 +278,7 @@ Registered Users
 
 
 <thead>
+
 
 <tr>
 
@@ -281,16 +324,19 @@ Status
 
 
 
-<tbody id="userTable">
+
+<tbody id="userTableBody">
 
 
 <tr>
 
-<td colspan="7">
+<td colspan="7"
+class="loading">
 
 Loading...
 
 </td>
+
 
 </tr>
 
@@ -302,7 +348,6 @@ Loading...
 </table>
 
 
-
 </div>
 
 
@@ -310,6 +355,21 @@ Loading...
 
 
 
+
+
+
+<script>
+
+
+function goBack(){
+
+window.location.href=
+"dashboard.html";
+
+}
+
+
+</script>
 
 
 
@@ -320,6 +380,4 @@ Loading...
 
 </body>
 
-
 </html>
-<script src="users.js"></script>
