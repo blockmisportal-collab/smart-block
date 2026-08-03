@@ -1,42 +1,48 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- SCHOOL MANAGEMENT CONTROLLER
- FINAL VERSION
+ SCHOOL MANAGEMENT JS
+ FINAL FIX VERSION
 =====================================================*/
 
-
 "use strict";
-
 
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
-
 let ALL_SCHOOLS = [];
-
-
 
 
 
 document.addEventListener(
 "DOMContentLoaded",
-function(){
+()=>{
 
 
 loadSchools();
 
 
+const refresh =
+document.querySelector(".refresh");
 
-const searchBox =
+
+if(refresh){
+
+refresh.onclick =
+loadSchools;
+
+}
+
+
+
+const search =
 document.getElementById("searchBox");
 
 
+if(search){
 
-if(searchBox){
-
-searchBox.addEventListener(
+search.addEventListener(
 "input",
 filterSchools
 );
@@ -45,14 +51,13 @@ filterSchools
 
 
 
-const nyayaFilter =
+const filter =
 document.getElementById("nyayaFilter");
 
 
+if(filter){
 
-if(nyayaFilter){
-
-nyayaFilter.addEventListener(
+filter.addEventListener(
 "change",
 filterSchools
 );
@@ -60,11 +65,7 @@ filterSchools
 }
 
 
-
 });
-
-
-
 
 
 
@@ -82,7 +83,6 @@ document.getElementById(
 
 
 tbody.innerHTML =
-
 `
 <tr>
 <td colspan="5">
@@ -96,29 +96,23 @@ Loading...
 try{
 
 
-const response =
+const res =
 await fetch(
 
 API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 "text/plain;charset=utf-8"
 
-
 },
 
-
 body:
-
 
 JSON.stringify({
 
@@ -126,21 +120,19 @@ action:"schools"
 
 })
 
-
 }
 
 );
 
 
 
-
 const text =
-await response.text();
+await res.text();
 
 
 
 console.log(
-"SCHOOL API RESPONSE",
+"SCHOOL RESPONSE",
 text
 );
 
@@ -148,8 +140,6 @@ text
 
 const result =
 JSON.parse(text);
-
-
 
 
 
@@ -163,12 +153,8 @@ result.message
 
 
 
-
-
 ALL_SCHOOLS =
-
 result.data || [];
-
 
 
 
@@ -176,9 +162,7 @@ result.data || [];
 document.getElementById(
 "totalSchools"
 ).innerHTML =
-
 ALL_SCHOOLS.length;
-
 
 
 
@@ -195,17 +179,13 @@ ALL_SCHOOLS
 
 }
 
-catch(error){
+catch(err){
 
 
-console.error(
-error
-);
-
+console.error(err);
 
 
 tbody.innerHTML =
-
 `
 <tr>
 <td colspan="5">
@@ -213,8 +193,6 @@ Server Connection Failed
 </td>
 </tr>
 `;
-
-
 
 }
 
@@ -247,40 +225,33 @@ return;
 
 
 
-let list = [];
-
+let values =
+[];
 
 
 
 
 ALL_SCHOOLS.forEach(
 
-school=>{
+s=>{
 
 
-let value =
+let np =
 
-String(
+s.NyayaPanchayat ||
 
-school.nyayaPanchayat ||
+s.nyayaPanchayat ||
 
-school.NyayaPanchayat ||
-
-""
-
-)
-.trim();
-
-
+"";
 
 
 
 if(
-value &&
-!list.includes(value)
+np &&
+!values.includes(np)
 ){
 
-list.push(value);
+values.push(np);
 
 }
 
@@ -291,16 +262,12 @@ list.push(value);
 
 
 
-
-
-list.sort();
-
+values.sort();
 
 
 
 
 select.innerHTML =
-
 `
 <option value="">
 All Nyaya Panchayat
@@ -309,23 +276,17 @@ All Nyaya Panchayat
 
 
 
+values.forEach(
 
-
-list.forEach(
-
-item=>{
+v=>{
 
 
 select.innerHTML +=
-
-
 `
-<option value="${item}">
-${item}
+<option value="${v}">
+${v}
 </option>
 `;
-
-
 
 }
 
@@ -354,31 +315,25 @@ document.getElementById(
 
 
 
-tbody.innerHTML = "";
+tbody.innerHTML="";
 
 
 
 
 if(
-!data ||
 data.length===0
 ){
 
-
-tbody.innerHTML =
-
+tbody.innerHTML=
 `
 <tr>
-
 <td colspan="5">
 No School Found
 </td>
-
 </tr>
 `;
 
 return;
-
 
 }
 
@@ -388,96 +343,38 @@ return;
 
 data.forEach(
 
-school=>{
-
-
-
-const udise =
-
-school.udise ||
-
-school.UDISECode ||
-
-"-";
-
-
-
-const name =
-
-school.schoolName ||
-
-school.SchoolName ||
-
-"-";
-
-
-
-const nyaya =
-
-school.nyayaPanchayat ||
-
-school.NyayaPanchayat ||
-
-"-";
-
-
-
-const type =
-
-school.schoolType ||
-
-school.SchoolType ||
-
-"-";
-
-
-
-const status =
-
-school.status ||
-
-school.Status ||
-
-"ACTIVE";
-
-
-
+s=>{
 
 
 tbody.innerHTML +=
-
-
 `
 
 <tr>
 
-
 <td>
-${udise}
+${s.UDISECode || s.udise || "-"}
 </td>
 
 
 <td>
-${name}
+${s.SchoolName || s.schoolName || "-"}
 </td>
 
 
 <td>
-${nyaya}
+${s.NyayaPanchayat || s.nyayaPanchayat || "-"}
 </td>
 
 
 <td>
-${type}
+${s.SchoolType || s.schoolType || "-"}
 </td>
 
 
 <td>
 
 <span class="status">
-
-${status}
-
+${s.Status || "ACTIVE"}
 </span>
 
 </td>
@@ -485,14 +382,9 @@ ${status}
 
 </tr>
 
-
 `;
 
-
-
 }
-
-
 
 );
 
@@ -512,123 +404,71 @@ function filterSchools(){
 
 
 
-const search =
+let search =
 
-
-String(
-
-document.getElementById(
-"searchBox"
-).value || ""
-
-)
-
+document
+.getElementById("searchBox")
+.value
 .toLowerCase()
+.trim();
 
+
+
+
+let np =
+
+document
+.getElementById("nyayaFilter")
+.value
+.toLowerCase()
 .trim();
 
 
 
 
 
-
-const nyaya =
-
-
-String(
-
-document.getElementById(
-"nyayaFilter"
-).value || ""
-
-)
-
-.toLowerCase()
-
-.trim();
-
-
-
-
-
-
-
-const filtered =
-
+let filtered =
 
 ALL_SCHOOLS.filter(
 
-school=>{
+s=>{
 
 
-
-const udise =
-
+let code =
 
 String(
-
-school.udise ||
-
-school.UDISECode ||
-
-""
-
+s.UDISECode || ""
 )
+.toLowerCase();
 
+
+
+let name =
+
+String(
+s.SchoolName || ""
+)
+.toLowerCase();
+
+
+
+let nyaya =
+
+String(
+s.NyayaPanchayat || ""
+)
 .toLowerCase();
 
 
 
 
 
-const name =
-
-
-String(
-
-school.schoolName ||
-
-school.SchoolName ||
-
-""
-
-)
-
-.toLowerCase();
-
-
-
-
-
-const np =
-
-
-String(
-
-school.nyayaPanchayat ||
-
-school.NyayaPanchayat ||
-
-""
-
-)
-
-.toLowerCase()
-
-.trim();
-
-
-
-
-
-
-
-const searchMatch =
+return
 
 
 (
 
-udise.includes(search)
+code.includes(search)
 
 ||
 
@@ -636,44 +476,29 @@ name.includes(search)
 
 ||
 
-np.includes(search)
+nyaya.includes(search)
 
-);
-
-
+)
 
 
-
-
-const nyayaMatch =
+&&
 
 
 (
 
-nyaya===""
+np==="" 
 
 ||
 
-np===nyaya
+nyaya===np
 
 );
-
-
-
-return
-
-searchMatch && nyayaMatch;
 
 
 
 }
 
-
-
 );
-
-
-
 
 
 
@@ -684,10 +509,6 @@ filtered
 
 
 }
-
-
-
-
 
 
 
