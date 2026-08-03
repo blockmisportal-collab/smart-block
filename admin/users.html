@@ -7,6 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>
 SMART FORM ENTERPRISE v6.1 - User Management
 </title>
@@ -28,7 +29,6 @@ background:#f4f7fb;
 }
 
 
-/* HEADER */
 
 .header{
 
@@ -43,17 +43,11 @@ align-items:center;
 }
 
 
+
 .header h1{
 
 margin:0;
 font-size:28px;
-
-}
-
-
-.header p{
-
-margin:5px 0 0;
 
 }
 
@@ -70,12 +64,14 @@ font-weight:bold;
 }
 
 
+
 .refresh{
 
 background:#1685e8;
 color:white;
 
 }
+
 
 
 .back{
@@ -87,13 +83,11 @@ color:white;
 
 
 
-
 .container{
 
 padding:25px;
 
 }
-
 
 
 
@@ -110,15 +104,16 @@ box-shadow:
 
 
 
+
 .topbar{
 
 display:flex;
-justify-content:space-between;
-align-items:center;
 gap:15px;
+align-items:center;
 flex-wrap:wrap;
 
 }
+
 
 
 
@@ -143,6 +138,14 @@ border-radius:6px;
 
 
 
+.table-wrapper{
+
+overflow-x:auto;
+
+}
+
+
+
 table{
 
 width:100%;
@@ -161,6 +164,7 @@ color:white;
 }
 
 
+
 th,td{
 
 padding:12px;
@@ -176,7 +180,6 @@ tr:hover{
 background:#f3f7ff;
 
 }
-
 
 
 
@@ -198,6 +201,7 @@ background:green;
 }
 
 
+
 .inactive{
 
 background:red;
@@ -215,22 +219,12 @@ padding:20px;
 
 
 
-@media(max-width:900px){
-
-
-table{
-
-font-size:12px;
-
-}
-
-
-}
 
 </style>
 
 
 </head>
+
 
 
 <body>
@@ -246,17 +240,19 @@ font-size:12px;
 SMART FORM ENTERPRISE v6.1
 </h1>
 
-
 <p>
 USER MANAGEMENT
 </p>
 
+
 </div>
+
 
 
 <div>
 
-<button 
+
+<button
 class="refresh"
 id="refreshBtn">
 
@@ -265,19 +261,22 @@ id="refreshBtn">
 </button>
 
 
+
 <button
 class="back"
-onclick="goBack()">
+id="backBtn">
 
 BACK
 
 </button>
 
 
+
 </div>
 
 
 </div>
+
 
 
 
@@ -287,7 +286,6 @@ BACK
 
 
 <div class="card">
-
 
 
 <h2>
@@ -312,20 +310,20 @@ Total Users :
 
 
 
-<input 
-type="text"
+<input
 id="searchBox"
+type="text"
 placeholder="Search User...">
+
+
 
 
 
 <select id="roleFilter">
 
-
 <option value="">
 All Roles
 </option>
-
 
 <option value="ADMIN">
 ADMIN
@@ -349,7 +347,6 @@ SCHOOL
 
 <select id="statusFilter">
 
-
 <option value="">
 All Status
 </option>
@@ -369,10 +366,16 @@ INACTIVE
 
 
 
+
 </div>
 
 
 
+
+
+
+
+<div class="table-wrapper">
 
 
 <table>
@@ -382,41 +385,19 @@ INACTIVE
 
 <tr>
 
+<th>Username</th>
 
-<th>
-Username
-</th>
+<th>Name</th>
 
+<th>Role</th>
 
-<th>
-Name
-</th>
+<th>Nyaya Panchayat</th>
 
+<th>School Code</th>
 
-<th>
-Role
-</th>
+<th>School Name</th>
 
-
-<th>
-Nyaya Panchayat
-</th>
-
-
-<th>
-School Code
-</th>
-
-
-<th>
-School Name
-</th>
-
-
-<th>
-Status
-</th>
-
+<th>Status</th>
 
 
 </tr>
@@ -432,12 +413,12 @@ Status
 
 <tr>
 
-<td colspan="7" class="loading">
+<td colspan="7"
+class="loading">
 
 Loading...
 
 </td>
-
 
 </tr>
 
@@ -454,7 +435,13 @@ Loading...
 </div>
 
 
+
 </div>
+
+
+</div>
+
+
 
 
 
@@ -463,15 +450,18 @@ Loading...
 <script>
 
 
-function goBack(){
+document
+.getElementById("backBtn")
+.onclick=function(){
 
 window.location.href=
 "dashboard.html";
 
-}
+};
 
 
 </script>
+
 
 
 
