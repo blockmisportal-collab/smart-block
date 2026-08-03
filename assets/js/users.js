@@ -1,8 +1,8 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  USER MANAGEMENT FINAL JS
- CORS SAFE VERSION
-======================================================*/
+ FIXED VERSION
+=====================================================*/
 
 "use strict";
 
@@ -11,13 +11,12 @@ const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
+
 let ALL_USERS = [];
 
 
 
-/*=====================================================
- PAGE LOAD
-=====================================================*/
+
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -28,55 +27,52 @@ loadUsers();
 
 
 
-const refreshBtn =
-document.getElementById("refreshBtn");
+const refresh =
+document.getElementById(
+"refreshBtn"
+);
 
 
-if(refreshBtn){
+if(refresh){
 
-refreshBtn.onclick =
-()=>loadUsers();
-
-}
-
-
-
-const search =
-document.getElementById("searchBox");
-
-
-if(search){
-
-search.oninput =
-filterUsers;
+refresh.onclick =
+loadUsers;
 
 }
 
 
 
-const role =
-document.getElementById("roleFilter");
 
 
-if(role){
+[
+"searchBox",
+"roleFilter",
+"statusFilter"
 
-role.onchange =
-filterUsers;
+].forEach(id=>{
+
+
+let el =
+document.getElementById(id);
+
+
+if(el){
+
+el.addEventListener(
+"input",
+filterUsers
+);
+
+
+el.addEventListener(
+"change",
+filterUsers
+);
 
 }
 
 
-
-const status =
-document.getElementById("statusFilter");
-
-
-if(status){
-
-status.onchange =
-filterUsers;
-
-}
+});
 
 
 
@@ -86,30 +82,18 @@ filterUsers;
 
 
 
-/*=====================================================
- LOAD USERS API
-=====================================================*/
+
+
 
 
 async function loadUsers(){
+
 
 
 const tbody =
 document.getElementById(
 "userTableBody"
 );
-
-
-
-if(!tbody){
-
-alert(
-"userTableBody ID Missing"
-);
-
-return;
-
-}
 
 
 
@@ -134,9 +118,12 @@ API_URL,
 
 {
 
+
 method:"POST",
 
-headers:{
+
+headers:
+{
 
 "Content-Type":
 "text/plain;charset=utf-8"
@@ -144,11 +131,14 @@ headers:{
 },
 
 
-body:JSON.stringify({
+body:
+
+JSON.stringify({
 
 action:"users"
 
 })
+
 
 }
 
@@ -162,7 +152,7 @@ await response.text();
 
 
 console.log(
-"USERS RESPONSE",
+"USER API RESPONSE",
 text
 );
 
@@ -173,12 +163,11 @@ JSON.parse(text);
 
 
 
-
 if(!result.success){
 
 throw new Error(
 result.message ||
-"API Error"
+"API ERROR"
 );
 
 }
@@ -187,28 +176,22 @@ result.message ||
 
 
 ALL_USERS =
-Array.isArray(result.data)
-?
-result.data
-:
-[];
 
+(result.data || [])
 
-
-
-const total =
-document.getElementById(
-"totalUsers"
+.map(
+normalizeUser
 );
 
 
 
-if(total){
 
-total.innerHTML =
+
+document.getElementById(
+"totalUsers"
+)
+.innerHTML =
 ALL_USERS.length;
-
-}
 
 
 
@@ -223,8 +206,9 @@ ALL_USERS
 catch(error){
 
 
+
 console.error(
-"USER ERROR",
+"USER LOAD ERROR",
 error
 );
 
@@ -232,7 +216,6 @@ error
 
 tbody.innerHTML =
 `
-
 <tr>
 
 <td colspan="7">
@@ -242,7 +225,6 @@ Server Connection Failed
 </td>
 
 </tr>
-
 `;
 
 
@@ -257,9 +239,99 @@ Server Connection Failed
 
 
 
-/*=====================================================
- DISPLAY USERS
-=====================================================*/
+
+
+
+
+function normalizeUser(user){
+
+
+
+return {
+
+
+username:
+
+user.username ||
+user.Username ||
+"",
+
+
+
+name:
+
+user.name ||
+user.Name ||
+"",
+
+
+
+role:
+
+String(
+
+user.role ||
+user.Role ||
+""
+
+)
+
+.toUpperCase(),
+
+
+
+
+nyayaPanchayat:
+
+user.nyayaPanchayat ||
+user.NyayaPanchayat ||
+"",
+
+
+
+
+schoolCode:
+
+user.schoolCode ||
+user.SchoolCode ||
+"",
+
+
+
+schoolName:
+
+user.schoolName ||
+user.SchoolName ||
+"",
+
+
+
+
+active:
+
+String(
+
+user.active ??
+user.Active ??
+""
+
+)
+
+.toUpperCase()==="TRUE"
+
+
+
+};
+
+
+}
+
+
+
+
+
+
+
 
 
 function renderUsers(users){
@@ -273,26 +345,20 @@ document.getElementById(
 
 
 
-if(!tbody){
-
-return;
-
-}
-
-
-
 tbody.innerHTML="";
 
 
 
 
-if(users.length===0){
+
+if(
+!users ||
+users.length===0
+){
 
 
-tbody.innerHTML=
-
+tbody.innerHTML =
 `
-
 <tr>
 
 <td colspan="7">
@@ -302,76 +368,78 @@ No User Found
 </td>
 
 </tr>
-
 `;
 
+
 return;
+
 
 }
 
 
 
 
+
 users.forEach(
-(user)=>{
-
-
-
-const active =
-(
-user.active===true ||
-String(user.active)
-.toUpperCase()
-==="TRUE"
-);
-
+user=>{
 
 
 tbody.innerHTML +=
 
 `
-
 <tr>
 
+
 <td>
-${user.username || ""}
+${user.username}
 </td>
 
 
+
 <td>
-${user.name || ""}
+${user.name}
 </td>
 
 
+
 <td>
-${user.role || ""}
+${user.role}
 </td>
 
 
+
 <td>
-${user.nyayapanchayat || ""}
+${user.nyayaPanchayat}
 </td>
 
 
+
 <td>
-${user.schoolCode || ""}
+${user.schoolCode}
 </td>
 
 
+
 <td>
-${user.schoolName || ""}
+${user.schoolName}
 </td>
 
 
+
+
 <td>
 
-<span class="status ${active?"active":"inactive"}">
 
-${active?"ACTIVE":"INACTIVE"}
+<span class="status ${user.active?"active":"inactive"}">
+
+${user.active?"ACTIVE":"INACTIVE"}
 
 </span>
 
+
+
 </td>
+
 
 
 </tr>
@@ -392,98 +460,102 @@ ${active?"ACTIVE":"INACTIVE"}
 
 
 
-/*=====================================================
- SEARCH FILTER
-=====================================================*/
 
 
 function filterUsers(){
 
 
 
-const search =
+let search =
+
+(
 document.getElementById(
 "searchBox"
-);
+)?.value || ""
+
+)
+
+.toLowerCase()
+.trim();
 
 
 
-const role =
+
+let role =
+
+(
 document.getElementById(
 "roleFilter"
-);
+)?.value || ""
+
+)
+
+.toUpperCase();
 
 
 
-const status =
+
+
+let status =
+
+(
 document.getElementById(
 "statusFilter"
-);
+)?.value || ""
+
+)
+
+.toUpperCase();
 
 
 
 
-let s =
-search?
-search.value.toLowerCase()
-:
-"";
 
 
 
-let r =
-role?
-role.value
-:
-"";
+let filtered =
 
-
-
-let st =
-status?
-status.value
-:
-"";
-
-
-
-
-const filtered =
 ALL_USERS.filter(
+user=>{
 
-(user)=>{
 
 
-const text =
+let text =
 
 (
 
-(user.username || "")+
-(user.name || "")+
-(user.schoolCode || "")+
-(user.schoolName || "")
+user.username+
+" "+
+user.name+
+" "+
+user.role+
+" "+
+user.nyayaPanchayat+
+" "+
+user.schoolCode+
+" "+
+user.schoolName
 
 )
+
 .toLowerCase();
 
 
 
 
 
-const active =
-(
-user.active===true ||
-String(user.active)
-.toUpperCase()
-==="TRUE"
-);
+let userStatus =
 
+user.active
 
+?
 
-const userStatus =
-active?
-"ACTIVE":
+"ACTIVE"
+
+:
+
 "INACTIVE";
+
 
 
 
@@ -491,20 +563,26 @@ active?
 
 return
 
-text.includes(s)
+
+text.includes(search)
+
 
 &&
 
+
 (
-r==="" ||
-user.role===r
+role==="" ||
+user.role===role
 )
 
+
+
 &&
 
+
 (
-st==="" ||
-userStatus===st
+status==="" ||
+userStatus===status
 );
 
 
@@ -522,3 +600,12 @@ filtered
 
 
 }
+
+
+
+
+
+
+
+window.loadUsers =
+loadUsers;
