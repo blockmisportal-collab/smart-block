@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- USER MANAGEMENT FINAL JS
- FIXED VERSION
+ USER MANAGEMENT JS
+ FINAL STABLE VERSION
 =====================================================*/
 
 "use strict";
@@ -11,60 +11,42 @@ const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
-
 let ALL_USERS = [];
-
 
 
 
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+function(){
 
 
 loadUsers();
 
 
 
-const refresh =
-document.getElementById(
-"refreshBtn"
+const search =
+document.getElementById("searchBox");
+
+
+if(search){
+
+search.addEventListener(
+"input",
+filterUsers
 );
-
-
-if(refresh){
-
-refresh.onclick =
-loadUsers;
 
 }
 
 
 
+const role =
+document.getElementById("roleFilter");
 
 
-[
-"searchBox",
-"roleFilter",
-"statusFilter"
+if(role){
 
-].forEach(id=>{
-
-
-let el =
-document.getElementById(id);
-
-
-if(el){
-
-el.addEventListener(
-"input",
-filterUsers
-);
-
-
-el.addEventListener(
+role.addEventListener(
 "change",
 filterUsers
 );
@@ -72,12 +54,38 @@ filterUsers
 }
 
 
-});
+
+const status =
+document.getElementById("statusFilter");
+
+
+if(status){
+
+status.addEventListener(
+"change",
+filterUsers
+);
+
+}
+
+
+
+const refresh =
+document.getElementById("refreshBtn");
+
+
+if(refresh){
+
+refresh.addEventListener(
+"click",
+loadUsers
+);
+
+}
 
 
 
 });
-
 
 
 
@@ -87,7 +95,6 @@ filterUsers
 
 
 async function loadUsers(){
-
 
 
 const tbody =
@@ -118,12 +125,9 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
-headers:
-{
+headers:{
 
 "Content-Type":
 "text/plain;charset=utf-8"
@@ -163,11 +167,12 @@ JSON.parse(text);
 
 
 
+
+
 if(!result.success){
 
 throw new Error(
-result.message ||
-"API ERROR"
+result.message
 );
 
 }
@@ -175,10 +180,10 @@ result.message ||
 
 
 
+
 ALL_USERS =
 
 (result.data || [])
-
 .map(
 normalizeUser
 );
@@ -187,11 +192,14 @@ normalizeUser
 
 
 
+
 document.getElementById(
 "totalUsers"
-)
-.innerHTML =
+).innerHTML =
+
 ALL_USERS.length;
+
+
 
 
 
@@ -206,9 +214,8 @@ ALL_USERS
 catch(error){
 
 
-
 console.error(
-"USER LOAD ERROR",
+"USER ERROR",
 error
 );
 
@@ -217,13 +224,9 @@ error
 tbody.innerHTML =
 `
 <tr>
-
 <td colspan="7">
-
 Server Connection Failed
-
 </td>
-
 </tr>
 `;
 
@@ -252,17 +255,31 @@ return {
 
 username:
 
+String(
+
 user.username ||
+
 user.Username ||
-"",
+
+""
+
+),
+
 
 
 
 name:
 
+String(
+
 user.name ||
+
 user.Name ||
-"",
+
+""
+
+),
+
 
 
 
@@ -271,38 +288,63 @@ role:
 String(
 
 user.role ||
+
 user.Role ||
+
 ""
 
 )
-
 .toUpperCase(),
+
 
 
 
 
 nyayaPanchayat:
 
+String(
+
 user.nyayaPanchayat ||
+
 user.NyayaPanchayat ||
-"",
+
+user.Nyaya ||
+
+""
+
+),
+
 
 
 
 
 schoolCode:
 
+String(
+
 user.schoolCode ||
+
 user.SchoolCode ||
-"",
+
+""
+
+),
+
 
 
 
 schoolName:
 
+String(
+
 user.schoolName ||
+
 user.SchoolName ||
-"",
+
+""
+
+),
+
 
 
 
@@ -312,12 +354,14 @@ active:
 String(
 
 user.active ??
+
 user.Active ??
+
 ""
 
 )
-
-.toUpperCase()==="TRUE"
+.toUpperCase()
+==="TRUE"
 
 
 
@@ -352,12 +396,12 @@ tbody.innerHTML="";
 
 
 if(
-!users ||
 users.length===0
 ){
 
 
 tbody.innerHTML =
+
 `
 <tr>
 
@@ -370,11 +414,11 @@ No User Found
 </tr>
 `;
 
-
 return;
 
-
 }
+
+
 
 
 
@@ -387,6 +431,7 @@ user=>{
 tbody.innerHTML +=
 
 `
+
 <tr>
 
 
@@ -426,20 +471,18 @@ ${user.schoolName}
 
 
 
-
 <td>
 
 
-<span class="status ${user.active?"active":"inactive"}">
+<span class="status ${user.active ? "active":"inactive"}">
 
-${user.active?"ACTIVE":"INACTIVE"}
+${user.active ? "ACTIVE":"INACTIVE"}
 
 </span>
 
 
 
 </td>
-
 
 
 </tr>
@@ -472,7 +515,6 @@ let search =
 document.getElementById(
 "searchBox"
 )?.value || ""
-
 )
 
 .toLowerCase()
@@ -487,7 +529,6 @@ let role =
 document.getElementById(
 "roleFilter"
 )?.value || ""
-
 )
 
 .toUpperCase();
@@ -502,7 +543,6 @@ let status =
 document.getElementById(
 "statusFilter"
 )?.value || ""
-
 )
 
 .toUpperCase();
@@ -513,9 +553,10 @@ document.getElementById(
 
 
 
-let filtered =
+let result =
 
 ALL_USERS.filter(
+
 user=>{
 
 
@@ -525,15 +566,25 @@ let text =
 (
 
 user.username+
+
 " "+
+
 user.name+
+
 " "+
+
 user.role+
+
 " "+
+
 user.nyayaPanchayat+
+
 " "+
+
 user.schoolCode+
+
 " "+
+
 user.schoolName
 
 )
@@ -544,15 +595,12 @@ user.schoolName
 
 
 
+
 let userStatus =
 
-user.active
+user.active ?
 
-?
-
-"ACTIVE"
-
-:
+"ACTIVE" :
 
 "INACTIVE";
 
@@ -566,15 +614,15 @@ return
 
 text.includes(search)
 
-
 &&
 
 
 (
 role==="" ||
-user.role===role
-)
 
+user.role===role
+
+)
 
 
 &&
@@ -582,7 +630,9 @@ user.role===role
 
 (
 status==="" ||
+
 userStatus===status
+
 );
 
 
@@ -590,19 +640,18 @@ userStatus===status
 }
 
 );
+
+
 
 
 
 renderUsers(
-filtered
+result
 );
 
 
 
 }
-
-
-
 
 
 
