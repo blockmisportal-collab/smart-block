@@ -1,7 +1,6 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- SCHOOL MANAGEMENT JS
- FINAL FIX VERSION
+ SCHOOL MANAGEMENT FINAL JS
 =====================================================*/
 
 "use strict";
@@ -19,45 +18,35 @@ document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
-
 loadSchools();
-
 
 
 const search =
 document.getElementById("searchBox");
 
 
-if(search){
-
-search.oninput =
-filterSchools;
-
-}
-
-
-
 const filter =
 document.getElementById("nyayaFilter");
 
 
-if(filter){
 
-filter.onchange =
-filterSchools;
+if(search){
+
+search.addEventListener(
+"input",
+filterSchools
+);
 
 }
 
 
 
-const refresh =
-document.getElementById("refreshBtn");
+if(filter){
 
-
-if(refresh){
-
-refresh.onclick =
-loadSchools;
+filter.addEventListener(
+"change",
+filterSchools
+);
 
 }
 
@@ -71,26 +60,14 @@ loadSchools;
 async function loadSchools(){
 
 
-const table =
+const tbody =
 document.getElementById(
 "schoolTableBody"
 );
 
 
 
-if(!table){
-
-alert(
-"schoolTableBody Missing"
-);
-
-return;
-
-}
-
-
-
-table.innerHTML=
+tbody.innerHTML =
 `
 <tr>
 <td colspan="5">
@@ -106,30 +83,25 @@ try{
 
 const response =
 await fetch(
-
 API_URL,
-
 {
 
 method:"POST",
 
-headers:{
-
+headers:
+{
 "Content-Type":
 "text/plain;charset=utf-8"
-
 },
 
-
-body:JSON.stringify({
+body:
+JSON.stringify({
 
 action:"schools"
 
 })
 
-
 }
-
 );
 
 
@@ -138,9 +110,8 @@ const text =
 await response.text();
 
 
-
 console.log(
-"SCHOOL API",
+"SCHOOL RESPONSE",
 text
 );
 
@@ -148,7 +119,6 @@ text
 
 const result =
 JSON.parse(text);
-
 
 
 
@@ -163,43 +133,19 @@ result.message
 
 
 ALL_SCHOOLS =
-(result.data || []).map(
-school=>({
-
-udise:
-String(school.udise || "").trim(),
-
-
-schoolName:
-String(school.schoolName || "").trim(),
-
-
-nyayaPanchayat:
-String(school.nyayaPanchayat || "").trim(),
-
-
-schoolType:
-String(school.schoolType || "").trim()
-
-
-})
-);
+Array.isArray(result.data)
+?
+result.data
+:
+[];
 
 
 
 
-const total =
 document.getElementById(
 "totalSchools"
-);
-
-
-if(total){
-
-total.innerHTML =
+).innerHTML =
 ALL_SCHOOLS.length;
-
-}
 
 
 
@@ -224,9 +170,7 @@ error
 );
 
 
-
-table.innerHTML=
-
+tbody.innerHTML =
 `
 <tr>
 <td colspan="5">
@@ -234,8 +178,6 @@ Server Connection Failed
 </td>
 </tr>
 `;
-
-
 
 }
 
@@ -251,7 +193,6 @@ Server Connection Failed
 function createNyayaFilter(){
 
 
-
 const select =
 document.getElementById(
 "nyayaFilter"
@@ -259,42 +200,34 @@ document.getElementById(
 
 
 
-if(!select){
-
+if(!select)
 return;
 
-}
 
 
-
-
-let list =
+let values =
 [
-
 ...new Set(
 
-ALL_SCHOOLS
-
-.map(
-s=>s.nyayaPanchayat
+ALL_SCHOOLS.map(
+s=>
+String(
+s.nyayaPanchayat || ""
 )
-
-.filter(
-x=>x
-)
+.trim()
 
 )
 
-];
+)
+
+]
+.filter(x=>x!=="")
+.sort();
 
 
 
-list.sort();
 
-
-
-select.innerHTML=
-
+select.innerHTML =
 `
 <option value="">
 All Nyaya Panchayat
@@ -303,27 +236,24 @@ All Nyaya Panchayat
 
 
 
-
-list.forEach(
-item=>{
+values.forEach(
+v=>{
 
 
 select.innerHTML +=
 
 `
-<option value="${item}">
-${item}
+<option value="${v}">
+${v}
 </option>
 `;
 
+}
 
-
-});
-
+);
 
 
 }
-
 
 
 
@@ -335,37 +265,30 @@ ${item}
 function renderSchools(data){
 
 
-
-const table =
+const tbody =
 document.getElementById(
 "schoolTableBody"
 );
 
 
 
-if(!table){
-
-return;
-
-}
+tbody.innerHTML="";
 
 
 
-table.innerHTML="";
+if(
+data.length===0
+){
 
 
-
-
-if(data.length===0){
-
-
-table.innerHTML=
-
+tbody.innerHTML=
 `
 <tr>
+
 <td colspan="5">
 No School Found
 </td>
+
 </tr>
 `;
 
@@ -380,10 +303,12 @@ data.forEach(
 school=>{
 
 
-table.innerHTML +=
+tbody.innerHTML +=
 
 `
+
 <tr>
+
 
 <td>
 ${school.udise || "-"}
@@ -406,18 +331,15 @@ ${school.schoolType || "-"}
 
 
 <td>
-
-<span class="status active">
+<span class="status">
 ACTIVE
 </span>
-
 </td>
 
 
 </tr>
+
 `;
-
-
 
 });
 
@@ -431,16 +353,15 @@ ACTIVE
 
 
 
-
 function filterSchools(){
 
 
-
 const search =
-(
+String(
 document.getElementById(
 "searchBox"
-)?.value || ""
+).value
+||""
 )
 .toLowerCase()
 .trim();
@@ -449,18 +370,15 @@ document.getElementById(
 
 
 const nyaya =
-(
 document.getElementById(
 "nyayaFilter"
-)?.value || ""
-)
-.trim();
+).value;
 
 
 
 
+const filtered =
 
-const result =
 ALL_SCHOOLS.filter(
 school=>{
 
@@ -468,15 +386,9 @@ school=>{
 const text =
 
 (
-
-school.udise+
-
-school.schoolName+
-
-school.nyayaPanchayat+
-
-school.schoolType
-
+String(school.udise || "")+
+String(school.schoolName || "")+
+String(school.nyayaPanchayat || "")
 )
 
 .toLowerCase();
@@ -490,15 +402,9 @@ text.includes(search)
 &&
 
 (
-
 nyaya===""
-
 ||
-
-school.nyayaPanchayat.trim()
-===
-nyaya.trim()
-
+school.nyayaPanchayat===nyaya
 );
 
 
@@ -506,17 +412,20 @@ nyaya.trim()
 }
 
 );
-
 
 
 
 renderSchools(
-result
+filtered
 );
 
 
 
 }
+
+
+
+
 
 
 
