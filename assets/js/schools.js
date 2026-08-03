@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  SCHOOL MANAGEMENT JS
- FINAL FIX VERSION
+ FINAL STABLE VERSION
 =====================================================*/
 
 "use strict";
@@ -17,32 +17,20 @@ let ALL_SCHOOLS = [];
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+function(){
 
 
 loadSchools();
 
 
-const refresh =
-document.querySelector(".refresh");
 
-
-if(refresh){
-
-refresh.onclick =
-loadSchools;
-
-}
-
-
-
-const search =
+const searchBox =
 document.getElementById("searchBox");
 
 
-if(search){
+if(searchBox){
 
-search.addEventListener(
+searchBox.addEventListener(
 "input",
 filterSchools
 );
@@ -51,13 +39,14 @@ filterSchools
 
 
 
-const filter =
+
+const nyayaFilter =
 document.getElementById("nyayaFilter");
 
 
-if(filter){
+if(nyayaFilter){
 
-filter.addEventListener(
+nyayaFilter.addEventListener(
 "change",
 filterSchools
 );
@@ -65,7 +54,24 @@ filterSchools
 }
 
 
+
+
+const refresh =
+document.querySelector(".refresh");
+
+
+if(refresh){
+
+refresh.addEventListener(
+"click",
+loadSchools
+);
+
+}
+
+
 });
+
 
 
 
@@ -83,6 +89,7 @@ document.getElementById(
 
 
 tbody.innerHTML =
+
 `
 <tr>
 <td colspan="5">
@@ -96,7 +103,7 @@ Loading...
 try{
 
 
-const res =
+const response =
 await fetch(
 
 API_URL,
@@ -127,12 +134,12 @@ action:"schools"
 
 
 const text =
-await res.text();
+await response.text();
 
 
 
 console.log(
-"SCHOOL RESPONSE",
+"SCHOOL API RESPONSE",
 text
 );
 
@@ -140,6 +147,8 @@ text
 
 const result =
 JSON.parse(text);
+
+
 
 
 
@@ -153,8 +162,29 @@ result.message
 
 
 
+
+
 ALL_SCHOOLS =
-result.data || [];
+
+Array.isArray(result.data)
+
+?
+
+result.data
+
+:
+
+[];
+
+
+
+
+
+console.log(
+"FINAL SCHOOL ARRAY",
+ALL_SCHOOLS
+);
+
 
 
 
@@ -162,12 +192,15 @@ result.data || [];
 document.getElementById(
 "totalSchools"
 ).innerHTML =
+
 ALL_SCHOOLS.length;
 
 
 
 
+
 createNyayaFilter();
+
 
 
 
@@ -177,15 +210,21 @@ ALL_SCHOOLS
 
 
 
+
 }
 
-catch(err){
+catch(error){
 
 
-console.error(err);
+console.error(
+"SCHOOL ERROR",
+error
+);
+
 
 
 tbody.innerHTML =
+
 `
 <tr>
 <td colspan="5">
@@ -193,6 +232,8 @@ Server Connection Failed
 </td>
 </tr>
 `;
+
+
 
 }
 
@@ -225,33 +266,39 @@ return;
 
 
 
-let values =
-[];
+let list=[];
 
 
 
 
 ALL_SCHOOLS.forEach(
 
-s=>{
+school=>{
 
 
-let np =
+let value =
 
-s.NyayaPanchayat ||
+String(
 
-s.nyayaPanchayat ||
+school.NyayaPanchayat ||
 
-"";
+school.nyayaPanchayat ||
+
+""
+
+);
 
 
 
 if(
-np &&
-!values.includes(np)
+
+value !== "" &&
+
+!list.includes(value)
+
 ){
 
-values.push(np);
+list.push(value);
 
 }
 
@@ -262,12 +309,16 @@ values.push(np);
 
 
 
-values.sort();
+
+
+list.sort();
+
 
 
 
 
 select.innerHTML =
+
 `
 <option value="">
 All Nyaya Panchayat
@@ -276,15 +327,17 @@ All Nyaya Panchayat
 
 
 
-values.forEach(
 
-v=>{
+list.forEach(
+
+item=>{
 
 
 select.innerHTML +=
+
 `
-<option value="${v}">
-${v}
+<option value="${item}">
+${item}
 </option>
 `;
 
@@ -295,6 +348,8 @@ ${v}
 
 
 }
+
+
 
 
 
@@ -320,16 +375,27 @@ tbody.innerHTML="";
 
 
 
+
 if(
+
+!data ||
+
 data.length===0
+
 ){
 
-tbody.innerHTML=
+
+tbody.innerHTML =
+
 `
 <tr>
+
 <td colspan="5">
+
 No School Found
+
 </td>
+
 </tr>
 `;
 
@@ -343,46 +409,57 @@ return;
 
 data.forEach(
 
-s=>{
+school=>{
 
 
 tbody.innerHTML +=
-`
 
+`
 <tr>
 
 <td>
-${s.UDISECode || s.udise || "-"}
+
+${school.UDISECode || "-"}
+
 </td>
 
 
 <td>
-${s.SchoolName || s.schoolName || "-"}
+
+${school.SchoolName || "-"}
+
 </td>
 
 
 <td>
-${s.NyayaPanchayat || s.nyayaPanchayat || "-"}
+
+${school.NyayaPanchayat || "-"}
+
 </td>
 
 
 <td>
-${s.SchoolType || s.schoolType || "-"}
+
+${school.SchoolType || "-"}
+
 </td>
 
 
 <td>
 
 <span class="status">
-${s.Status || "ACTIVE"}
+
+${school.Status || "ACTIVE"}
+
 </span>
 
 </td>
 
 
 </tr>
-
 `;
+
+
 
 }
 
@@ -404,7 +481,7 @@ function filterSchools(){
 
 
 
-let search =
+const search =
 
 document
 .getElementById("searchBox")
@@ -415,49 +492,55 @@ document
 
 
 
-let np =
+
+const nyaya =
 
 document
 .getElementById("nyayaFilter")
 .value
-.toLowerCase()
 .trim();
 
 
 
 
 
-let filtered =
+
+const filtered =
+
 
 ALL_SCHOOLS.filter(
 
-s=>{
+school=>{
 
 
-let code =
+const code =
 
 String(
-s.UDISECode || ""
+school.UDISECode || ""
 )
+
 .toLowerCase();
 
 
 
-let name =
+
+const name =
 
 String(
-s.SchoolName || ""
+school.SchoolName || ""
 )
+
 .toLowerCase();
 
 
 
-let nyaya =
+
+
+const np =
 
 String(
-s.NyayaPanchayat || ""
-)
-.toLowerCase();
+school.NyayaPanchayat || ""
+);
 
 
 
@@ -468,29 +551,28 @@ return
 
 (
 
-code.includes(search)
+search === "" ||
 
-||
+code.includes(search) ||
 
-name.includes(search)
+name.includes(search) ||
 
-||
-
-nyaya.includes(search)
+np.toLowerCase()
+.includes(search)
 
 )
+
 
 
 &&
 
 
+
 (
 
-np==="" 
+nyaya === "" ||
 
-||
-
-nyaya===np
+np === nyaya
 
 );
 
@@ -499,6 +581,8 @@ nyaya===np
 }
 
 );
+
+
 
 
 
@@ -509,6 +593,9 @@ filtered
 
 
 }
+
+
+
 
 
 
