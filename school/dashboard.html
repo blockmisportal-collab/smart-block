@@ -1145,11 +1145,10 @@ USER.role ||
 
 async function loadForms(){
 
-
 try{
 
 
-let response = await fetch(
+const response = await fetch(
 
 API_URL,
 
@@ -1159,12 +1158,9 @@ method:"POST",
 
 headers:{
 
-"Content-Type":
-
-"text/plain;charset=utf-8"
+"Content-Type":"text/plain;charset=utf-8"
 
 },
-
 
 body:JSON.stringify({
 
@@ -1178,9 +1174,17 @@ action:"activeForms"
 
 
 
+const text = await response.text();
 
 
-let result = await response.json();
+console.log(
+"ACTIVE FORM RESPONSE:",
+text
+);
+
+
+
+const result = JSON.parse(text);
 
 
 
@@ -1212,12 +1216,11 @@ document.getElementById(
 
 <div class="form-item">
 
-${result.message}
+❌ ${result.message}
 
 </div>
 
 `;
-
 
 
 }
@@ -1229,7 +1232,8 @@ ${result.message}
 catch(error){
 
 
-console.log(
+console.error(
+"LOAD FORMS ERROR:",
 error
 );
 
@@ -1245,19 +1249,17 @@ document.getElementById(
 
 <div class="form-item">
 
-Server Error
+❌ ${error.message}
 
 </div>
 
 `;
 
 
-
 }
 
 
 }
-
 
 
 
