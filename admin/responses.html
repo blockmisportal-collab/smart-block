@@ -4,14 +4,17 @@
 
 <head>
 
+
 <meta charset="UTF-8">
+
 
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0">
 
 
 <title>
-SMART FORM ENTERPRISE v6.1 - Response Report
+SMART FORM ENTERPRISE v6.1
+- Response Dashboard
 </title>
 
 
@@ -20,7 +23,9 @@ SMART FORM ENTERPRISE v6.1 - Response Report
 
 
 *{
+
 box-sizing:border-box;
+
 }
 
 
@@ -30,6 +35,7 @@ body{
 margin:0;
 
 font-family:
+
 "Segoe UI",
 Arial,
 sans-serif;
@@ -42,7 +48,6 @@ background:#f4f7fb;
 
 
 .header{
-
 
 background:#0d47a1;
 
@@ -60,12 +65,22 @@ align-items:center;
 
 
 
+
 .header h1{
 
 margin:0;
 
+font-size:26px;
+
 }
 
+
+
+.header p{
+
+margin:5px 0 0;
+
+}
 
 
 
@@ -98,7 +113,6 @@ color:white;
 
 
 
-
 .refresh{
 
 background:#1565c0;
@@ -111,14 +125,11 @@ color:white;
 
 
 
-
-
 .container{
 
 padding:25px;
 
 }
-
 
 
 
@@ -142,10 +153,8 @@ margin-bottom:20px;
 
 
 
-
-
-
 .stats{
+
 
 display:grid;
 
@@ -155,12 +164,12 @@ repeat(4,1fr);
 
 gap:20px;
 
+
 }
 
 
 
-
-.stat-card{
+.stat{
 
 
 background:#f5f9ff;
@@ -178,21 +187,19 @@ border-left:5px solid #0d47a1;
 
 
 
-.stat-card h2{
+.stat h2{
 
 margin:0;
 
-color:#0d47a1;
-
 font-size:30px;
+
+color:#0d47a1;
 
 }
 
 
 
-
-
-.stat-card p{
+.stat p{
 
 font-weight:bold;
 
@@ -202,10 +209,8 @@ font-weight:bold;
 
 
 
+.filters{
 
-
-
-.filter-box{
 
 display:flex;
 
@@ -214,8 +219,6 @@ gap:15px;
 flex-wrap:wrap;
 
 }
-
-
 
 
 
@@ -231,12 +234,7 @@ border-radius:6px;
 
 min-width:220px;
 
-
 }
-
-
-
-
 
 
 
@@ -247,12 +245,13 @@ width:100%;
 
 border-collapse:collapse;
 
+margin-top:20px;
+
 }
 
 
 
 th{
-
 
 background:#0d47a1;
 
@@ -266,27 +265,21 @@ padding:12px;
 
 td{
 
-
 padding:12px;
-
-border-bottom:1px solid #ddd;
 
 text-align:center;
 
+border-bottom:1px solid #ddd;
+
 }
-
-
 
 
 
 tr:hover{
 
-
 background:#f1f6ff;
 
-
 }
-
 
 
 
@@ -302,16 +295,22 @@ color:white;
 
 
 
+.unlock{
+
+background:#ff9800;
+
+color:white;
+
+}
+
 
 
 
 .loading{
 
-
 text-align:center;
 
 padding:20px;
-
 
 }
 
@@ -319,11 +318,7 @@ padding:20px;
 
 
 
-
-
-
-@media(max-width:800px){
-
+@media(max-width:900px){
 
 
 .stats{
@@ -332,9 +327,7 @@ grid-template-columns:
 
 repeat(2,1fr);
 
-
 }
-
 
 
 table{
@@ -342,7 +335,6 @@ table{
 font-size:12px;
 
 }
-
 
 
 }
@@ -353,7 +345,11 @@ font-size:12px;
 
 
 </head>
+</head>
+
+
 <body>
+
 
 
 <div class="header">
@@ -367,7 +363,7 @@ SMART FORM ENTERPRISE v6.1
 
 
 <p>
-RESPONSE REPORT DASHBOARD
+ADMIN RESPONSE DASHBOARD
 </p>
 
 
@@ -400,9 +396,7 @@ BACK
 </div>
 
 
-
 </div>
-
 
 
 
@@ -417,7 +411,7 @@ BACK
 
 
 
-<!-- STATISTICS -->
+<!-- DASHBOARD COUNT -->
 
 
 <div class="card">
@@ -427,8 +421,9 @@ BACK
 
 
 
-<div class="stat-card">
 
+
+<div class="stat">
 
 <h2 id="totalResponse">
 
@@ -436,13 +431,9 @@ BACK
 
 </h2>
 
-
 <p>
-
 Total Response
-
 </p>
-
 
 </div>
 
@@ -451,33 +442,7 @@ Total Response
 
 
 
-<div class="stat-card">
-
-
-<h2 id="todayResponse">
-
-0
-
-</h2>
-
-
-<p>
-
-Today Response
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="stat-card">
-
+<div class="stat">
 
 <h2 id="totalSchool">
 
@@ -485,13 +450,9 @@ Today Response
 
 </h2>
 
-
 <p>
-
-Schools
-
+Submitted Schools
 </p>
-
 
 </div>
 
@@ -501,8 +462,7 @@ Schools
 
 
 
-<div class="stat-card">
-
+<div class="stat">
 
 <h2 id="totalForm">
 
@@ -510,15 +470,32 @@ Schools
 
 </h2>
 
-
 <p>
-
 Forms
-
 </p>
 
+</div>
+
+
+
+
+
+
+
+<div class="stat">
+
+<h2 id="todayResponse">
+
+0
+
+</h2>
+
+<p>
+Today
+</p>
 
 </div>
+
 
 
 
@@ -548,7 +525,7 @@ Search Response
 
 
 
-<div class="filter-box">
+<div class="filters">
 
 
 
@@ -556,9 +533,11 @@ Search Response
 
 id="searchBox"
 
-placeholder="Search School / Form / UDISE"
+placeholder="Search School / UDISE / Form"
 
-onkeyup="filterResponse()">
+onkeyup="filterResponse()"
+
+>
 
 
 
@@ -569,7 +548,6 @@ onkeyup="filterResponse()">
 id="formFilter"
 
 onchange="filterResponse()">
-
 
 
 <option value="">
@@ -583,7 +561,18 @@ All Forms
 
 
 
-</div>
+
+
+
+<input
+
+type="date"
+
+id="dateFilter"
+
+onchange="filterResponse()"
+
+>
 
 
 
@@ -591,24 +580,25 @@ All Forms
 
 
 
+</div>
 
 
 
 
 
 
-<!-- TABLE -->
+
+
+
+<!-- RESPONSE TABLE -->
 
 
 <div class="card">
 
 
 <h2>
-
-Submitted Responses
-
+Submitted Response List
 </h2>
-
 
 
 
@@ -657,14 +647,13 @@ Action
 
 
 
-
 <tbody id="responseTable">
 
 
 <tr>
 
-<td colspan="5"
 
+<td colspan="5"
 class="loading">
 
 Loading...
@@ -690,6 +679,72 @@ Loading...
 
 
 
+
+
+
+<!-- DETAIL POPUP -->
+
+
+<div id="modal"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+align-items:center;
+justify-content:center;
+">
+
+
+
+
+
+<div style="
+background:white;
+width:90%;
+max-width:600px;
+padding:25px;
+border-radius:15px;
+">
+
+
+
+<h2>
+Response Details
+</h2>
+
+
+
+
+<div id="detailData">
+
+</div>
+
+
+
+
+<br>
+
+
+<button
+
+class="back"
+
+onclick="closeModal()">
+
+Close
+
+</button>
+
+
+
+</div>
+
+
+
 </div>
 
 
@@ -697,17 +752,9 @@ Loading...
 
 
 
-
-
-
 <script>
-
-
-const API_URL =
-
+ const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
-
-
 
 
 
@@ -717,25 +764,18 @@ let RESPONSE_DATA=[];
 
 
 
-
-
-
 /*========================
  LOAD RESPONSES
-=========================*/
+========================*/
 
 
 async function loadResponses(){
 
 
-
 try{
 
 
-
-let response =
-
-await fetch(
+let res = await fetch(
 
 API_URL,
 
@@ -758,7 +798,9 @@ headers:{
 
 body:JSON.stringify({
 
+
 action:"responses"
+
 
 })
 
@@ -773,12 +815,7 @@ action:"responses"
 
 let result =
 
-JSON.parse(
-
-await response.text()
-
-);
-
+await res.json();
 
 
 
@@ -788,18 +825,25 @@ if(result.success){
 
 
 
-RESPONSE_DATA=result.data;
+RESPONSE_DATA = result.data;
 
 
-displayResponses(RESPONSE_DATA);
+updateDashboard(
+RESPONSE_DATA
+);
 
 
-updateStats(RESPONSE_DATA);
+loadFormFilter(
+RESPONSE_DATA
+);
+
+
+displayResponses(
+RESPONSE_DATA
+);
 
 
 }
-
-
 
 
 }
@@ -814,6 +858,204 @@ console.log(error);
 
 
 
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ DASHBOARD COUNT
+========================*/
+
+
+function updateDashboard(data){
+
+
+
+document.getElementById(
+"totalResponse"
+).innerHTML=
+
+data.length;
+
+
+
+
+
+
+let schools =
+
+[...new Set(
+
+data.map(
+
+x=>x.schoolCode
+
+)
+
+)]
+
+.length;
+
+
+
+document.getElementById(
+"totalSchool"
+).innerHTML=
+
+schools;
+
+
+
+
+
+
+
+let forms =
+
+[...new Set(
+
+data.map(
+
+x=>x.formName
+
+)
+
+)]
+
+.length;
+
+
+
+document.getElementById(
+"totalForm"
+).innerHTML=
+
+forms;
+
+
+
+
+
+
+
+let today =
+
+new Date()
+.toDateString();
+
+
+
+
+
+let count =
+
+data.filter(
+
+x=>{
+
+
+return new Date(
+x.date
+)
+
+.toDateString()
+
+===
+
+today;
+
+
+}
+
+)
+
+.length;
+
+
+
+
+document.getElementById(
+"todayResponse"
+).innerHTML=
+
+count;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/*========================
+ FORM FILTER
+========================*/
+
+
+function loadFormFilter(data){
+
+
+
+let select =
+
+document.getElementById(
+"formFilter"
+);
+
+
+
+
+
+let forms =
+
+[...new Set(
+
+data.map(
+
+x=>x.formName
+
+)
+
+)];
+
+
+
+
+
+forms.forEach(
+
+form=>{
+
+
+let option =
+document.createElement(
+"option"
+);
+
+
+option.value=form;
+
+option.text=form;
+
+
+select.appendChild(option);
+
+
+
+});
+
 
 }
 
@@ -827,7 +1069,7 @@ console.log(error);
 
 /*========================
  DISPLAY TABLE
-=========================*/
+========================*/
 
 
 function displayResponses(data){
@@ -857,17 +1099,20 @@ No Response Found
 
 `;
 
+
+
 }
+
+
+
+
 
 
 data.forEach(item=>{
 
 
 
-html+=
-
-
-`
+html+=`
 
 <tr>
 
@@ -877,7 +1122,6 @@ html+=
 ${item.formName}
 
 </td>
-
 
 
 <td>
@@ -919,14 +1163,14 @@ View
 </button>
 
 
-</td>
 
+</td>
 
 
 </tr>
 
-
 `;
+
 
 
 
@@ -937,11 +1181,8 @@ View
 
 
 
-
 document.getElementById(
-
 "responseTable"
-
 ).innerHTML=
 
 html;
@@ -959,119 +1200,78 @@ html;
 
 
 /*========================
- STATISTICS
-=========================*/
-
-
-function updateStats(data){
-
-
-
-document.getElementById(
-"totalResponse"
-).innerHTML=
-
-data.length;
-
-
-
-
-
-
-let schools =
-
-[...new Set(
-
-data.map(
-
-x=>x.schoolCode
-
-)
-
-)]
-
-.length;
-
-
-
-document.getElementById(
-"totalSchool"
-).innerHTML=
-
-schools;
-
-
-
-
-
-let forms =
-
-[...new Set(
-
-data.map(
-
-x=>x.formName
-
-)
-
-)]
-
-.length;
-
-
-
-document.getElementById(
-"totalForm"
-).innerHTML=
-
-forms;
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*========================
- SEARCH
-=========================*/
+ SEARCH FILTER
+========================*/
 
 
 function filterResponse(){
 
 
 
-let text =
+let search =
 
 document.getElementById(
 "searchBox"
-).value
+)
+
+.value
 
 .toLowerCase();
 
 
 
 
+
+let form =
+
+document.getElementById(
+"formFilter"
+)
+
+.value;
+
+
+
+
+
+
+let date =
+
+document.getElementById(
+"dateFilter"
+)
+
+.value;
+
+
+
+
+
+
 let data =
 
-RESPONSE_DATA.filter(item=>{
+RESPONSE_DATA.filter(
+
+item=>{
 
 
-return
+
+let matchSearch =
 
 
 String(item.schoolName)
 
 .toLowerCase()
 
-.includes(text)
+.includes(search)
+
+
+
+||
+
+String(item.schoolCode)
+
+.includes(search)
 
 
 
@@ -1081,19 +1281,66 @@ String(item.formName)
 
 .toLowerCase()
 
-.includes(text)
+.includes(search);
 
 
+
+
+
+
+let matchForm =
+
+!form
 
 ||
 
-String(item.schoolCode)
-
-.includes(text);
+item.formName===form;
 
 
 
-});
+
+
+
+let matchDate =
+
+!date
+
+||
+
+new Date(item.date)
+
+.toISOString()
+
+.substring(0,10)
+
+===
+
+date;
+
+
+
+
+
+
+return (
+
+matchSearch
+
+&&
+
+matchForm
+
+&&
+
+matchDate
+
+);
+
+
+
+}
+
+);
 
 
 
@@ -1114,28 +1361,120 @@ displayResponses(data);
 
 
 /*========================
- VIEW
-=========================*/
+ VIEW DETAIL
+========================*/
 
 
-function viewResponse(data){
+function viewResponse(item){
 
 
 
-alert(
+let html = `
 
-JSON.stringify(
 
-data.response,
 
-null,
+<p>
 
-2
+<b>School:</b>
+
+${item.schoolName}
+
+</p>
+
+
+<p>
+
+<b>UDISE:</b>
+
+${item.schoolCode}
+
+</p>
+
+
+<p>
+
+<b>Form:</b>
+
+${item.formName}
+
+</p>
+
+
+<hr>
+
+
+
+`;
+
+
+
+
+
+Object.keys(
+
+item.response
 
 )
 
-);
+.forEach(key=>{
 
+
+html+=`
+
+<p>
+
+<b>${key}</b> :
+
+${item.response[key]}
+
+</p>
+
+`;
+
+
+
+});
+
+
+
+
+
+
+document.getElementById(
+"detailData"
+).innerHTML=
+
+html;
+
+
+
+
+document.getElementById(
+"modal"
+).style.display=
+
+"flex";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function closeModal(){
+
+
+document.getElementById(
+"modal"
+).style.display=
+
+"none";
 
 
 }
@@ -1164,12 +1503,3 @@ window.location.href=
 
 
 loadResponses();
-
-
-
-</script>
-
-
-</body>
-
-</html>
