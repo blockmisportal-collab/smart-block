@@ -1,150 +1,145 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
 
 <title>
+
 SMART FORM ENTERPRISE v6.1 - School Forms
+
 </title>
+
+
 
 
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 }
+
 
 
 body{
 
+
 margin:0;
-font-family:"Segoe UI",Arial,sans-serif;
+
+
+font-family:
+
+"Segoe UI",
+Arial,
+sans-serif;
+
+
 background:#f4f7fb;
+
 
 }
 
 
 
+
+
+/* HEADER */
+
 .header{
 
+
 background:#0d47a1;
+
+
 color:white;
+
+
 padding:20px 30px;
 
+
 display:flex;
+
+
 justify-content:space-between;
+
+
 align-items:center;
+
 
 }
 
 
 
 .header h1{
+
+
 margin:0;
+
+
+font-size:26px;
+
+
 }
+
+
+
+.header p{
+
+
+margin:5px 0 0;
+
+
+}
+
+
+
+
 
 
 
 button{
 
+
 border:none;
+
+
 padding:10px 18px;
+
+
 border-radius:6px;
+
+
 cursor:pointer;
+
+
 font-weight:bold;
 
+
 }
+
+
+
 
 
 .back{
 
+
 background:#d32f2f;
+
+
 color:white;
 
-}
-
-
-
-.container{
-
-padding:25px;
-
-}
-
-
-
-.card{
-
-background:white;
-padding:25px;
-border-radius:15px;
-
-box-shadow:
-0 5px 20px rgba(0,0,0,.12);
-
-margin-bottom:20px;
-
-}
-
-
-
-.info{
-
-display:flex;
-gap:30px;
-flex-wrap:wrap;
-
-}
-
-
-
-.info div{
-
-background:#f5f9ff;
-padding:15px;
-border-radius:10px;
-
-}
-
-
-
-.title{
-
-color:#0d47a1;
-font-weight:bold;
-
-}
-
-
-
-table{
-
-width:100%;
-border-collapse:collapse;
-
-}
-
-
-
-th{
-
-background:#0d47a1;
-color:white;
-padding:12px;
-
-}
-
-
-td{
-
-padding:12px;
-border-bottom:1px solid #ddd;
-text-align:center;
 
 }
 
@@ -152,30 +147,266 @@ text-align:center;
 
 .open{
 
+
 background:#1565c0;
+
+
 color:white;
 
+
 }
+
+
+
+
+
+.container{
+
+
+padding:25px;
+
+
+}
+
+
+
+
+
+
+
+.card{
+
+
+background:white;
+
+
+padding:25px;
+
+
+border-radius:15px;
+
+
+box-shadow:
+
+
+0 5px 20px rgba(0,0,0,.12);
+
+
+margin-bottom:20px;
+
+
+}
+
+
+
+
+
+
+
+/* SCHOOL INFO */
+
+
+.info{
+
+
+display:grid;
+
+
+grid-template-columns:
+
+
+repeat(3,1fr);
+
+
+gap:20px;
+
+
+}
+
+
+
+
+.info-box{
+
+
+background:#f5f9ff;
+
+
+padding:20px;
+
+
+border-radius:10px;
+
+
+}
+
+
+
+
+.label{
+
+
+color:#0d47a1;
+
+
+font-weight:bold;
+
+
+}
+
+
+
+
+.value{
+
+
+font-size:18px;
+
+
+margin-top:8px;
+
+
+}
+
+
+
+
+
+
+
+/* TABLE */
+
+
+table{
+
+
+width:100%;
+
+
+border-collapse:collapse;
+
+
+}
+
+
+
+th{
+
+
+background:#0d47a1;
+
+
+color:white;
+
+
+padding:12px;
+
+
+}
+
+
+
+td{
+
+
+padding:12px;
+
+
+border-bottom:1px solid #ddd;
+
+
+text-align:center;
+
+
+}
+
+
+
+
+
+tr:hover{
+
+
+background:#f1f6ff;
+
+
+}
+
+
+
 
 
 
 .loading{
 
+
 text-align:center;
+
+
 padding:20px;
+
 
 }
 
 
+
+
+
+.badge{
+
+
+background:#2e7d32;
+
+
+color:white;
+
+
+padding:5px 12px;
+
+
+border-radius:20px;
+
+
+font-size:12px;
+
+
+}
+
+
+
+
+
+
+@media(max-width:800px){
+
+
+
+.info{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+
+table{
+
+
+font-size:13px;
+
+
+}
+
+
+}
+
+
+
 </style>
 
-
-</head>
-
-
-
 <body>
-
 
 
 <div class="header">
@@ -188,14 +419,14 @@ SMART FORM ENTERPRISE v6.1
 </h1>
 
 <p>
-SCHOOL FORMS
+SCHOOL FORM MANAGEMENT
 </p>
 
 </div>
 
 
 
-<button 
+<button
 class="back"
 onclick="goBack()">
 
@@ -215,6 +446,12 @@ BACK
 <div class="container">
 
 
+
+
+
+<!-- SCHOOL INFORMATION -->
+
+
 <div class="card">
 
 
@@ -227,34 +464,69 @@ School Information
 <div class="info">
 
 
-<div>
 
-<span class="title">
+<div class="info-box">
+
+<div class="label">
 School Name
-</span>
+</div>
 
-<br>
 
-<span id="schoolName">
+<div class="value"
+id="schoolName">
+
 -
-</span>
+
+</div>
 
 
 </div>
 
 
 
-<div>
 
-<span class="title">
+
+<div class="info-box">
+
+
+<div class="label">
 UDISE Code
-</span>
+</div>
 
-<br>
 
-<span id="udiseCode">
+<div class="value"
+id="udiseCode">
+
 -
-</span>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="info-box">
+
+
+<div class="label">
+User Role
+</div>
+
+
+<div class="value"
+id="userRole">
+
+SCHOOL
+
+</div>
+
+
+</div>
+
+
 
 
 </div>
@@ -263,18 +535,24 @@ UDISE Code
 </div>
 
 
-</div>
 
 
 
 
+
+
+
+
+<!-- ACTIVE FORM LIST -->
 
 
 <div class="card">
 
 
 <h2>
-Available Forms
+
+Available Active Forms
+
 </h2>
 
 
@@ -286,6 +564,7 @@ Available Forms
 
 <tr>
 
+
 <th>
 Form Name
 </th>
@@ -293,6 +572,11 @@ Form Name
 
 <th>
 Description
+</th>
+
+
+<th>
+Status
 </th>
 
 
@@ -307,16 +591,20 @@ Action
 </thead>
 
 
+
+
 <tbody id="formList">
 
 
 <tr>
 
-<td colspan="3" class="loading">
+<td colspan="4"
+class="loading">
 
-Loading...
+Loading Forms...
 
 </td>
+
 
 </tr>
 
@@ -328,10 +616,16 @@ Loading...
 </table>
 
 
+
 </div>
 
 
+
+
+
+
 </div>
+
 
 
 
@@ -344,58 +638,161 @@ Loading...
 <script>
 
 
+/*====================================
+ API URL
+=====================================*/
+
+
+const API_URL =
+
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
+
+
+
+
+
+
+/*====================================
+ LOAD USER
+=====================================*/
+
+
 function loadUser(){
 
 
 let user =
+
 JSON.parse(
+
 localStorage.getItem("USER")
+
 ||
+
 "{}"
+
 );
+
+
 
 
 
 document.getElementById(
 "schoolName"
 ).innerText =
-user.schoolName || "-";
+
+user.schoolName
+||
+"-";
+
+
 
 
 
 document.getElementById(
 "udiseCode"
 ).innerText =
-user.schoolCode || "-";
+
+user.schoolCode
+||
+"-";
+
+
+
+
+
+document.getElementById(
+"userRole"
+).innerText =
+
+user.role
+||
+"SCHOOL";
+
 
 
 }
 
 
 
-function loadForms(){
 
 
-let forms=[
+
+
+
+
+/*====================================
+ LOAD ACTIVE FORMS
+=====================================*/
+
+
+async function loadForms(){
+
+
+
+try{
+
+
+
+let response =
+
+await fetch(
+
+API_URL,
 
 {
 
-name:"PM POSHAN Monthly Report",
 
-desc:"Monthly Mid Day Meal Data Entry"
+method:"POST",
+
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
 
 },
 
-{
 
-name:"School Information Update",
 
-desc:"Update School Details"
+body:
+
+JSON.stringify({
+
+
+action:"forms"
+
+
+})
+
+
 
 }
 
+);
 
-];
+
+
+
+
+
+
+let result =
+
+JSON.parse(
+
+await response.text()
+
+);
+
+
+
+
 
 
 
@@ -403,36 +800,29 @@ let html="";
 
 
 
-forms.forEach(
-form=>{
 
 
-html+=
+
+
+if(
+
+result.success !== true
+
+){
+
+
+
+html =
 
 `
 
 <tr>
 
-<td>
-${form.name}
-</td>
+<td colspan="4">
 
-
-<td>
-${form.desc}
-</td>
-
-
-<td>
-
-<button class="open">
-
-Open
-
-</button>
+No Forms Available
 
 </td>
-
 
 </tr>
 
@@ -440,40 +830,277 @@ Open
 
 
 
-});
+}
+
+else{
+
+
+
+
+
+result.data.forEach(
+
+function(form){
+
+
+
+
+
+if(
+
+String(form.status)
+
+.toUpperCase()
+
+===
+
+"ACTIVE"
+
+)
+
+{
+
+
+
+
+
+html +=
+
+
+
+`
+
+<tr>
+
+
+<td>
+
+${form.name}
+
+</td>
+
+
+
+<td>
+
+${form.description || "-"}
+
+</td>
+
+
+
+<td>
+
+<span class="badge">
+
+ACTIVE
+
+</span>
+
+</td>
+
+
+
+<td>
+
+
+<button
+
+class="open"
+
+onclick="openForm('${form.id}')">
+
+
+Open
+
+
+</button>
+
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+}
+
+
+
+}
+
+);
+
+
+
+
+
+}
+
+
+
+
+
+
+
+if(html===""){
+
+
+html=
+
+`
+
+<tr>
+
+<td colspan="4">
+
+No Active Forms Found
+
+</td>
+
+</tr>
+
+`;
+
+
+
+}
+
+
+
 
 
 
 document.getElementById(
+
 "formList"
-).innerHTML =
+
+)
+
+.innerHTML=
+
 html;
 
 
 
+
+
+}
+
+catch(error){
+
+
+
+document.getElementById(
+
+"formList"
+
+)
+
+.innerHTML=
+
+`
+
+<tr>
+
+<td colspan="4">
+
+Server Connection Failed
+
+</td>
+
+</tr>
+
+`;
+
+
+
+console.error(error);
+
+
+
 }
 
 
+
+}
+
+
+
+
+
+
+
+
+
+/*====================================
+ OPEN FORM
+=====================================*/
+
+
+function openForm(id){
+
+
+
+window.location.href =
+
+"fill-form.html?id="+id;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*====================================
+ BACK
+=====================================*/
 
 
 function goBack(){
 
+
 window.location.href=
+
 "dashboard.html";
+
 
 }
 
 
 
+
+
+
+
+
+
+/* START */
+
+
 loadUser();
 
+
 loadForms();
+
 
 
 </script>
 
 
-
 </body>
 
+
 </html>
+</head>
