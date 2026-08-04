@@ -1,21 +1,471 @@
-<!-- ================================
-     AVAILABLE SERVICES
-================================ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<title>
+SMART FORM ENTERPRISE v6.1 - Admin Dashboard
+</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
+
+background:#f4f7fb;
+
+color:#222;
+
+}
+
+
+
+/* HEADER */
+
+.header{
+
+background:#0d47a1;
+
+color:white;
+
+padding:20px 30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+
+.header h1{
+
+margin:0;
+
+font-size:26px;
+
+}
+
+
+.header p{
+
+margin:5px 0 0;
+
+}
+
+
+
+/* BUTTON */
+
+.btn{
+
+border:none;
+
+padding:10px 20px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+
+
+.logout{
+
+background:#d32f2f;
+
+color:white;
+
+}
+
+
+
+
+/* CONTAINER */
+
+.container{
+
+padding:25px;
+
+}
+
+
+
+/* CARD */
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:
+
+0 5px 20px rgba(0,0,0,.1);
+
+margin-bottom:20px;
+
+}
+
+
+
+/* WELCOME */
+
+.welcome{
+
+font-size:24px;
+
+color:#0d47a1;
+
+}
+
+
+
+/* DASHBOARD STATS */
+
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.stat-card{
+
+background:#f1f6ff;
+
+padding:25px;
+
+border-radius:12px;
+
+text-align:center;
+
+}
+
+
+
+.stat-card h2{
+
+color:#0d47a1;
+
+font-size:32px;
+
+margin:10px;
+
+}
+
+
+
+/* SERVICES */
+
+
+.services-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.service-card{
+
+background:#f5f8ff;
+
+border-top:4px solid #0d47a1;
+
+padding:30px;
+
+text-align:center;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.service-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+.service-icon{
+
+font-size:40px;
+
+}
+
+
+
+.service-card h3{
+
+color:#0d47a1;
+
+}
+
+
+
+/* ACTIVITY */
+
+.activity{
+
+background:#f8f8f8;
+
+padding:15px;
+
+border-radius:10px;
+
+}
+
+
+
+.footer{
+
+text-align:center;
+
+color:#777;
+
+padding:20px;
+
+}
+
+
+
+
+@media(max-width:800px){
+
+
+.stats,
+
+.services-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+
+<div>
+
+<h1>
+SMART FORM ENTERPRISE v6.1
+</h1>
+
+
+<p>
+ADMIN DASHBOARD
+</p>
+
+
+</div>
+
+
+
+<button
+class="btn logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="container">
+
+
+
+
+
+<!-- WELCOME -->
+
 
 <div class="card">
+
+
+<h2 class="welcome">
+
+Welcome 
+<span id="adminName">
+ADMIN USER
+</span>
+
+</h2>
+
+
+<p>
+System Administration Panel
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- STATISTICS -->
+
+
+<div class="card">
+
+
+<h2>
+Dashboard Overview
+</h2>
+
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+<h2 id="totalUsers">
+0
+</h2>
+
+<p>
+Total Users
+</p>
+
+</div>
+
+
+
+
+<div class="stat-card">
+
+<h2 id="totalSchools">
+0
+</h2>
+
+<p>
+Total Schools
+</p>
+
+</div>
+
+
+
+
+<div class="stat-card">
+
+<h2 id="totalForms">
+0
+</h2>
+
+<p>
+Total Forms
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- SERVICES -->
+
+
+<div class="card">
+
 
 <h2>
 Available Services
 </h2>
 
 
+
+
 <div class="services-grid">
 
 
-<!-- FORM BUILDER -->
 
 <div class="service-card"
 onclick="openFormBuilder()">
+
 
 
 <div class="service-icon">
@@ -38,10 +488,10 @@ Create & Manage Dynamic Forms
 
 
 
-<!-- REPORTS -->
 
 <div class="service-card"
 onclick="openReports()">
+
 
 
 <div class="service-icon">
@@ -64,10 +514,11 @@ Progress & Analysis Reports
 
 
 
-<!-- PROFILE -->
+
 
 <div class="service-card"
 onclick="openProfile()">
+
 
 
 <div class="service-icon">
@@ -89,121 +540,120 @@ User Profile Management
 
 
 
-</div>
 
 </div>
 
 
-
-<!-- ================================
-     SERVICE STYLE
-================================ -->
-
-
-<style>
-
-
-.services-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:20px;
-
-}
+</div>
 
 
 
-.service-card{
-
-
-background:#f5f8ff;
-
-border-top:4px solid #0d47a1;
-
-padding:30px;
-
-text-align:center;
-
-border-radius:12px;
-
-cursor:pointer;
-
-transition:.3s;
-
-
-}
 
 
 
-.service-card:hover{
 
 
-transform:translateY(-5px);
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.15);
+<!-- ACTIVITY -->
 
 
-}
+<div class="card">
 
 
-
-.service-icon{
-
-font-size:40px;
-
-margin-bottom:10px;
-
-}
+<h2>
+Recent Activity
+</h2>
 
 
+<div class="activity">
 
-.service-card h3{
+System Ready ✅
 
-color:#0d47a1;
+<br>
 
-margin:10px 0;
+Admin Dashboard Loaded Successfully
 
-}
+
+</div>
+
+
+</div>
 
 
 
-.service-card p{
-
-color:#555;
-
-font-size:15px;
-
-}
 
 
+<div class="footer">
 
-@media(max-width:800px){
+SMART FORM ENTERPRISE v6.1
 
-
-.services-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-}
-
-
-</style>
+</div>
 
 
 
-<!-- ================================
-     SERVICE SCRIPT
-================================ -->
+
+</div>
+
+
+
+
+
+
 
 
 <script>
+
+
+// USER LOAD
+
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+let user =
+
+localStorage.getItem("USER")
+||
+sessionStorage.getItem("USER");
+
+
+
+if(user){
+
+
+try{
+
+
+let data =
+JSON.parse(user);
+
+
+
+document.getElementById(
+"adminName"
+).innerHTML =
+
+data.name
+||
+data.username
+||
+"ADMIN USER";
+
+
+}
+
+catch(e){}
+
+
+}
+
+
+
+});
+
+
+
 
 
 function openFormBuilder(){
@@ -229,211 +679,27 @@ window.location.href="profile.html";
 }
 
 
-</script>
 
-<h3>
-Form Builder
-</h3>
+function logout(){
 
 
-<p>
-Create & Manage Dynamic Forms
-</p>
+sessionStorage.clear();
+
+localStorage.clear();
 
 
-</div>
-
-
-
-
-<div class="service-card"
-onclick="openReports()">
-
-
-<div class="service-icon">
-📊
-</div>
-
-
-<h3>
-Reports
-</h3>
-
-
-<p>
-Progress & Analysis Reports
-</p>
-
-
-</div>
-
-
-
-
-<div class="service-card"
-onclick="openProfile()">
-
-
-<div class="service-icon">
-👤
-</div>
-
-
-<h3>
-Profile
-</h3>
-
-
-<p>
-User Profile Management
-</p>
-
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-
-
-<style>
-
-
-.services-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:20px;
-
-}
-
-
-
-
-.service-card{
-
-
-background:#f5f8ff;
-
-border-top:4px solid #0d47a1;
-
-padding:30px;
-
-text-align:center;
-
-border-radius:12px;
-
-cursor:pointer;
-
-transition:.3s;
+window.location.href="../index.html";
 
 
 }
 
-
-
-.service-card:hover{
-
-
-transform:translateY(-5px);
-
-
-box-shadow:
-
-0 5px 15px rgba(0,0,0,.15);
-
-
-}
-
-
-
-
-.service-icon{
-
-font-size:35px;
-
-}
-
-
-
-.service-card h3{
-
-color:#0d47a1;
-
-}
-
-
-
-.service-card p{
-
-color:#555;
-
-}
-
-
-
-@media(max-width:800px){
-
-
-.services-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-}
-
-
-</style>
-
-
-
-
-
-<script>
-
-
-function openFormBuilder(){
-
-
-window.location.href=
-"forms.html";
-
-
-}
-
-
-
-function openReports(){
-
-
-alert(
-"Reports Module Coming Soon"
-);
-
-
-}
-
-
-
-function openProfile(){
-
-
-alert(
-"Profile Module Coming Soon"
-);
-
-
-}
 
 
 </script>
+
+
+
+
+</body>
+
+</html>
