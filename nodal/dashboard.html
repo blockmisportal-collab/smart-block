@@ -1,4 +1,743 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<title>
+SMART FORM ENTERPRISE v6.1 - NODAL Dashboard
+</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+
+font-family:"Segoe UI",Arial,sans-serif;
+
+background:#f4f7fb;
+
+}
+
+
+
+.header{
+
+background:#0d47a1;
+
+color:white;
+
+padding:20px 30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+
+
+.header h1{
+
+margin:0;
+
+font-size:28px;
+
+}
+
+
+
+.btn{
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+
+
+.logout{
+
+background:#d32f2f;
+
+color:white;
+
+}
+
+
+
+.container{
+
+padding:25px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.12);
+
+margin-bottom:20px;
+
+}
+
+
+
+
+
+.welcome{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#0d47a1;
+
+}
+
+
+
+
+
+/* INFORMATION */
+
+.info{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.box{
+
+background:#f1f6ff;
+
+padding:20px;
+
+border-radius:10px;
+
+}
+
+
+
+.label{
+
+font-weight:bold;
+
+color:#0d47a1;
+
+}
+
+
+
+.value{
+
+font-size:20px;
+
+margin-top:10px;
+
+}
+
+
+
+
+
+/* SERVICES */
+
+.services{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.service-box{
+
+background:#f8fbff;
+
+border-radius:15px;
+
+padding:25px;
+
+text-align:center;
+
+border-top:5px solid #0d47a1;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.service-box:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+.service-icon{
+
+font-size:40px;
+
+}
+
+
+
+.service-box h3{
+
+color:#0d47a1;
+
+margin:10px;
+
+}
+
+
+
+
+
+/* TABLE */
+
+input{
+
+padding:10px;
+
+width:300px;
+
+border:1px solid #ccc;
+
+border-radius:6px;
+
+}
+
+
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+
+
+th{
+
+background:#0d47a1;
+
+color:white;
+
+padding:12px;
+
+}
+
+
+
+td{
+
+padding:10px;
+
+text-align:center;
+
+border-bottom:1px solid #ddd;
+
+}
+
+
+
+.status{
+
+background:green;
+
+color:white;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+}
+
+
+
+
+
+@media(max-width:900px){
+
+.info,
+.services{
+
+grid-template-columns:1fr;
+
+}
+
+
+input{
+
+width:100%;
+
+}
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="header">
+
+
+<div>
+
+<h1>
+SMART FORM ENTERPRISE v6.1
+</h1>
+
+
+<p>
+NODAL DASHBOARD
+</p>
+
+
+</div>
+
+
+
+<button
+class="btn logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+
+
+<!-- WELCOME -->
+
+<div class="card">
+
+
+<div class="welcome">
+
+Welcome 
+<span id="userName">
+NODAL USER
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- INFORMATION AFTER WELCOME -->
+
+
+<div class="card">
+
+
+<div class="info">
+
+
+
+<div class="box">
+
+
+<div class="label">
+Nyaya Panchayat
+</div>
+
+
+<div class="value" id="nyaya">
+-
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<div class="label">
+Assigned Schools
+</div>
+
+
+<div class="value" id="schoolCount">
+0
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<div class="label">
+Role
+</div>
+
+
+<div class="value">
+NODAL
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- AVAILABLE SERVICES -->
+
+
+<div class="card">
+
+
+<h2>
+Available Services
+</h2>
+
+
+
+<div class="services">
+
+
+
+<div class="service-box"
+onclick="openForms()">
+
+
+
+<div class="service-icon">
+📝
+</div>
+
+
+<h3>
+Forms
+</h3>
+
+
+<p>
+School Data Entry & Submission
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="service-box"
+onclick="openReports()">
+
+
+
+<div class="service-icon">
+📊
+</div>
+
+
+<h3>
+Reports
+</h3>
+
+
+<p>
+Progress & Analysis Reports
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="service-box"
+onclick="openProfile()">
+
+
+
+<div class="service-icon">
+👤
+</div>
+
+
+<h3>
+Profile
+</h3>
+
+
+<p>
+User Profile Management
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- SCHOOL LIST -->
+
+
+<div class="card">
+
+
+<h2>
+Assigned School List
+</h2>
+
+
+
+<input
+
+id="schoolSearch"
+
+placeholder="Search School / UDISE Code">
+
+
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+
+<th>
+UDISE Code
+</th>
+
+
+<th>
+School Name
+</th>
+
+
+<th>
+School Type
+</th>
+
+
+<th>
+Status
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="schoolList">
+
+
+<tr>
+
+<td colspan="4">
+
+Loading...
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<script src="assets/js/dashboard.js"></script>
+
+
+
+<script>
+
+
+function openForms(){
+
+alert("Forms Module Coming Soon");
+
+}
+
+
+
+function openReports(){
+
+alert("Reports Module Coming Soon");
+
+}
+
+
+
+function openProfile(){
+
+alert("Profile Module Coming Soon");
+
+}
+
+
+
+function logout(){
+
+sessionStorage.clear();
+
+localStorage.clear();
+
+location.href="../index.html";
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
+<!DOCTYPE html>
 
 <html lang="en">
 
