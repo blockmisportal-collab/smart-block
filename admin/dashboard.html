@@ -17,7 +17,9 @@ SMART FORM ENTERPRISE v6.1 - Admin Dashboard
 
 
 *{
+
 box-sizing:border-box;
+
 }
 
 
@@ -27,6 +29,7 @@ body{
 margin:0;
 
 font-family:
+
 "Segoe UI",
 Arial,
 sans-serif;
@@ -34,6 +37,9 @@ sans-serif;
 background:#f4f7fb;
 
 }
+
+
+
 
 
 
@@ -60,7 +66,11 @@ color:white;
 
 padding-top:20px;
 
+overflow-y:auto;
+
 }
+
+
 
 
 
@@ -68,18 +78,21 @@ padding-top:20px;
 
 padding:20px;
 
-text-align:center;
-
 font-size:22px;
 
 font-weight:bold;
 
+text-align:center;
+
 line-height:1.5;
 
 border-bottom:
+
 1px solid rgba(255,255,255,.2);
 
 }
+
+
 
 
 
@@ -91,12 +104,12 @@ margin-top:20px;
 
 
 
-.menu a{
 
+.menu a{
 
 display:block;
 
-padding:15px 25px;
+padding:14px 25px;
 
 color:white;
 
@@ -108,11 +121,63 @@ font-size:16px;
 
 
 
+
+
 .menu a:hover{
 
 background:#1565c0;
 
 }
+
+
+
+
+
+/* =====================
+ FORM MANAGEMENT SUB MENU
+===================== */
+
+
+.submenu{
+
+display:none;
+
+background:#08357c;
+
+}
+
+
+
+
+
+.submenu a{
+
+padding-left:45px;
+
+font-size:14px;
+
+}
+
+
+
+
+
+.submenu a:hover{
+
+background:#1565c0;
+
+}
+
+
+
+
+
+.menu-group{
+
+cursor:pointer;
+
+}
+
 
 
 
@@ -132,6 +197,7 @@ margin-left:250px;
 min-height:100vh;
 
 }
+
 
 
 
@@ -177,6 +243,7 @@ font-size:24px;
 
 
 
+
 .header-right{
 
 display:flex;
@@ -191,50 +258,10 @@ gap:15px;
 
 
 
-/* FORM DROPDOWN */
 
-
-.form-status-menu select{
-
-
-height:40px;
-
-padding:0 15px;
-
-border-radius:8px;
-
-border:1px solid #ddd;
-
-background:white;
-
-color:#0d47a1;
-
-font-weight:600;
-
-cursor:pointer;
-
-}
-
-
-
-
-
-.form-status-menu select:hover{
-
-
-box-shadow:
-
-0 3px 10px rgba(0,0,0,.15);
-
-
-}
-
-
-
-
-
-
-/* LOGOUT */
+/* =====================
+ LOGOUT BUTTON
+===================== */
 
 
 .logout{
@@ -254,6 +281,7 @@ cursor:pointer;
 font-weight:bold;
 
 }
+
 
 
 
@@ -294,14 +322,12 @@ margin-bottom:20px;
 
 
 
-
 /* =====================
  MOBILE
 ===================== */
 
 
 @media(max-width:800px){
-
 
 
 .sidebar{
@@ -311,7 +337,6 @@ width:70px;
 }
 
 
-
 .logo{
 
 font-size:12px;
@@ -319,8 +344,17 @@ font-size:12px;
 }
 
 
-
 .menu a{
+
+font-size:0;
+
+padding:15px;
+
+}
+
+
+
+.submenu a{
 
 font-size:0;
 
@@ -340,15 +374,10 @@ margin-left:70px;
 }
 
 
-
 </style>
 
-
 </head>
-
-
 <body>
-
 
 
 <!-- =====================
@@ -362,9 +391,7 @@ margin-left:70px;
 <div class="logo">
 
 SMART FORM<br>
-
 ENTERPRISE v6.1
-
 
 </div>
 
@@ -383,11 +410,15 @@ ENTERPRISE v6.1
 
 
 
+
+
 <a href="users.html">
 
 👥 User Management
 
 </a>
+
+
 
 
 
@@ -399,12 +430,22 @@ ENTERPRISE v6.1
 
 
 
+
+
 <a href="forms.html">
 
 📝 Form Builder
 
 </a>
-<!-- FORM MANAGEMENT MENU -->
+
+
+
+
+
+
+
+
+<!-- FORM MANAGEMENT -->
 
 
 <div class="menu-group">
@@ -416,6 +457,8 @@ onclick="toggleFormMenu()">
 📋 Form Management ▾
 
 </a>
+
+
 
 
 
@@ -431,11 +474,15 @@ class="submenu">
 
 
 
+
+
 <a href="forms.html?status=active">
 
 ✅ Active Form
 
 </a>
+
+
 
 
 
@@ -450,7 +497,15 @@ class="submenu">
 </div>
 
 
+
 </div>
+
+
+
+
+
+
+
 
 
 <a href="reports.html">
@@ -458,6 +513,10 @@ class="submenu">
 📊 Reports MIS
 
 </a>
+
+
+
+
 
 
 
@@ -469,11 +528,16 @@ class="submenu">
 
 
 
-</div>
 
 
 
 </div>
+
+
+</div>
+
+
+
 
 
 
@@ -481,11 +545,12 @@ class="submenu">
 
 
 <!-- =====================
- MAIN
+ MAIN AREA
 ===================== -->
 
 
 <div class="main">
+
 
 
 
@@ -498,20 +563,29 @@ class="submenu">
 
 
 
+
+
 <div>
 
 
 <h1>
+
 ADMIN DASHBOARD
+
 </h1>
 
 
+
 <small>
+
 SMART FORM ENTERPRISE v6.1
+
 </small>
 
 
+
 </div>
+
 
 
 
@@ -522,62 +596,29 @@ SMART FORM ENTERPRISE v6.1
 
 
 
-<div class="form-status-menu">
-
-
-<select
-id="formStatus"
-onchange="openFormStatus(this.value)">
-
-
-
-<option value="">
-
-📋 Form List
-
-</option>
-
-
-
-
-<option value="active">
-
-✅ Active Form
-
-</option>
-
-
-
-
-<option value="deactive">
-
-⛔ De-Active Form
-
-</option>
-
-
-
-</select>
-
-
-</div>
-
-
-
 
 
 
 <button
+
 class="logout"
+
 onclick="logout()">
 
+
 LOGOUT
+
 
 </button>
 
 
 
+
+
+
 </div>
+
+
 
 
 
@@ -591,13 +632,16 @@ LOGOUT
 
 
 
-<!-- WELCOME -->
+
+
+<!-- WELCOME CARD -->
 
 
 <div class="card">
 
 
 <h2 style="color:#0d47a1;">
+
 
 Welcome,
 
@@ -606,6 +650,7 @@ Welcome,
 Administrator
 
 </span>
+
 
 </h2>
 
@@ -623,6 +668,7 @@ ADMIN
 </p>
 
 
+
 </div>
 
 
@@ -631,8 +677,9 @@ ADMIN
 
 
 
+
 <!-- =====================
- OVERVIEW
+ DASHBOARD OVERVIEW
 ===================== -->
 
 
@@ -640,8 +687,12 @@ ADMIN
 
 
 <h2>
+
 Dashboard Overview
+
 </h2>
+
+
 
 
 
@@ -651,13 +702,18 @@ Dashboard Overview
 
 <div class="stat-card">
 
+
 <h2 id="totalUsers">
+
 0
+
 </h2>
 
 
 <p>
+
 Total Users
+
 </p>
 
 
@@ -667,15 +723,22 @@ Total Users
 
 
 
+
+
 <div class="stat-card">
+
 
 <h2 id="totalSchools">
+
 0
+
 </h2>
 
 
 <p>
+
 Total Schools
+
 </p>
 
 
@@ -685,15 +748,22 @@ Total Schools
 
 
 
+
+
 <div class="stat-card">
+
 
 <h2 id="totalForms">
+
 0
+
 </h2>
 
 
 <p>
+
 Total Forms
+
 </p>
 
 
@@ -703,19 +773,28 @@ Total Forms
 
 
 
+
+
 <div class="stat-card">
+
 
 <h2 id="pendingForms">
+
 0
+
 </h2>
 
 
 <p>
+
 Pending Forms
+
 </p>
 
 
 </div>
+
+
 
 
 
@@ -723,13 +802,18 @@ Pending Forms
 
 <div class="stat-card">
 
+
 <h2 style="color:green;">
+
 ONLINE
+
 </h2>
 
 
 <p>
+
 System Status
+
 </p>
 
 
@@ -738,10 +822,14 @@ System Status
 
 
 
+
 </div>
 
 
+
 </div>
+
+
 
 
 
@@ -766,6 +854,7 @@ Available Services
 
 
 
+
 <div class="services-grid">
 
 
@@ -773,6 +862,7 @@ Available Services
 
 
 <div class="service-card"
+
 onclick="openFormBuilder()">
 
 
@@ -784,6 +874,7 @@ onclick="openFormBuilder()">
 </div>
 
 
+
 <h3>
 
 Form Builder
@@ -791,11 +882,13 @@ Form Builder
 </h3>
 
 
+
 <p>
 
 Create & Manage Dynamic Forms
 
 </p>
+
 
 
 </div>
@@ -806,7 +899,10 @@ Create & Manage Dynamic Forms
 
 
 
+
+
 <div class="service-card"
+
 onclick="openReports()">
 
 
@@ -818,6 +914,7 @@ onclick="openReports()">
 </div>
 
 
+
 <h3>
 
 Reports MIS
@@ -825,11 +922,13 @@ Reports MIS
 </h3>
 
 
+
 <p>
 
 Progress & Analysis Reports
 
 </p>
+
 
 
 </div>
@@ -840,7 +939,10 @@ Progress & Analysis Reports
 
 
 
+
+
 <div class="service-card"
+
 onclick="openProfile()">
 
 
@@ -852,11 +954,13 @@ onclick="openProfile()">
 </div>
 
 
+
 <h3>
 
 Profile
 
 </h3>
+
 
 
 <p>
@@ -866,16 +970,20 @@ User Profile Management
 </p>
 
 
-</div>
-
-
-
-
 
 </div>
 
 
+
+
+
 </div>
+
+
+
+</div>
+
+
 
 
 
@@ -899,6 +1007,7 @@ Recent Activity
 
 
 
+
 <div class="activity">
 
 
@@ -912,6 +1021,12 @@ System Ready
 
 
 </div>
+
+
+
+</div>
+
+
 
 
 
@@ -968,9 +1083,9 @@ color:#0d47a1;
 
 .stat-card p{
 
-font-weight:bold;
-
 margin-top:10px;
+
+font-weight:bold;
 
 }
 
@@ -1061,6 +1176,10 @@ color:#555;
 
 
 
+
+/* ACTIVITY */
+
+
 .activity{
 
 
@@ -1071,6 +1190,7 @@ padding:15px;
 border-radius:10px;
 
 }
+
 
 
 
@@ -1099,9 +1219,8 @@ grid-template-columns:
 }
 
 
-
-
 </style>
+
 
 
 
@@ -1112,12 +1231,13 @@ grid-template-columns:
 
 
 /* =====================
- LOAD USER
+ USER SESSION LOAD
 ===================== */
 
 
 document.addEventListener(
 "DOMContentLoaded",
+
 function(){
 
 
@@ -1137,12 +1257,14 @@ sessionStorage.getItem("USER");
 if(user){
 
 
+
 try{
 
 
 let data =
 
 JSON.parse(user);
+
 
 
 
@@ -1166,19 +1288,17 @@ data.username
 
 }
 
-catch(e){
+catch(error){
 
 
-
-console.log(e);
-
-
-}
-
+console.log(error);
 
 
 }
 
+
+
+}
 
 
 });
@@ -1192,41 +1312,35 @@ console.log(e);
 
 
 /* =====================
- FORM STATUS
+ FORM MENU TOGGLE
 ===================== */
 
 
-function openFormStatus(status){
+function toggleFormMenu(){
 
 
 
-if(status==="active"){
+let menu =
 
-
-window.location.href =
-"forms.html?status=active";
-
-
-}
+document.getElementById(
+"formSubMenu"
+);
 
 
 
-else if(status==="deactive"){
+
+if(menu.style.display==="block"){
 
 
-window.location.href =
-"forms.html?status=deactive";
+menu.style.display="none";
 
 
 }
-
-
 
 else{
 
 
-window.location.href =
-"forms.html";
+menu.style.display="block";
 
 
 }
@@ -1244,7 +1358,7 @@ window.location.href =
 
 
 /* =====================
- SERVICES
+ SERVICE LINKS
 ===================== */
 
 
@@ -1252,6 +1366,7 @@ function openFormBuilder(){
 
 
 window.location.href=
+
 "forms.html";
 
 
@@ -1260,10 +1375,12 @@ window.location.href=
 
 
 
+
 function openReports(){
 
 
 window.location.href=
+
 "reports.html";
 
 
@@ -1272,14 +1389,69 @@ window.location.href=
 
 
 
+
 function openProfile(){
 
 
 window.location.href=
+
 "profile.html";
 
 
 }
+
+
+
+
+
+
+
+
+
+/* =====================
+ FORM STATUS MENU
+===================== */
+
+
+function openFormStatus(status){
+
+
+if(status==="active"){
+
+
+window.location.href=
+
+"forms.html?status=active";
+
+
+}
+
+
+else if(status==="deactive"){
+
+
+window.location.href=
+
+"forms.html?status=deactive";
+
+
+}
+
+
+else{
+
+
+window.location.href=
+
+"forms.html";
+
+
+}
+
+
+}
+
+
 
 
 
@@ -1303,8 +1475,8 @@ localStorage.clear();
 
 
 window.location.href=
-"../index.html";
 
+"../index.html";
 
 
 }
@@ -1318,8 +1490,3 @@ window.location.href=
 </body>
 
 </html>
-
-
-
-
-</div>
