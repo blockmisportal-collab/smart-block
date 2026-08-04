@@ -1,63 +1,234 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
 
 <title>
-SMART FORM ENTERPRISE v6.1 - School Dashboard
+SMART FORM ENTERPRISE v6.1
+- School Dashboard
 </title>
+
 
 
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 }
+
+
 
 
 body{
 
 margin:0;
-font-family:"Segoe UI",Arial,sans-serif;
+
+font-family:
+
+"Segoe UI",
+Arial,
+sans-serif;
+
 background:#f4f7fb;
 
 }
 
 
 
+/*========================
+ SIDEBAR
+========================*/
+
+
+.sidebar{
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:260px;
+
+height:100vh;
+
+background:#0d47a1;
+
+color:white;
+
+padding:20px;
+
+overflow:auto;
+
+}
+
+
+
+.logo{
+
+font-size:22px;
+
+font-weight:bold;
+
+line-height:1.4;
+
+margin-bottom:30px;
+
+}
+
+
+
+
+.menu-item{
+
+padding:14px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+margin-bottom:8px;
+
+font-weight:bold;
+
+}
+
+
+
+.menu-item:hover{
+
+background:rgba(255,255,255,.15);
+
+}
+
+
+
+
+
+.menu-title{
+
+font-size:14px;
+
+color:#bbdefb;
+
+margin-top:20px;
+
+margin-bottom:8px;
+
+}
+
+
+
+
+.dropdown{
+
+display:none;
+
+padding-left:15px;
+
+}
+
+
+
+
+.dropdown div{
+
+padding:10px;
+
+cursor:pointer;
+
+border-radius:6px;
+
+}
+
+
+
+.dropdown div:hover{
+
+background:rgba(255,255,255,.15);
+
+}
+
+
+
+
+
+/*========================
+ MAIN AREA
+========================*/
+
+
+.main{
+
+margin-left:260px;
+
+min-height:100vh;
+
+}
+
+
+
+
+
+
 .header{
 
 background:#0d47a1;
+
 color:white;
-padding:20px 30px;
+
+padding:18px 30px;
 
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
 
 }
 
 
 
+
 .header h1{
+
 margin:0;
-font-size:28px;
+
+font-size:26px;
+
 }
+
+
+
+.header p{
+
+margin:5px 0 0;
+
+}
+
 
 
 
 .btn{
 
 border:none;
+
 padding:10px 18px;
+
 border-radius:6px;
+
 cursor:pointer;
+
 font-weight:bold;
 
 }
@@ -67,10 +238,18 @@ font-weight:bold;
 .logout{
 
 background:#d32f2f;
+
 color:white;
 
 }
 
+
+
+
+
+/*========================
+ CONTENT
+========================*/
 
 
 .container{
@@ -81,13 +260,17 @@ padding:25px;
 
 
 
+
 .card{
 
 background:white;
+
 padding:25px;
+
 border-radius:15px;
 
 box-shadow:
+
 0 5px 20px rgba(0,0,0,.12);
 
 margin-bottom:20px;
@@ -96,29 +279,43 @@ margin-bottom:20px;
 
 
 
+
+
+
 .info{
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(220px,1fr));
+
 gap:20px;
 
 }
 
 
 
+
+
 .box{
 
 background:#f5f9ff;
-padding:20px;
+
+padding:18px;
+
 border-radius:10px;
+
+border-left:5px solid #0d47a1;
 
 }
 
 
 
-.title{
+.label{
 
 color:#0d47a1;
+
 font-weight:bold;
 
 }
@@ -127,29 +324,123 @@ font-weight:bold;
 
 .value{
 
-font-size:22px;
+font-size:20px;
+
+font-weight:bold;
+
 margin-top:8px;
 
 }
 
 
 
-.menu{
 
-display:flex;
-gap:15px;
-flex-wrap:wrap;
+
+
+
+
+/*========================
+ DASHBOARD CARDS
+========================*/
+
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(4,1fr);
+
+gap:20px;
 
 }
 
 
 
-.menu button{
+.stat{
 
-background:#1565c0;
-color:white;
+background:#f5f9ff;
+
+padding:20px;
+
+border-radius:12px;
+
+text-align:center;
+
+border-left:5px solid #0d47a1;
 
 }
+
+
+
+.stat h2{
+
+margin:0;
+
+font-size:30px;
+
+color:#0d47a1;
+
+}
+
+
+
+
+
+.stat p{
+
+font-weight:bold;
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ MOBILE
+========================*/
+
+
+@media(max-width:900px){
+
+
+
+.sidebar{
+
+position:relative;
+
+width:100%;
+
+height:auto;
+
+}
+
+
+
+.main{
+
+margin-left:0;
+
+}
+
+
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+}
+
 
 
 
@@ -159,7 +450,178 @@ color:white;
 </head>
 
 
-<body>
+
+  <!-- =========================
+ SIDEBAR
+========================= -->
+
+
+<div class="sidebar">
+
+
+<div class="logo">
+
+🏫 SMART FORM
+
+<br>
+
+ENTERPRISE v6.1
+
+</div>
+
+
+
+
+
+<div class="menu-item"
+onclick="goDashboard()">
+
+🏠 Dashboard
+
+</div>
+
+
+
+
+
+<div class="menu-title">
+
+FORMS
+
+</div>
+
+
+
+
+
+<div class="menu-item"
+onclick="toggleForms()">
+
+📝 Available Active Forms ▼
+
+</div>
+
+
+
+
+
+<div id="formMenu"
+class="dropdown">
+
+
+<div onclick="openForms()">
+
+📋 All Active Forms
+
+</div>
+
+
+<div>
+
+➕ New Forms
+
+</div>
+
+
+
+<div>
+
+📂 Assigned Forms
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="menu-item"
+onclick="openSubmission()">
+
+📤 My Submissions
+
+</div>
+
+
+
+
+
+<div class="menu-item"
+onclick="openReturned()">
+
+↩ Returned Forms
+
+</div>
+
+
+
+
+
+
+
+<div class="menu-title">
+
+REPORT
+
+</div>
+
+
+
+
+<div class="menu-item">
+
+📊 Reports
+
+</div>
+
+
+
+
+
+<div class="menu-item">
+
+👤 Profile
+
+</div>
+
+
+
+
+
+
+<div class="menu-item"
+onclick="logout()">
+
+🚪 Logout
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =========================
+ MAIN AREA
+========================= -->
+
+
+<div class="main">
+
+
+
 
 
 <div class="header">
@@ -167,20 +629,31 @@ color:white;
 
 <div>
 
+
 <h1>
+
 SMART FORM ENTERPRISE v6.1
+
 </h1>
 
+
 <p>
-SCHOOL DASHBOARD
+
+SCHOOL MANAGEMENT DASHBOARD
+
 </p>
 
 
 </div>
 
 
-<button 
+
+
+
+<button
+
 class="btn logout"
+
 onclick="logout()">
 
 Logout
@@ -188,7 +661,13 @@ Logout
 </button>
 
 
+
 </div>
+
+
+
+
+
 
 
 
@@ -197,65 +676,133 @@ Logout
 <div class="container">
 
 
+
+
+
+
+
+<!-- =========================
+ SCHOOL PROFILE
+========================= -->
+
+
 <div class="card">
 
 
-<h2>
-Welcome
+<h2 style="color:#0d47a1">
+
+Welcome,
+
 <span id="userName">
+
 School User
+
 </span>
+
 </h2>
+
 
 
 
 <div class="info">
 
 
+
+
+
 <div class="box">
 
-<div class="title">
+
+<div class="label">
+
 School Name
+
 </div>
+
 
 <div class="value"
 id="schoolName">
+
 -
-</div>
 
 </div>
+
+
+</div>
+
+
+
+
 
 
 
 <div class="box">
 
-<div class="title">
+
+<div class="label">
+
 UDISE Code
+
 </div>
+
 
 <div class="value"
 id="udiseCode">
+
 -
-</div>
 
 </div>
+
+
+</div>
+
+
+
+
+
 
 
 
 <div class="box">
 
-<div class="title">
-Role
+
+<div class="label">
+
+Nyaya Panchayat
+
 </div>
+
+
+<div class="value"
+id="nyayaPanchayat">
+
+-
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="box">
+
+
+<div class="label">
+
+Role
+
+</div>
+
 
 <div class="value"
 id="userRole">
+
 SCHOOL
-</div>
-
-</div>
-
-
 
 </div>
 
@@ -265,34 +812,132 @@ SCHOOL
 
 
 
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =========================
+ DASHBOARD SUMMARY
+========================= -->
 
 
 <div class="card">
 
 
-<h2>
-Available Services
+<div class="stats">
+
+
+
+
+
+<div class="stat">
+
+
+<h2 id="totalForms">
+
+0
+
 </h2>
 
 
-<div class="menu">
+<p>
+
+📋 Total Forms
+
+</p>
 
 
-<button onclick="openForms()">
-📋 Forms
-</button>
-
-
-
-<button>
-📊 Reports
-</button>
+</div>
 
 
 
-<button>
-👤 Profile
-</button>
+
+
+
+<div class="stat">
+
+
+<h2 id="pendingForms">
+
+0
+
+</h2>
+
+
+<p>
+
+⏳ Pending
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat">
+
+
+<h2 id="approvedForms">
+
+0
+
+</h2>
+
+
+<p>
+
+✅ Approved
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="stat">
+
+
+<h2 id="returnedForms">
+
+0
+
+</h2>
+
+
+<p>
+
+⚠ Returned
+
+</p>
+
+
+</div>
+
+
+
 
 
 
@@ -305,7 +950,178 @@ Available Services
 
 
 
+
+
+
+
+<!-- =========================
+ RETURNED FORM ALERT
+========================= -->
+
+
+<div class="card"
+id="returnedSection"
+style="display:none;">
+
+
+
+<h2 style="color:#d32f2f">
+
+⚠ Form Returned By Nodal
+
+</h2>
+
+
+
+
+<div id="returnedData">
+
 </div>
+
+
+
+</div>
+  <!-- =========================
+ ACTIVE FORMS SECTION
+========================= -->
+
+
+<div class="card">
+
+
+<h2 style="color:#0d47a1">
+
+📝 Available Active Forms
+
+</h2>
+
+
+
+
+<div id="activeForms">
+
+
+<div class="loading">
+
+Loading Forms...
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =========================
+ SUBMITTED FORMS
+========================= -->
+
+
+<div class="card">
+
+
+<h2 style="color:#0d47a1">
+
+📤 My Submitted Forms
+
+</h2>
+
+
+
+
+
+<table width="100%">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+Form Name
+
+</th>
+
+
+<th>
+
+Date
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Action
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody id="submissionTable">
+
+
+<tr>
+
+<td colspan="4">
+
+Loading...
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
 
 
 
@@ -314,48 +1130,1631 @@ Available Services
 <script>
 
 
-function loadUser(){
+
+const API_URL =
+
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
-let user =
+
+
+
+let USER =
+
 JSON.parse(
+
 localStorage.getItem("USER")
+
 ||
+
 "{}"
+
 );
+
+
+
+
+
+let FORM_DATA=[];
+
+let RESPONSE_DATA=[];
+
+
+
+
+
+
+
+
+
+/*========================
+ LOAD USER
+========================*/
+
+
+function loadUser(){
 
 
 
 document.getElementById(
 "userName"
-).innerText =
-user.name || user.username || "School User";
+).innerHTML =
+
+USER.name ||
+
+USER.username ||
+
+"School User";
+
+
 
 
 
 document.getElementById(
 "schoolName"
-).innerText =
-user.schoolName || "-";
+).innerHTML =
+
+USER.schoolName || "-";
+
+
 
 
 
 document.getElementById(
 "udiseCode"
-).innerText =
-user.schoolCode || "-";
+).innerHTML =
+
+USER.schoolCode || "-";
+
+
+
+
+
+document.getElementById(
+"nyayaPanchayat"
+).innerHTML =
+
+USER.nyayaPanchayat || "-";
+
+
 
 
 
 document.getElementById(
 "userRole"
-).innerText =
-user.role || "SCHOOL";
+).innerHTML =
+
+USER.role || "SCHOOL";
 
 
 
 }
 
+
+
+
+
+
+
+
+
+
+
+/*========================
+ LOAD ACTIVE FORMS
+========================*/
+
+
+async function loadForms(){
+
+
+try{
+
+
+let res = await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+action:"forms"
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+let result =
+
+await res.json();
+
+
+
+
+
+if(result.success){
+
+
+
+FORM_DATA = result.data || [];
+
+
+
+displayForms(
+
+FORM_DATA
+
+);
+
+
+
+}
+
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ DISPLAY FORMS
+========================*/
+
+
+function displayForms(data){
+
+
+
+let html="";
+
+
+
+
+
+if(data.length===0){
+
+
+html=
+
+`
+
+<p>
+
+कोई Active Form उपलब्ध नहीं है।
+
+</p>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+data.forEach(form=>{
+
+
+html +=
+
+
+
+`
+
+<div class="box">
+
+
+<div class="label">
+
+${form.name}
+
+</div>
+
+
+
+
+<p>
+
+${form.description || "Online Form"}
+
+</p>
+
+
+
+
+<button
+
+class="btn"
+
+style="background:#1565c0;color:white"
+
+onclick="openForm('${form.id}')">
+
+📝 Open Form
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+
+
+
+document.getElementById(
+"activeForms"
+).innerHTML = html;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ OPEN FORM
+========================*/
+
+
+function openForm(id){
+
+
+window.location.href =
+
+"fill-form.html?id="+id;
+
+
+}
+
+
+
+
+
+
+
+
+/*========================
+ FORM DROPDOWN
+========================*/
+
+
+function toggleForms(){
+
+
+let menu =
+
+document.getElementById(
+"formMenu"
+);
+
+
+
+if(menu.style.display==="block"){
+
+
+menu.style.display="none";
+
+
+}
+
+else{
+
+
+menu.style.display="block";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+function openForms(){
+
+
+document.getElementById(
+"activeForms"
+)
+
+.scrollIntoView();
+
+
+}
+
+
+
+function goDashboard(){
+
+
+window.scrollTo(0,0);
+
+
+}
+<!-- =========================
+ ACTIVE FORMS SECTION
+========================= -->
+
+
+<div class="card">
+
+
+<h2 style="color:#0d47a1">
+
+📝 Available Active Forms
+
+</h2>
+
+
+
+
+<div id="activeForms">
+
+
+<div class="loading">
+
+Loading Forms...
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =========================
+ SUBMITTED FORMS
+========================= -->
+
+
+<div class="card">
+
+
+<h2 style="color:#0d47a1">
+
+📤 My Submitted Forms
+
+</h2>
+
+
+
+
+
+<table width="100%">
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+Form Name
+
+</th>
+
+
+<th>
+
+Date
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+<th>
+
+Action
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody id="submissionTable">
+
+
+<tr>
+
+<td colspan="4">
+
+Loading...
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+const API_URL =
+
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
+
+
+
+let USER =
+
+JSON.parse(
+
+localStorage.getItem("USER")
+
+||
+
+"{}"
+
+);
+
+
+
+
+
+let FORM_DATA=[];
+
+let RESPONSE_DATA=[];
+
+
+
+
+
+
+
+
+
+/*========================
+ LOAD USER
+========================*/
+
+
+function loadUser(){
+
+
+
+document.getElementById(
+"userName"
+).innerHTML =
+
+USER.name ||
+
+USER.username ||
+
+"School User";
+
+
+
+
+
+document.getElementById(
+"schoolName"
+).innerHTML =
+
+USER.schoolName || "-";
+
+
+
+
+
+document.getElementById(
+"udiseCode"
+).innerHTML =
+
+USER.schoolCode || "-";
+
+
+
+
+
+document.getElementById(
+"nyayaPanchayat"
+).innerHTML =
+
+USER.nyayaPanchayat || "-";
+
+
+
+
+
+document.getElementById(
+"userRole"
+).innerHTML =
+
+USER.role || "SCHOOL";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*========================
+ LOAD ACTIVE FORMS
+========================*/
+
+
+async function loadForms(){
+
+
+try{
+
+
+let res = await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+action:"forms"
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+let result =
+
+await res.json();
+
+
+
+
+
+if(result.success){
+
+
+
+FORM_DATA = result.data || [];
+
+
+
+displayForms(
+
+FORM_DATA
+
+);
+
+
+
+}
+
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ DISPLAY FORMS
+========================*/
+
+
+function displayForms(data){
+
+
+
+let html="";
+
+
+
+
+
+if(data.length===0){
+
+
+html=
+
+`
+
+<p>
+
+कोई Active Form उपलब्ध नहीं है।
+
+</p>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+data.forEach(form=>{
+
+
+html +=
+
+
+
+`
+
+<div class="box">
+
+
+<div class="label">
+
+${form.name}
+
+</div>
+
+
+
+
+<p>
+
+${form.description || "Online Form"}
+
+</p>
+
+
+
+
+<button
+
+class="btn"
+
+style="background:#1565c0;color:white"
+
+onclick="openForm('${form.id}')">
+
+📝 Open Form
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+
+
+
+document.getElementById(
+"activeForms"
+).innerHTML = html;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ OPEN FORM
+========================*/
+
+
+function openForm(id){
+
+
+window.location.href =
+
+"fill-form.html?id="+id;
+
+
+}
+
+
+
+
+
+
+
+
+/*========================
+ FORM DROPDOWN
+========================*/
+
+
+function toggleForms(){
+
+
+let menu =
+
+document.getElementById(
+"formMenu"
+);
+
+
+
+if(menu.style.display==="block"){
+
+
+menu.style.display="none";
+
+
+}
+
+else{
+
+
+menu.style.display="block";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+function openForms(){
+
+
+document.getElementById(
+"activeForms"
+)
+
+.scrollIntoView();
+
+
+}
+
+
+
+function goDashboard(){
+
+
+window.scrollTo(0,0);
+
+
+}
+/*========================
+ LOAD SUBMISSIONS
+========================*/
+
+
+async function loadSubmissions(){
+
+
+try{
+
+
+let res = await fetch(
+
+API_URL,
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+},
+
+
+body:JSON.stringify({
+
+action:"responses"
+
+})
+
+
+}
+
+);
+
+
+
+
+
+let result = await res.json();
+
+
+
+
+
+if(result.success){
+
+
+RESPONSE_DATA =
+
+result.data.filter(
+
+x=>
+
+String(x.schoolCode)
+
+===
+
+String(USER.schoolCode)
+
+);
+
+
+
+
+displaySubmissions(
+
+RESPONSE_DATA
+
+);
+
+
+
+updateCount(
+
+RESPONSE_DATA
+
+);
+
+
+
+showReturned(
+
+RESPONSE_DATA
+
+);
+
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ DISPLAY SUBMISSIONS
+========================*/
+
+
+function displaySubmissions(data){
+
+
+
+let html="";
+
+
+
+
+
+if(data.length===0){
+
+
+html=
+
+`
+
+<tr>
+
+<td colspan="4">
+
+कोई Submission उपलब्ध नहीं है।
+
+</td>
+
+</tr>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+data.forEach(item=>{
+
+
+
+let status =
+
+String(item.status || "PENDING")
+
+.toUpperCase();
+
+
+
+
+
+let badge="";
+
+
+
+
+
+if(status==="APPROVED"){
+
+
+badge=
+
+`
+
+<span style="
+background:#2e7d32;
+color:white;
+padding:6px 12px;
+border-radius:5px">
+
+✅ APPROVED
+
+</span>
+
+`;
+
+
+
+}
+
+else if(status==="REJECTED"){
+
+
+badge=
+
+`
+
+<span style="
+background:#d32f2f;
+color:white;
+padding:6px 12px;
+border-radius:5px">
+
+⚠ RETURNED
+
+</span>
+
+`;
+
+
+
+}
+
+else{
+
+
+badge=
+
+`
+
+<span style="
+background:#f57c00;
+color:white;
+padding:6px 12px;
+border-radius:5px">
+
+⏳ PENDING
+
+</span>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+let action="View";
+
+
+
+
+
+if(status==="REJECTED"){
+
+
+action=
+
+`
+
+<button
+
+class="btn"
+
+style="background:#d32f2f;color:white"
+
+onclick="editForm('${item.formId}')">
+
+✏ Edit & Submit Again
+
+</button>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+html +=
+
+
+`
+
+<tr>
+
+
+<td>
+
+${item.formName}
+
+</td>
+
+
+<td>
+
+${new Date(item.date)
+.toLocaleDateString()}
+
+</td>
+
+
+<td>
+
+${badge}
+
+</td>
+
+
+<td>
+
+${action}
+
+</td>
+
+
+</tr>
+
+`;
+
+
+
+});
+
+
+
+
+
+document.getElementById(
+"submissionTable"
+).innerHTML=html;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ DASHBOARD COUNT
+========================*/
+
+
+function updateCount(data){
+
+
+let total=data.length;
+
+let pending=0;
+
+let approved=0;
+
+let returned=0;
+
+
+
+
+
+data.forEach(item=>{
+
+
+let s=
+
+String(item.status)
+
+.toUpperCase();
+
+
+
+if(s==="APPROVED")
+
+approved++;
+
+
+else if(s==="REJECTED")
+
+returned++;
+
+
+else
+
+pending++;
+
+
+
+});
+
+
+
+
+
+document.getElementById(
+"totalForms"
+).innerHTML=
+
+total;
+
+
+
+document.getElementById(
+"pendingForms"
+).innerHTML=
+
+pending;
+
+
+
+document.getElementById(
+"approvedForms"
+).innerHTML=
+
+approved;
+
+
+
+document.getElementById(
+"returnedForms"
+).innerHTML=
+
+returned;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ RETURNED FORM
+========================*/
+
+
+function showReturned(data){
+
+
+let returned =
+
+data.filter(
+
+x=>
+
+String(x.status)
+
+.toUpperCase()
+
+==="REJECTED"
+
+);
+
+
+
+
+
+if(returned.length===0){
+
+
+document.getElementById(
+"returnedSection"
+)
+
+.style.display="none";
+
+
+return;
+
+}
+
+
+
+
+
+let html="";
+
+
+
+
+
+returned.forEach(item=>{
+
+
+html +=
+
+
+`
+
+<div class="box">
+
+
+<h3 style="color:#d32f2f">
+
+⚠ ${item.formName}
+
+</h3>
+
+
+
+<p>
+
+<b>Remark:</b>
+
+${item.remark || "Correction Required"}
+
+</p>
+
+
+
+<button
+
+class="btn"
+
+style="background:#1565c0;color:white"
+
+onclick="editForm('${item.formId}')">
+
+✏ Edit Form
+
+</button>
+
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+
+
+
+
+document.getElementById(
+"returnedData"
+)
+
+.innerHTML=html;
+
+
+
+document.getElementById(
+"returnedSection"
+)
+
+.style.display="block";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ EDIT FORM
+========================*/
+
+
+function editForm(id){
+
+
+window.location.href=
+
+"fill-form.html?id="+id;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ OTHER MENU
+========================*/
+
+
+function openSubmission(){
+
+
+document.querySelector(
+
+"#submissionTable"
+
+)
+
+.scrollIntoView();
+
+
+}
+
+
+
+
+function openReturned(){
+
+
+document.getElementById(
+"returnedSection"
+)
+
+.scrollIntoView();
+
+
+}
+
+
+
+
+
+
+
+
+/*========================
+ LOGOUT
+========================*/
 
 
 function logout(){
@@ -372,18 +2771,21 @@ window.location.href="../index.html";
 
 
 
-function openForms(){
 
 
-window.location.href="forms.html";
 
 
-}
 
-
+/*========================
+ PAGE LOAD
+========================*/
 
 
 loadUser();
+
+loadForms();
+
+loadSubmissions();
 
 
 
@@ -392,4 +2794,6 @@ loadUser();
 
 </body>
 
+
 </html>
+<body>
