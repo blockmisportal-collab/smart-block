@@ -7,6 +7,7 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+
 <title>
 SMART FORM ENTERPRISE v6.1 - NODAL Dashboard
 </title>
@@ -22,29 +23,38 @@ box-sizing:border-box;
 body{
 
 margin:0;
+
 font-family:"Segoe UI",Arial,sans-serif;
+
 background:#f4f7fb;
 
 }
 
 
 
+/* HEADER */
+
 .header{
 
 background:#0d47a1;
+
 color:white;
 
 padding:20px 30px;
 
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
 
 }
 
 
 .header h1{
+
 margin:0;
+
 }
 
 
@@ -52,9 +62,13 @@ margin:0;
 .btn{
 
 border:none;
+
 padding:10px 18px;
+
 border-radius:6px;
+
 cursor:pointer;
+
 font-weight:bold;
 
 }
@@ -64,9 +78,12 @@ font-weight:bold;
 .logout{
 
 background:#d32f2f;
+
 color:white;
 
 }
+
+
 
 
 
@@ -78,9 +95,11 @@ padding:25px;
 
 
 
+
 .card{
 
 background:white;
+
 padding:25px;
 
 border-radius:15px;
@@ -94,10 +113,15 @@ margin-bottom:20px;
 
 
 
+
+/* INFO */
+
 .info{
 
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
+
 gap:20px;
 
 }
@@ -107,7 +131,9 @@ gap:20px;
 .box{
 
 background:#f1f6ff;
+
 padding:20px;
+
 border-radius:10px;
 
 }
@@ -117,6 +143,7 @@ border-radius:10px;
 .label{
 
 color:#0d47a1;
+
 font-weight:bold;
 
 }
@@ -126,11 +153,16 @@ font-weight:bold;
 .value{
 
 font-size:20px;
+
 margin-top:10px;
 
 }
 
 
+
+
+
+/* SEARCH */
 
 input{
 
@@ -147,6 +179,9 @@ width:300px;
 
 
 
+
+/* TABLE */
+
 table{
 
 width:100%;
@@ -162,6 +197,7 @@ margin-top:20px;
 th{
 
 background:#0d47a1;
+
 color:white;
 
 padding:12px;
@@ -182,9 +218,11 @@ border-bottom:1px solid #ddd;
 
 
 
+
 .status{
 
 background:green;
+
 color:white;
 
 padding:5px 12px;
@@ -195,19 +233,71 @@ border-radius:20px;
 
 
 
-.services button{
 
-margin-right:10px;
 
-background:#0d47a1;
 
-color:white;
+/* SERVICES */
 
-border:none;
+.services{
 
-padding:8px 15px;
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
 
 }
+
+
+
+.service-box{
+
+width:220px;
+
+padding:25px;
+
+background:#f1f6ff;
+
+border-radius:12px;
+
+text-align:center;
+
+cursor:pointer;
+
+border:1px solid #ddd;
+
+transition:.3s;
+
+}
+
+
+
+.service-box:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+.service-icon{
+
+font-size:35px;
+
+}
+
+
+
+.service-box h3{
+
+color:#0d47a1;
+
+}
+
+
 
 
 
@@ -219,11 +309,21 @@ grid-template-columns:1fr;
 
 }
 
+
+.service-box{
+
+width:100%;
+
+}
+
+
 }
 
 </style>
 
+
 </head>
+
 
 
 
@@ -240,12 +340,15 @@ grid-template-columns:1fr;
 SMART FORM ENTERPRISE v6.1
 </h1>
 
+
 <p>
 NODAL DASHBOARD
 </p>
 
 
 </div>
+
+
 
 
 <button 
@@ -263,7 +366,11 @@ Logout
 
 
 
+
+
 <div class="container">
+
+
 
 
 
@@ -271,12 +378,17 @@ Logout
 
 
 <h2>
-Welcome <span id="userName">NODAL USER</span>
+Welcome <span id="userName">
+NODAL USER
+</span>
+
 </h2>
 
 
 
+
 <div class="info">
+
 
 
 <div class="box">
@@ -289,7 +401,9 @@ Nyaya Panchayat
 -
 </div>
 
+
 </div>
+
 
 
 
@@ -303,7 +417,9 @@ Assigned Schools
 0
 </div>
 
+
 </div>
+
 
 
 
@@ -313,18 +429,23 @@ Assigned Schools
 Role
 </div>
 
+
 <div class="value">
 NODAL
 </div>
 
-</div>
-
-
 
 </div>
 
 
+
 </div>
+
+
+</div>
+
+
+
 
 
 
@@ -336,6 +457,7 @@ NODAL
 <h2>
 Assigned School List
 </h2>
+
 
 
 <input 
@@ -352,6 +474,7 @@ placeholder="Search School / UDISE Code">
 <thead>
 
 <tr>
+
 
 <th>
 UDISE Code
@@ -409,6 +532,9 @@ Loading...
 
 
 
+
+
+
 <div class="card">
 
 
@@ -417,35 +543,99 @@ Available Services
 </h2>
 
 
+
 <div class="services">
 
 
-<button>
-📝 Forms
-</button>
+
+<div class="service-box"
+onclick="openForms()">
+
+<div class="service-icon">
+📝
+</div>
 
 
-<button>
-📊 Reports
-</button>
+<h3>
+Forms
+</h3>
 
 
-<button>
-👤 Profile
-</button>
+<p>
+Fill School Forms
+</p>
 
 
 </div>
 
 
+
+
+
+
+<div class="service-box"
+onclick="openReports()">
+
+
+<div class="service-icon">
+📊
+</div>
+
+
+<h3>
+Reports
+</h3>
+
+
+<p>
+View Reports
+</p>
+
+
 </div>
 
 
 
 
 
+
+
+<div class="service-box"
+onclick="openProfile()">
+
+
+<div class="service-icon">
+👤
 </div>
 
+
+<h3>
+Profile
+</h3>
+
+
+<p>
+Manage Profile
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
 
 
 
@@ -459,6 +649,33 @@ Available Services
 <script>
 
 
+
+function openForms(){
+
+location.href="../forms/index.html";
+
+}
+
+
+
+function openReports(){
+
+location.href="../reports/index.html";
+
+}
+
+
+
+function openProfile(){
+
+location.href="../profile.html";
+
+}
+
+
+
+
+
 function logout(){
 
 sessionStorage.clear();
@@ -468,6 +685,7 @@ localStorage.clear();
 location.href="../index.html";
 
 }
+
 
 
 </script>
