@@ -4,54 +4,81 @@
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
 
 
 <title>
+
 SMART FORM ENTERPRISE v6.1 - School Management
+
 </title>
 
 
 
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 }
+
 
 
 body{
 
+
 margin:0;
 
+
 font-family:
+
 "Segoe UI",
 Arial,
 sans-serif;
 
+
 background:#f4f7fb;
+
 
 }
 
 
 
-/* HEADER */
+
+
+/* =====================
+ HEADER
+===================== */
+
 
 .header{
 
+
 background:#0d47a1;
+
 
 color:white;
 
+
 padding:20px 30px;
+
 
 display:flex;
 
+
 justify-content:space-between;
 
+
 align-items:center;
+
 
 }
 
@@ -59,9 +86,12 @@ align-items:center;
 
 .header h1{
 
+
 margin:0;
 
-font-size:28px;
+
+font-size:26px;
+
 
 }
 
@@ -69,24 +99,39 @@ font-size:28px;
 
 .header p{
 
+
 margin:5px 0 0;
+
 
 }
 
 
 
 
+
+
+/* =====================
+ BUTTON
+===================== */
+
+
 .btn{
+
 
 border:none;
 
+
 padding:10px 18px;
+
 
 border-radius:6px;
 
+
 cursor:pointer;
 
+
 font-weight:bold;
+
 
 }
 
@@ -94,9 +139,12 @@ font-weight:bold;
 
 .refresh{
 
+
 background:#1976d2;
 
+
 color:white;
+
 
 }
 
@@ -104,9 +152,12 @@ color:white;
 
 .back{
 
+
 background:#d32f2f;
 
+
 color:white;
+
 
 }
 
@@ -114,9 +165,18 @@ color:white;
 
 
 
+
+
+/* =====================
+ CONTAINER
+===================== */
+
+
 .container{
 
+
 padding:25px;
+
 
 }
 
@@ -125,47 +185,75 @@ padding:25px;
 
 .card{
 
+
 background:white;
+
 
 padding:25px;
 
+
 border-radius:15px;
 
+
 box-shadow:
+
+
 0 5px 20px rgba(0,0,0,.1);
+
 
 margin-bottom:20px;
 
+
 }
 
 
 
 
-.topbar{
 
-display:flex;
+
+
+/* =====================
+ FILTER
+===================== */
+
+
+.filter-box{
+
+
+display:grid;
+
+
+grid-template-columns:
+
+
+2fr 1fr 1fr 150px;
+
 
 gap:15px;
 
-flex-wrap:wrap;
 
 align-items:center;
 
-}
 
+}
 
 
 
 input,
 select{
 
-padding:10px;
+
+width:100%;
+
+
+padding:12px;
+
 
 border:1px solid #ccc;
 
+
 border-radius:6px;
 
-min-width:180px;
 
 }
 
@@ -175,11 +263,33 @@ min-width:180px;
 
 .count{
 
+
 font-size:20px;
+
 
 font-weight:bold;
 
+
 color:#0d47a1;
+
+
+}
+
+
+
+
+
+
+/* =====================
+ TABLE
+===================== */
+
+
+.table-container{
+
+
+overflow-x:auto;
+
 
 }
 
@@ -189,24 +299,28 @@ color:#0d47a1;
 
 table{
 
+
 width:100%;
+
 
 border-collapse:collapse;
 
-margin-top:20px;
 
 }
 
 
 
-
 th{
+
 
 background:#0d47a1;
 
+
 color:white;
 
+
 padding:12px;
+
 
 }
 
@@ -214,97 +328,109 @@ padding:12px;
 
 td{
 
+
 padding:10px;
+
 
 text-align:center;
 
+
 border-bottom:1px solid #ddd;
 
-}
 
+}
 
 
 
 
 tr:hover{
 
-background:#f1f5ff;
+
+background:#f1f6ff;
+
 
 }
 
 
 
 
-.status{
 
-padding:6px 12px;
 
-border-radius:20px;
 
-background:green;
+/* STATUS */
+
+
+.active{
+
+
+background:#2e7d32;
+
 
 color:white;
 
-font-size:13px;
 
-}
-
+padding:5px 12px;
 
 
+border-radius:20px;
 
-.loading{
-
-text-align:center;
-
-padding:20px;
-
-}
-
-
-
-
-@media(max-width:800px){
-
-
-table{
 
 font-size:12px;
 
-}
-
-
-
-.topbar{
-
-flex-direction:column;
-
-align-items:stretch;
-
-}
-
-
-input,
-select{
-
-width:100%;
 
 }
 
 
 
+.inactive{
+
+
+background:#d32f2f;
+
+
+color:white;
+
+
+padding:5px 12px;
+
+
+border-radius:20px;
+
+
+font-size:12px;
+
+
 }
 
+
+
+
+
+
+@media(max-width:900px){
+
+
+.filter-box{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+
+}
 
 
 </style>
 
-
-</head>
-
-
-
 <body>
 
+
+<!-- =====================
+ HEADER
+===================== -->
 
 
 <div class="header">
@@ -314,12 +440,16 @@ width:100%;
 
 
 <h1>
+
 SMART FORM ENTERPRISE v6.1
+
 </h1>
 
 
 <p>
+
 SCHOOL MANAGEMENT
+
 </p>
 
 
@@ -328,25 +458,37 @@ SCHOOL MANAGEMENT
 
 
 
+
+
 <div>
 
 
 <button
+
 class="btn refresh"
+
 onclick="loadSchools()">
+
 
 🔄 Refresh
 
+
 </button>
+
+
 
 
 
 
 <button
+
 class="btn back"
+
 onclick="goBack()">
 
+
 BACK
+
 
 </button>
 
@@ -363,16 +505,32 @@ BACK
 
 
 
+
+
+
+<!-- =====================
+ MAIN CONTAINER
+===================== -->
 
 
 <div class="container">
 
 
 
+
+
+
+
+<!-- SCHOOL FILTER -->
+
+
 <div class="card">
 
 
-<div class="topbar">
+
+<div class="filter-box">
+
+
 
 
 
@@ -381,9 +539,13 @@ BACK
 
 Total Schools :
 
+
 <span id="totalSchools">
+
 0
+
 </span>
+
 
 
 </div>
@@ -391,24 +553,38 @@ Total Schools :
 
 
 
-<input
 
-id="searchBox"
+
+
+<input
 
 type="text"
 
-placeholder="Search School / UDISE Code">
+id="searchSchool"
+
+placeholder="Search School / UDISE Code"
+
+onkeyup="filterSchools()">
 
 
 
 
 
-<select id="nyayaFilter">
+
+
+<select
+
+id="nyayaFilter"
+
+onchange="filterSchools()">
+
 
 
 <option value="">
 
+
 All Nyaya Panchayat
+
 
 </option>
 
@@ -417,6 +593,59 @@ All Nyaya Panchayat
 
 
 
+
+
+
+
+
+<select
+
+id="statusFilter"
+
+onchange="filterSchools()">
+
+
+
+<option value="">
+
+
+All Status
+
+
+</option>
+
+
+
+
+<option value="ACTIVE">
+
+
+🟢 Active
+
+
+</option>
+
+
+
+
+<option value="INACTIVE">
+
+
+🔴 Inactive
+
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+
 </div>
 
 
@@ -428,19 +657,35 @@ All Nyaya Panchayat
 
 
 
+
+
+
+<!-- SCHOOL TABLE -->
 
 
 <div class="card">
 
 
+
 <h2>
+
 Registered Schools
+
+
 </h2>
 
 
 
 
+
+<div class="table-container">
+
+
+
+
+
 <table>
+
 
 
 <thead>
@@ -449,28 +694,55 @@ Registered Schools
 <tr>
 
 
+
 <th>
+
 UDISE Code
+
 </th>
 
 
+
 <th>
+
 School Name
+
 </th>
 
 
+
+
 <th>
+
 Nyaya Panchayat
+
 </th>
 
 
+
+
 <th>
+
 School Type
+
 </th>
 
 
+
+
 <th>
+
 Status
+
+</th>
+
+
+
+
+<th>
+
+Action
+
 </th>
 
 
@@ -484,22 +756,27 @@ Status
 
 
 
+
 <tbody id="schoolTableBody">
 
 
 <tr>
 
-<td colspan="5" class="loading">
 
-Loading...
+<td colspan="6">
+
+
+Loading Schools...
+
 
 </td>
+
 
 </tr>
 
 
-
 </tbody>
+
 
 
 
@@ -507,45 +784,18 @@ Loading...
 
 
 
-</div>
-
-
 
 </div>
 
 
 
 
+</div>
 
 
 
 
 
-<!-- JS FILE -->
 
-<script src="../assets/js/schools.js?v=8"></script>
-
-
-
-
-
-<script>
-
-
-function goBack(){
-
-window.location.href =
-"dashboard.html";
-
-}
-
-
-
-</script>
-
-
-
-
-</body>
-
-</html>
+</div>
+</head>
