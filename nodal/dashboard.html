@@ -24,17 +24,13 @@ body{
 
 margin:0;
 
-font-family:
-"Segoe UI",
-Arial,
-sans-serif;
+font-family:"Segoe UI",Arial,sans-serif;
 
 background:#f4f7fb;
 
 }
 
 
-/* HEADER */
 
 .header{
 
@@ -90,8 +86,6 @@ color:white;
 
 
 
-
-
 .container{
 
 padding:25px;
@@ -99,8 +93,6 @@ padding:25px;
 }
 
 
-
-/* CARD */
 
 .card{
 
@@ -121,111 +113,27 @@ margin-bottom:20px;
 
 
 
-/* WELCOME */
-
 .welcome{
 
 font-size:22px;
 
-color:#0d47a1;
-
 font-weight:bold;
 
-}
-
-
-
-
-
-/* SERVICES */
-
-
-.services{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:20px;
-
-}
-
-
-
-.service-box{
-
-
-background:#f8fbff;
-
-border-radius:15px;
-
-padding:25px;
-
-text-align:center;
-
-cursor:pointer;
-
-border-top:5px solid #0d47a1;
-
-transition:.3s;
-
-
-}
-
-
-
-.service-box:hover{
-
-
-transform:translateY(-5px);
-
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.15);
-
-
-}
-
-
-
-.service-icon{
-
-font-size:40px;
-
-}
-
-
-
-.service-box h3{
-
-margin:10px 0;
-
 color:#0d47a1;
 
 }
 
 
 
-.service-box p{
-
-color:#555;
-
-}
 
 
-
-
-
-/* INFO */
-
+/* INFORMATION */
 
 .info{
 
 display:grid;
 
-grid-template-columns:
-repeat(3,1fr);
+grid-template-columns:repeat(3,1fr);
 
 gap:20px;
 
@@ -247,9 +155,9 @@ border-radius:10px;
 
 .label{
 
-color:#0d47a1;
-
 font-weight:bold;
+
+color:#0d47a1;
 
 }
 
@@ -257,7 +165,7 @@ font-weight:bold;
 
 .value{
 
-font-size:22px;
+font-size:20px;
 
 margin-top:10px;
 
@@ -267,8 +175,72 @@ margin-top:10px;
 
 
 
-/* TABLE */
+/* SERVICES */
 
+.services{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.service-box{
+
+background:#f8fbff;
+
+border-radius:15px;
+
+padding:25px;
+
+text-align:center;
+
+border-top:5px solid #0d47a1;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.service-box:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+.service-icon{
+
+font-size:40px;
+
+}
+
+
+
+.service-box h3{
+
+color:#0d47a1;
+
+margin:10px;
+
+}
+
+
+
+
+
+/* TABLE */
 
 input{
 
@@ -320,7 +292,6 @@ border-bottom:1px solid #ddd;
 
 
 
-
 .status{
 
 background:green;
@@ -339,14 +310,12 @@ border-radius:20px;
 
 @media(max-width:900px){
 
-
-.services,
-.info{
+.info,
+.services{
 
 grid-template-columns:1fr;
 
 }
-
 
 
 input{
@@ -355,9 +324,7 @@ width:100%;
 
 }
 
-
 }
-
 
 
 </style>
@@ -371,12 +338,10 @@ width:100%;
 
 
 
-
 <div class="header">
 
 
 <div>
-
 
 <h1>
 SMART FORM ENTERPRISE v6.1
@@ -439,7 +404,84 @@ NODAL USER
 
 
 
-<!-- SERVICES TOP -->
+<!-- INFORMATION AFTER WELCOME -->
+
+
+<div class="card">
+
+
+<div class="info">
+
+
+
+<div class="box">
+
+
+<div class="label">
+Nyaya Panchayat
+</div>
+
+
+<div class="value" id="nyaya">
+-
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<div class="label">
+Assigned Schools
+</div>
+
+
+<div class="value" id="schoolCount">
+0
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<div class="label">
+Role
+</div>
+
+
+<div class="value">
+NODAL
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- AVAILABLE SERVICES -->
 
 
 <div class="card">
@@ -481,6 +523,8 @@ School Data Entry & Submission
 
 
 
+
+
 <div class="service-box"
 onclick="openReports()">
 
@@ -502,6 +546,8 @@ Progress & Analysis Reports
 
 
 </div>
+
+
 
 
 
@@ -532,104 +578,12 @@ User Profile Management
 
 
 
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- INFORMATION -->
-
-
-<div class="card">
-
-
-
-<div class="info">
-
-
-
-<div class="box">
-
-
-<div class="label">
-
-Nyaya Panchayat
-
-</div>
-
-
-<div class="value"
-id="nyaya">
-
--
 
 </div>
 
 
 </div>
 
-
-
-
-
-<div class="box">
-
-
-<div class="label">
-
-Assigned Schools
-
-</div>
-
-
-<div class="value"
-id="schoolCount">
-
-0
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="box">
-
-
-<div class="label">
-
-Role
-
-</div>
-
-
-<div class="value">
-
-NODAL
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
 
 
 
@@ -646,11 +600,8 @@ NODAL
 
 
 <h2>
-
 Assigned School List
-
 </h2>
-
 
 
 
@@ -668,7 +619,6 @@ placeholder="Search School / UDISE Code">
 
 
 <thead>
-
 
 <tr>
 
@@ -700,7 +650,6 @@ Status
 
 
 
-
 <tbody id="schoolList">
 
 
@@ -718,22 +667,19 @@ Loading...
 </tbody>
 
 
-
 </table>
 
 
-</div>
-
-
-
-
-
 
 </div>
 
 
 
 
+
+
+
+</div>
 
 
 
@@ -744,15 +690,12 @@ Loading...
 
 
 
-
 <script>
 
 
 function openForms(){
 
-alert(
-"Forms Module Coming Soon"
-);
+alert("Forms Module Coming Soon");
 
 }
 
@@ -760,9 +703,7 @@ alert(
 
 function openReports(){
 
-alert(
-"Reports Module Coming Soon"
-);
+alert("Reports Module Coming Soon");
 
 }
 
@@ -770,25 +711,19 @@ alert(
 
 function openProfile(){
 
-alert(
-"Profile Module Coming Soon"
-);
+alert("Profile Module Coming Soon");
 
 }
 
 
 
-
 function logout(){
-
 
 sessionStorage.clear();
 
 localStorage.clear();
 
-
 location.href="../index.html";
-
 
 }
 
