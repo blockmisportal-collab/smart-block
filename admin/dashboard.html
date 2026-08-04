@@ -71,6 +71,151 @@ User Profile Management
 </div>
 
 </div>
+<!-- AVAILABLE SERVICES -->
+
+<div class="card">
+
+<h2>
+Available Services
+</h2>
+
+
+<div class="services-grid">
+
+
+
+<div class="service-card"
+onclick="openFormBuilder()">
+
+<div class="service-icon">
+📝
+</div>
+
+<h3>
+Form Builder
+</h3>
+
+<p>
+Create & Manage Dynamic Forms
+</p>
+
+</div>
+
+
+
+
+<div class="service-card">
+
+<div class="service-icon">
+📊
+</div>
+
+<h3>
+Reports
+</h3>
+
+<p>
+Progress & Analysis Reports
+</p>
+
+</div>
+
+
+
+
+<div class="service-card">
+
+<div class="service-icon">
+👤
+</div>
+
+<h3>
+Profile
+</h3>
+
+<p>
+User Profile Management
+</p>
+
+</div>
+
+
+
+</div>
+
+</div><!-- AVAILABLE SERVICES -->
+
+<div class="card">
+
+<h2>
+Available Services
+</h2>
+
+
+<div class="services-grid">
+
+
+
+<div class="service-card"
+onclick="openFormBuilder()">
+
+<div class="service-icon">
+📝
+</div>
+
+<h3>
+Form Builder
+</h3>
+
+<p>
+Create & Manage Dynamic Forms
+</p>
+
+</div>
+
+
+
+
+<div class="service-card">
+
+<div class="service-icon">
+📊
+</div>
+
+<h3>
+Reports
+</h3>
+
+<p>
+Progress & Analysis Reports
+</p>
+
+</div>
+
+
+
+
+<div class="service-card">
+
+<div class="service-icon">
+👤
+</div>
+
+<h3>
+Profile
+</h3>
+
+<p>
+User Profile Management
+</p>
+
+</div>
+
+
+
+</div>
+
+</div>
 .services-grid{
 
 display:grid;
@@ -128,6 +273,88 @@ color:#0d47a1;
 color:#555;
 
 }
+
+
+@media(max-width:800px){
+
+.services-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+<script>
+
+function openFormBuilder(){
+
+window.location.href="forms.html";
+
+}
+
+</script>
+.services-grid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+
+}
+
+
+.service-card{
+
+background:#f5f8ff;
+
+border-top:4px solid #0d47a1;
+
+padding:30px;
+
+text-align:center;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.service-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 5px 15px rgba(0,0,0,.15);
+
+}
+
+
+
+.service-icon{
+
+font-size:35px;
+
+}
+
+
+
+.service-card h3{
+
+color:#0d47a1;
+
+}
+
+
+
+.service-card p{
+
+color:#555;
+
+}
+
 
 
 @media(max-width:800px){
