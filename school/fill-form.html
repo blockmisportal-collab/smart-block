@@ -820,9 +820,162 @@ data
 
 
 
+document
+.getElementById(
+"dynamicForm"
+)
+.addEventListener(
+
+"submit",
+
+async function(e){
+
+
+e.preventDefault();
+
+
+
+let data={};
+
+
+
+new FormData(this)
+
+.forEach(
+
+(value,key)=>{
+
+
+data[key]=value;
+
+
+}
+
+);
+
+
+
+
+let user =
+
+JSON.parse(
+
+localStorage.getItem("USER")
+
+||
+
+"{}"
+
+);
+
+
+
+
+
+let response =
+
+await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:
+
+JSON.stringify({
+
+
+action:"saveResponse",
+
+
+formId:formId,
+
+
+formName:currentForm.name,
+
+
+user:user,
+
+
+response:data
+
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+
+
+let result =
+
+JSON.parse(
+
+await response.text()
+
+);
+
+
+
+
+
+
+if(result.success){
+
+
 alert(
 
 "Form Submitted Successfully"
+
+);
+
+
+document
+.getElementById(
+"dynamicForm"
+)
+.reset();
+
+
+}
+
+else{
+
+
+alert(
+
+result.message
+
+);
+
+
+}
+
+
+
+}
 
 );
 
