@@ -8,8 +8,7 @@
 
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
-
+"https://script.google.com/macros/s/AKfycbwLMuH57q6Re4jjKoLzvbptYePUmd-QQQpPHgQCcfnqV37VtwRjxgGvhNWX3nmk3JRbdw/exec";
 
 let ALL_SCHOOLS = [];
 
