@@ -1,34 +1,47 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
 
 <title>
-SMART FORM ENTERPRISE v6.1 - NODAL Dashboard
+
+SMART FORM ENTERPRISE v6.1
+- NODAL DASHBOARD
+
 </title>
 
 
 <style>
+
 
 *{
 box-sizing:border-box;
 }
 
 
+
 body{
 
 margin:0;
 
-font-family:"Segoe UI",Arial,sans-serif;
+font-family:
+
+"Segoe UI",
+Arial,sans-serif;
 
 background:#f4f7fb;
 
 }
+
 
 
 
@@ -54,13 +67,23 @@ align-items:center;
 
 margin:0;
 
-font-size:28px;
+font-size:25px;
 
 }
 
 
 
-.btn{
+.header p{
+
+margin:5px 0 0;
+
+}
+
+
+
+
+
+button{
 
 border:none;
 
@@ -76,6 +99,8 @@ font-weight:bold;
 
 
 
+
+
 .logout{
 
 background:#d32f2f;
@@ -83,6 +108,8 @@ background:#d32f2f;
 color:white;
 
 }
+
+
 
 
 
@@ -94,6 +121,8 @@ padding:25px;
 
 
 
+
+
 .card{
 
 background:white;
@@ -102,24 +131,11 @@ padding:25px;
 
 border-radius:15px;
 
-box-shadow:
-0 5px 20px rgba(0,0,0,.12);
-
 margin-bottom:20px;
 
-}
+box-shadow:
 
-
-
-
-
-.welcome{
-
-font-size:22px;
-
-font-weight:bold;
-
-color:#0d47a1;
+0 5px 20px rgba(0,0,0,.12);
 
 }
 
@@ -127,33 +143,35 @@ color:#0d47a1;
 
 
 
-/* INFORMATION */
+
 
 .info{
 
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
+display:flex;
 
 gap:20px;
 
+flex-wrap:wrap;
+
 }
 
 
 
-.box{
+.info-box{
 
-background:#f1f6ff;
+background:#f5f9ff;
 
-padding:20px;
+padding:15px;
 
 border-radius:10px;
 
+flex:1;
+
 }
 
 
 
-.label{
+.title{
 
 font-weight:bold;
 
@@ -163,25 +181,17 @@ color:#0d47a1;
 
 
 
-.value{
-
-font-size:20px;
-
-margin-top:10px;
-
-}
 
 
 
 
-
-/* SERVICES */
-
-.services{
+.stats{
 
 display:grid;
 
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:
+
+repeat(3,1fr);
 
 gap:20px;
 
@@ -189,70 +199,45 @@ gap:20px;
 
 
 
-.service-box{
 
-background:#f8fbff;
 
-border-radius:15px;
+.stat{
 
-padding:25px;
+background:#f5f9ff;
+
+padding:20px;
+
+border-radius:12px;
 
 text-align:center;
 
-border-top:5px solid #0d47a1;
-
-cursor:pointer;
-
-transition:.3s;
+border-left:5px solid #0d47a1;
 
 }
 
 
 
-.service-box:hover{
+.stat h2{
 
-transform:translateY(-5px);
+margin:0;
 
-box-shadow:
-0 8px 20px rgba(0,0,0,.15);
-
-}
-
-
-
-.service-icon{
-
-font-size:40px;
-
-}
-
-
-
-.service-box h3{
+font-size:30px;
 
 color:#0d47a1;
 
-margin:10px;
-
 }
 
 
 
 
 
-/* TABLE */
+.stat p{
 
-input{
-
-padding:10px;
-
-width:300px;
-
-border:1px solid #ccc;
-
-border-radius:6px;
+font-weight:bold;
 
 }
+
+
 
 
 
@@ -265,6 +250,8 @@ border-collapse:collapse;
 margin-top:20px;
 
 }
+
+
 
 
 
@@ -282,7 +269,7 @@ padding:12px;
 
 td{
 
-padding:10px;
+padding:12px;
 
 text-align:center;
 
@@ -292,15 +279,54 @@ border-bottom:1px solid #ddd;
 
 
 
-.status{
+tr:hover{
 
-background:green;
+background:#f1f6ff;
+
+}
+
+
+
+
+
+
+.view{
+
+background:#1565c0;
 
 color:white;
 
-padding:5px 12px;
+}
 
-border-radius:20px;
+
+
+.approve{
+
+background:#2e7d32;
+
+color:white;
+
+}
+
+
+
+.reject{
+
+background:#d32f2f;
+
+color:white;
+
+}
+
+
+
+
+
+.loading{
+
+text-align:center;
+
+padding:20px;
 
 }
 
@@ -310,21 +336,26 @@ border-radius:20px;
 
 @media(max-width:900px){
 
-.info,
-.services{
 
-grid-template-columns:1fr;
+.stats{
+
+grid-template-columns:
+
+1fr;
+
+}
+
+
+
+table{
+
+font-size:12px;
 
 }
 
 
-input{
-
-width:100%;
-
 }
 
-}
 
 
 </style>
@@ -333,8 +364,9 @@ width:100%;
 </head>
 
 
-
 <body>
+
+
 
 
 
@@ -344,12 +376,16 @@ width:100%;
 <div>
 
 <h1>
+
 SMART FORM ENTERPRISE v6.1
+
 </h1>
 
 
 <p>
-NODAL DASHBOARD
+
+NODAL APPROVAL DASHBOARD
+
 </p>
 
 
@@ -358,15 +394,18 @@ NODAL DASHBOARD
 
 
 <button
-class="btn logout"
+
+class="logout"
+
 onclick="logout()">
 
-Logout
+LOGOUT
 
 </button>
 
 
 </div>
+
 
 
 
@@ -380,50 +419,76 @@ Logout
 
 
 
-<!-- WELCOME -->
 
-<div class="card">
-
-
-<div class="welcome">
-
-Welcome 
-<span id="userName">
-NODAL USER
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- INFORMATION AFTER WELCOME -->
+<!-- USER INFO -->
 
 
 <div class="card">
+
+
+<h2>
+
+Nodal Information
+
+</h2>
+
 
 
 <div class="info">
 
 
 
-<div class="box">
+<div class="info-box">
 
 
-<div class="label">
-Nyaya Panchayat
-</div>
+<span class="title">
+
+Name
+
+</span>
 
 
-<div class="value" id="nyaya">
+<br>
+
+
+<span id="nodalName">
+
 -
+
+</span>
+
+
+</div>
+
+
+
+
+
+<div class="info-box">
+
+
+<span class="title">
+
+Nyaya Panchayat
+
+</span>
+
+
+<br>
+
+
+<span id="nyayaPanchayat">
+
+-
+
+</span>
+
+
+</div>
+
+
+
+
 </div>
 
 
@@ -433,16 +498,87 @@ Nyaya Panchayat
 
 
 
-<div class="box">
 
 
-<div class="label">
-Assigned Schools
-</div>
 
 
-<div class="value" id="schoolCount">
+<!-- COUNT -->
+
+
+<div class="card">
+
+
+<div class="stats">
+
+
+
+<div class="stat">
+
+
+<h2 id="totalPending">
+
 0
+
+</h2>
+
+
+<p>
+
+Pending Approval
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="stat">
+
+
+<h2 id="totalApproved">
+
+0
+
+</h2>
+
+
+<p>
+
+Approved
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="stat">
+
+
+<h2 id="totalRejected">
+
+0
+
+</h2>
+
+
+<p>
+
+Rejected
+
+</p>
+
+
+</div>
+
+
+
 </div>
 
 
@@ -452,166 +588,20 @@ Assigned Schools
 
 
 
-<div class="box">
-
-
-<div class="label">
-Role
-</div>
-
-
-<div class="value">
-NODAL
-</div>
-
-
-</div>
 
 
 
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- AVAILABLE SERVICES -->
+<!-- RESPONSE LIST -->
 
 
 <div class="card">
 
 
 <h2>
-Available Services
+
+School Form Responses
+
 </h2>
-
-
-
-<div class="services">
-
-
-
-<div class="service-box"
-onclick="openForms()">
-
-
-
-<div class="service-icon">
-📝
-</div>
-
-
-<h3>
-Forms
-</h3>
-
-
-<p>
-School Data Entry & Submission
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="service-box"
-onclick="openReports()">
-
-
-
-<div class="service-icon">
-📊
-</div>
-
-
-<h3>
-Reports
-</h3>
-
-
-<p>
-Progress & Analysis Reports
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="service-box"
-onclick="openProfile()">
-
-
-
-<div class="service-icon">
-👤
-</div>
-
-
-<h3>
-Profile
-</h3>
-
-
-<p>
-User Profile Management
-</p>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-<!-- SCHOOL LIST -->
-
-
-<div class="card">
-
-
-<h2>
-Assigned School List
-</h2>
-
-
-
-<input
-
-id="schoolSearch"
-
-placeholder="Search School / UDISE Code">
-
-
 
 
 
@@ -620,26 +610,42 @@ placeholder="Search School / UDISE Code">
 
 <thead>
 
+
 <tr>
 
 
 <th>
-UDISE Code
+
+Form
+
 </th>
 
 
 <th>
+
 School Name
+
 </th>
 
 
 <th>
-School Type
+
+UDISE
+
 </th>
 
 
 <th>
-Status
+
+Date
+
+</th>
+
+
+<th>
+
+Action
+
 </th>
 
 
@@ -650,21 +656,26 @@ Status
 
 
 
-<tbody id="schoolList">
+
+<tbody id="responseTable">
 
 
 <tr>
 
-<td colspan="4">
+<td colspan="5"
+class="loading">
 
 Loading...
 
 </td>
 
+
 </tr>
 
 
+
 </tbody>
+
 
 
 </table>
@@ -676,57 +687,1024 @@ Loading...
 
 
 
-
-
-
-</div>
-
-
-
-
-
-
-<script src="assets/js/dashboard.js"></script>
-
-
-
 <script>
 
 
-function openForms(){
+/*========================
+ API CONFIGURATION
+========================*/
 
-alert("Forms Module Coming Soon");
+
+const API_URL =
+
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
+
+
+
+let USER =
+
+JSON.parse(
+
+localStorage.getItem("USER")
+
+||
+
+"{}"
+
+);
+
+
+
+
+
+let RESPONSE_DATA=[];
+
+
+
+
+
+
+/*========================
+ LOAD USER
+========================*/
+
+
+function loadUser(){
+
+
+
+document.getElementById(
+"nodalName"
+).innerHTML =
+
+
+USER.name
+
+||
+
+USER.username
+
+||
+
+"-";
+
+
+
+
+
+document.getElementById(
+"nyayaPanchayat"
+).innerHTML =
+
+
+USER.nyayaPanchayat
+
+||
+
+"-";
+
+
 
 }
 
 
 
-function openReports(){
 
-alert("Reports Module Coming Soon");
+
+
+
+
+
+/*========================
+ LOAD NODAL RESPONSE
+========================*/
+
+
+async function loadResponses(){
+
+
+
+try{
+
+
+
+let res = await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+action:"nodalResponses",
+
+
+nyayaPanchayat:
+
+USER.nyayaPanchayat
+
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+
+
+let result =
+
+await res.json();
+
+
+
+
+
+console.log(
+"Nodal Response",
+result
+);
+
+
+
+
+
+
+
+if(result.success){
+
+
+
+RESPONSE_DATA =
+
+result.data || [];
+
+
+
+
+
+updateCount(
+RESPONSE_DATA
+);
+
+
+
+displayResponses(
+RESPONSE_DATA
+);
+
+
+
+
+}
+
+else{
+
+
+
+document.getElementById(
+"responseTable"
+).innerHTML=
+
+
+`
+
+<tr>
+
+<td colspan="5">
+
+No Response Found
+
+</td>
+
+</tr>
+
+`;
+
+
 
 }
 
 
 
-function openProfile(){
+}
 
-alert("Profile Module Coming Soon");
+catch(error){
+
+
+
+console.log(error);
+
+
+
+document.getElementById(
+"responseTable"
+).innerHTML=
+
+
+`
+
+<tr>
+
+<td colspan="5">
+
+Server Error
+
+</td>
+
+</tr>
+
+`;
+
+
 
 }
 
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ UPDATE COUNT
+========================*/
+
+
+function updateCount(data){
+
+
+
+let pending =
+
+data.filter(
+
+x=>
+
+x.status==="PENDING"
+
+).length;
+
+
+
+
+
+let approved =
+
+data.filter(
+
+x=>
+
+x.status==="APPROVED"
+
+).length;
+
+
+
+
+
+let rejected =
+
+data.filter(
+
+x=>
+
+x.status==="REJECTED"
+
+).length;
+
+
+
+
+
+
+
+document.getElementById(
+"totalPending"
+).innerHTML=
+
+pending;
+
+
+
+
+
+document.getElementById(
+"totalApproved"
+).innerHTML=
+
+approved;
+
+
+
+
+
+document.getElementById(
+"totalRejected"
+).innerHTML=
+
+rejected;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*========================
+ DISPLAY RESPONSE
+========================*/
+
+
+function displayResponses(data){
+
+
+
+let html="";
+
+
+
+
+
+
+if(data.length===0){
+
+
+
+html=
+
+`
+
+<tr>
+
+<td colspan="5">
+
+No Pending Form
+
+</td>
+
+</tr>
+
+`;
+
+
+
+}
+
+
+
+
+
+data.forEach(item=>{
+
+
+
+html+=
+
+
+`
+
+<tr>
+
+
+<td>
+
+${item.formName}
+
+</td>
+
+
+
+<td>
+
+${item.schoolName}
+
+</td>
+
+
+
+
+<td>
+
+${item.schoolCode}
+
+</td>
+
+
+
+
+<td>
+
+${new Date(item.date)
+.toLocaleDateString()}
+
+</td>
+
+
+
+
+<td>
+
+
+<button
+
+class="view"
+
+onclick='viewResponse(${JSON.stringify(item)})'>
+
+View
+
+</button>
+
+
+
+<button
+
+class="approve"
+
+onclick='approveForm(${JSON.stringify(item)})'>
+
+✅ Approve
+
+</button>
+
+
+
+<button
+
+class="reject"
+
+onclick='rejectForm(${JSON.stringify(item)})'>
+
+❌ Reject
+
+</button>
+
+
+
+</td>
+
+
+</tr>
+
+
+`;
+
+
+
+});
+
+
+
+
+
+
+document.getElementById(
+"responseTable"
+).innerHTML=
+
+html;
+
+
+
+}
+  /*========================
+ VIEW RESPONSE
+========================*/
+
+
+function viewResponse(item){
+
+
+let html =
+
+`
+
+
+<p>
+
+<b>School Name:</b>
+
+${item.schoolName}
+
+</p>
+
+
+
+<p>
+
+<b>UDISE Code:</b>
+
+${item.schoolCode}
+
+</p>
+
+
+
+<p>
+
+<b>Form Name:</b>
+
+${item.formName}
+
+</p>
+
+
+<p>
+
+<b>Nyaya Panchayat:</b>
+
+${item.nyayaPanchayat}
+
+</p>
+
+
+<hr>
+
+
+`;
+
+
+
+
+
+
+let responseData = item.response;
+
+
+
+try{
+
+
+if(typeof responseData==="string"){
+
+
+responseData =
+
+JSON.parse(responseData);
+
+
+}
+
+
+
+Object.keys(responseData)
+
+.forEach(key=>{
+
+
+html +=
+
+
+`
+
+<p>
+
+<b>${key}</b> :
+
+${responseData[key]}
+
+</p>
+
+
+`;
+
+
+
+});
+
+
+}
+
+catch(e){
+
+
+html +=
+
+
+`
+
+<p>
+
+${item.response}
+
+</p>
+
+`;
+
+
+}
+
+
+
+
+
+alert(
+
+html.replace(/<[^>]*>/g,'')
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ APPROVE FORM
+========================*/
+
+
+async function approveForm(item){
+
+
+
+let confirmApprove =
+
+confirm(
+
+"क्या आप इस Form को Approve करना चाहते हैं?"
+
+);
+
+
+
+
+
+if(!confirmApprove){
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+await updateStatus(
+
+item,
+
+"APPROVED",
+
+""
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ REJECT FORM
+========================*/
+
+
+async function rejectForm(item){
+
+
+
+let remark =
+
+prompt(
+
+"Reject करने का कारण लिखें"
+
+);
+
+
+
+
+
+if(!remark){
+
+
+alert(
+
+"Remark जरूरी है"
+
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+await updateStatus(
+
+item,
+
+"REJECTED",
+
+remark
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ UPDATE STATUS API
+========================*/
+
+
+async function updateStatus(
+
+item,
+
+status,
+
+remark
+
+){
+
+
+
+try{
+
+
+let res = await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+action:
+
+status==="APPROVED"
+
+?
+
+"approveResponse"
+
+:
+
+"rejectResponse",
+
+
+
+formId:
+
+item.formId,
+
+
+
+schoolCode:
+
+item.schoolCode,
+
+
+
+schoolName:
+
+item.schoolName,
+
+
+
+nyayaPanchayat:
+
+item.nyayaPanchayat,
+
+
+
+remark:
+
+remark,
+
+
+
+actionBy:
+
+USER.name || USER.username
+
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+
+
+
+let result =
+
+await res.json();
+
+
+
+
+
+
+
+if(result.success){
+
+
+
+alert(
+
+"✅ "
+
++
+
+status
+
++
+
+" Successfully"
+
+);
+
+
+
+loadResponses();
+
+
+
+}
+
+else{
+
+
+
+alert(
+
+result.message
+
+);
+
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+
+console.log(error);
+
+
+
+alert(
+
+"Server Error"
+
+);
+
+
+
+}
+
+
+
+}
+  /*========================
+ LOGOUT
+========================*/
 
 
 function logout(){
 
-sessionStorage.clear();
 
 localStorage.clear();
 
-location.href="../index.html";
+
+sessionStorage.clear();
+
+
+
+window.location.href =
+
+"../index.html";
+
 
 }
 
+
+
+
+
+
+
+
+
+/*========================
+ PAGE LOAD
+========================*/
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+function(){
+
+
+
+loadUser();
+
+
+loadResponses();
+
+
+
+});
 
 
 </script>
@@ -734,6 +1712,8 @@ location.href="../index.html";
 
 
 
+
 </body>
 
 </html>
+</div>
