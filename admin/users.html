@@ -13,32 +13,55 @@ SMART FORM ENTERPRISE v6.1 - User Management
 </title>
 
 
+
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 }
+
 
 
 body{
 
 margin:0;
-font-family:Arial,Helvetica,sans-serif;
+
+font-family:
+
+"Segoe UI",
+Arial,
+sans-serif;
+
 background:#f4f7fb;
 
 }
 
 
 
+
+/* =====================
+ HEADER
+===================== */
+
+
 .header{
 
-background:#124ca3;
+
+background:#0d47a1;
+
 color:white;
-padding:25px;
+
+padding:20px 30px;
 
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 
 }
 
@@ -47,100 +70,176 @@ align-items:center;
 .header h1{
 
 margin:0;
-font-size:28px;
+
+font-size:24px;
 
 }
 
 
 
-button{
+.header p{
+
+margin:5px 0 0;
+
+}
+
+
+
+
+.btn{
+
 
 border:none;
+
 padding:10px 18px;
+
 border-radius:6px;
+
 cursor:pointer;
+
 font-weight:bold;
 
 }
 
-
-
-.refresh{
-
-background:#1685e8;
-color:white;
-
-}
 
 
 
 .back{
 
-background:#e53935;
+
+background:#d32f2f;
+
 color:white;
 
 }
 
 
 
+
+.refresh{
+
+
+background:#2196f3;
+
+color:white;
+
+}
+
+
+
+
+
+
+/* =====================
+ CONTAINER
+===================== */
+
+
 .container{
+
 
 padding:25px;
 
+
 }
+
 
 
 
 .card{
 
+
 background:white;
+
 padding:25px;
+
 border-radius:15px;
 
+
 box-shadow:
-0 5px 20px rgba(0,0,0,.12);
+
+0 5px 20px rgba(0,0,0,.1);
+
+
+margin-bottom:20px;
+
 
 }
 
 
 
 
-.topbar{
 
-display:flex;
+/* =====================
+ FILTER AREA
+===================== */
+
+
+.filter-box{
+
+
+display:grid;
+
+grid-template-columns:
+
+2fr 1fr 1fr 150px;
+
 gap:15px;
+
 align-items:center;
-flex-wrap:wrap;
+
 
 }
 
 
 
 
-.count{
 
-font-size:18px;
-font-weight:bold;
-color:#124ca3;
-
-}
+input,
+select{
 
 
+padding:12px;
 
-input,select{
-
-padding:10px;
 border:1px solid #ccc;
+
 border-radius:6px;
 
+
 }
 
 
 
 
-.table-wrapper{
+.total{
+
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#0d47a1;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================
+ TABLE
+===================== */
+
+
+.table-container{
+
 
 overflow-x:auto;
+
 
 }
 
@@ -148,55 +247,65 @@ overflow-x:auto;
 
 table{
 
+
 width:100%;
+
 border-collapse:collapse;
-margin-top:20px;
+
 
 }
 
 
 
-thead{
+th{
 
-background:#124ca3;
+
+background:#0d47a1;
+
 color:white;
-
-}
-
-
-
-th,td{
 
 padding:12px;
+
 text-align:center;
+
+
+}
+
+
+
+td{
+
+
+padding:10px;
+
 border-bottom:1px solid #ddd;
 
-}
+text-align:center;
 
-
-
-tr:hover{
-
-background:#f3f7ff;
 
 }
 
 
 
-.status{
 
-padding:6px 14px;
-border-radius:20px;
-color:white;
-font-size:13px;
 
-}
 
+/* STATUS */
 
 
 .active{
 
-background:green;
+
+background:#2e7d32;
+
+color:white;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
 
 }
 
@@ -204,19 +313,41 @@ background:green;
 
 .inactive{
 
-background:red;
+
+background:#d32f2f;
+
+color:white;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
 
 }
 
 
 
-.loading{
 
-text-align:center;
-padding:20px;
+
+
+/* MOBILE */
+
+
+@media(max-width:900px){
+
+
+.filter-box{
+
+
+grid-template-columns:1fr;
+
 
 }
 
+
+}
 
 
 
@@ -224,11 +355,13 @@ padding:20px;
 
 
 </head>
-
-
-
 <body>
 
+
+
+<!-- =====================
+ HEADER
+===================== -->
 
 
 <div class="header">
@@ -240,6 +373,7 @@ padding:20px;
 SMART FORM ENTERPRISE v6.1
 </h1>
 
+
 <p>
 USER MANAGEMENT
 </p>
@@ -249,12 +383,14 @@ USER MANAGEMENT
 
 
 
+
+
 <div>
 
 
 <button
-class="refresh"
-id="refreshBtn">
+class="btn refresh"
+onclick="loadUsers()">
 
 🔄 Refresh
 
@@ -262,20 +398,24 @@ id="refreshBtn">
 
 
 
+
 <button
-class="back"
-id="backBtn">
+class="btn back"
+onclick="goBack()">
 
 BACK
 
 </button>
 
 
+</div>
+
+
 
 </div>
 
 
-</div>
+
 
 
 
@@ -285,24 +425,31 @@ BACK
 <div class="container">
 
 
+
+
+
+
+
+<!-- =====================
+ USER SUMMARY
+===================== -->
+
+
 <div class="card">
 
 
-<h2>
-Registered Users
-</h2>
+<div class="filter-box">
 
 
 
-
-<div class="topbar">
-
-
-<div class="count">
+<div class="total">
 
 Total Users :
+
 <span id="totalUsers">
+
 0
+
 </span>
 
 
@@ -310,34 +457,60 @@ Total Users :
 
 
 
+
+
+
 <input
-id="searchBox"
+
 type="text"
-placeholder="Search User...">
+
+id="searchUser"
+
+placeholder="Search User..."
+
+onkeyup="filterUsers()">
+
+
+ 
 
 
 
 
+<select
 
-<select id="roleFilter">
+id="roleFilter"
+
+onchange="filterUsers()">
+
+
 
 <option value="">
+
 All Roles
+
 </option>
 
+
 <option value="ADMIN">
+
 ADMIN
+
 </option>
 
 
 <option value="NODAL">
+
 NODAL
+
 </option>
 
 
 <option value="SCHOOL">
+
 SCHOOL
+
 </option>
+
 
 
 </select>
@@ -345,26 +518,51 @@ SCHOOL
 
 
 
-<select id="statusFilter">
+
+
+
+
+<select
+
+id="statusFilter"
+
+onchange="filterUsers()">
+
+
 
 <option value="">
+
 All Status
+
 </option>
+
 
 
 <option value="ACTIVE">
+
 ACTIVE
+
 </option>
+
 
 
 <option value="INACTIVE">
+
 INACTIVE
+
 </option>
+
+
 
 
 </select>
 
 
+
+
+
+
+</div>
 
 
 </div>
@@ -375,7 +573,27 @@ INACTIVE
 
 
 
-<div class="table-wrapper">
+
+
+<!-- =====================
+ USER TABLE
+===================== -->
+
+
+<div class="card">
+
+
+<h2>
+
+Registered Users
+
+</h2>
+
+
+
+
+
+<div class="table-container">
 
 
 <table>
@@ -383,21 +601,49 @@ INACTIVE
 
 <thead>
 
+
 <tr>
 
-<th>Username</th>
 
-<th>Name</th>
+<th>
+Username
+</th>
 
-<th>Role</th>
 
-<th>Nyaya Panchayat</th>
+<th>
+Name
+</th>
 
-<th>School Code</th>
 
-<th>School Name</th>
+<th>
+Role
+</th>
 
-<th>Status</th>
+
+<th>
+Nyaya Panchayat
+</th>
+
+
+<th>
+School Code
+</th>
+
+
+<th>
+School Name
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Action
+</th>
+
 
 
 </tr>
@@ -408,34 +654,32 @@ INACTIVE
 
 
 
-<tbody id="userTableBody">
+
+<tbody id="userTable">
 
 
 <tr>
 
-<td colspan="7"
-class="loading">
 
-Loading...
+<td colspan="8">
+
+Loading Users...
 
 </td>
 
-</tr>
 
+</tr>
 
 
 </tbody>
 
 
 
+
+
 </table>
 
 
-
-</div>
-
-
-
 </div>
 
 
@@ -447,26 +691,563 @@ Loading...
 
 
 
+
+
+<!-- =====================
+ ADD USER BUTTON
+===================== -->
+
+
+<div class="card">
+
+
+<button
+
+class="btn refresh"
+
+onclick="addUser()">
+
+
+➕ Add New User
+
+</button>
+
+
+</div>
+
+
+
+
+
+</div>
 <script>
 
 
-document
-.getElementById("backBtn")
-.onclick=function(){
+const API_URL =
+
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
+
+
+let USERS=[];
+
+
+
+
+
+
+// LOAD USERS
+
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+loadUsers();
+
+});
+
+
+
+
+
+
+
+async function loadUsers(){
+
+
+try{
+
+
+const response =
+
+await fetch(API_URL,{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
+},
+
+
+body:JSON.stringify({
+
+action:"users"
+
+})
+
+
+});
+
+
+
+
+
+const result =
+
+JSON.parse(
+await response.text()
+);
+
+
+
+
+
+if(result.success){
+
+
+USERS=result.data;
+
+
+document.getElementById(
+"totalUsers"
+).innerHTML=
+
+USERS.length;
+
+
+
+displayUsers(USERS);
+
+
+
+}
+
+else{
+
+
+alert(result.message);
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+alert(
+"Server Connection Failed"
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// DISPLAY USERS
+
+
+function displayUsers(data){
+
+
+
+let html="";
+
+
+
+
+
+if(data.length===0){
+
+
+html=
+
+`
+
+<tr>
+
+<td colspan="8">
+
+No User Found
+
+</td>
+
+</tr>
+
+
+`;
+
+
+}
+
+
+
+
+
+
+data.forEach(function(user){
+
+
+
+html +=
+
+
+`
+
+<tr>
+
+
+<td>
+
+${user.username}
+
+</td>
+
+
+
+<td>
+
+${user.name}
+
+</td>
+
+
+
+<td>
+
+${user.role}
+
+</td>
+
+
+
+<td>
+
+${user.nyayaPanchayat}
+
+</td>
+
+
+
+<td>
+
+${user.schoolCode}
+
+</td>
+
+
+
+<td>
+
+${user.schoolName}
+
+</td>
+
+
+
+
+<td>
+
+
+<span class="${
+user.active
+?
+'active'
+:
+'inactive'
+}">
+
+
+${
+user.active
+?
+'ACTIVE'
+:
+'INACTIVE'
+}
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+<td>
+
+
+<button
+
+class="btn refresh"
+
+onclick="changeStatus('${user.username}',${!user.active})">
+
+
+Change
+
+
+</button>
+
+
+</td>
+
+
+
+
+</tr>
+
+
+`;
+
+
+
+
+});
+
+
+
+
+
+document.getElementById(
+"userTable"
+).innerHTML=html;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// FILTER
+
+
+function filterUsers(){
+
+
+
+let search =
+
+document.getElementById(
+"searchUser"
+).value
+.toLowerCase();
+
+
+
+
+let role =
+
+document.getElementById(
+"roleFilter"
+).value;
+
+
+
+
+
+let status =
+
+document.getElementById(
+"statusFilter"
+).value;
+
+
+
+
+
+
+let filtered =
+
+USERS.filter(function(user){
+
+
+
+return (
+
+String(user.username)
+.toLowerCase()
+.includes(search)
+
+
+||
+
+String(user.name)
+.toLowerCase()
+.includes(search)
+
+
+
+)
+
+&&
+
+(
+
+role===""
+||
+user.role===role
+
+)
+
+
+&&
+
+(
+
+status===""
+
+||
+
+(status==="ACTIVE" && user.active)
+
+||
+
+(status==="INACTIVE" && !user.active)
+
+
+);
+
+
+
+});
+
+
+
+
+
+displayUsers(filtered);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// CHANGE STATUS
+
+
+async function changeStatus(
+username,
+status
+){
+
+
+
+await fetch(API_URL,{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
+
+},
+
+
+
+body:JSON.stringify({
+
+
+action:"updateStatus",
+
+
+username:username,
+
+
+status:status
+
+
+})
+
+
+});
+
+
+
+
+loadUsers();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ADD USER
+
+
+function addUser(){
+
+
+
+alert(
+
+"Add User Module Coming Soon"
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+// BACK
+
+
+function goBack(){
+
 
 window.location.href=
 "dashboard.html";
 
-};
+
+}
+
 
 
 </script>
-
-
-
-
-<script src="../assets/js/users.js"></script>
-
 
 
 </body>
