@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
+
 <meta charset="UTF-8">
+
 
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0">
@@ -14,7 +17,9 @@ SMART FORM ENTERPRISE v6.1 - Fill Form
 </title>
 
 
+
 <style>
+
 
 *{
 box-sizing:border-box;
@@ -36,6 +41,8 @@ background:#f4f7fb;
 
 
 
+/* HEADER */
+
 .header{
 
 background:#0d47a1;
@@ -53,12 +60,12 @@ align-items:center;
 }
 
 
-
 .header h1{
 
 margin:0;
 
 }
+
 
 
 
@@ -89,11 +96,13 @@ color:white;
 
 
 
+
 .container{
 
 padding:25px;
 
 }
+
 
 
 
@@ -113,6 +122,7 @@ box-shadow:
 0 5px 20px rgba(0,0,0,.12);
 
 }
+
 
 
 
@@ -139,6 +149,8 @@ border-radius:10px;
 
 flex:1;
 
+min-width:200px;
+
 }
 
 
@@ -164,11 +176,11 @@ margin-bottom:15px;
 
 label{
 
+display:block;
+
 font-weight:bold;
 
 color:#0d47a1;
-
-display:block;
 
 }
 
@@ -205,7 +217,6 @@ background:#eeeeee;
 
 cursor:not-allowed;
 
-
 }
 
 
@@ -214,7 +225,7 @@ cursor:not-allowed;
 
 .submit{
 
-background:green;
+background:#2e7d32;
 
 color:white;
 
@@ -236,8 +247,6 @@ border-radius:10px;
 
 font-weight:bold;
 
-margin-bottom:15px;
-
 }
 
 
@@ -256,9 +265,9 @@ border-radius:10px;
 
 font-weight:bold;
 
-margin-bottom:15px;
-
 }
+
+
 
 
 
@@ -269,6 +278,7 @@ text-align:center;
 padding:20px;
 
 }
+
 
 
 
@@ -304,7 +314,9 @@ DYNAMIC SCHOOL FORM
 
 
 <button
+
 class="back"
+
 onclick="goBack()">
 
 BACK
@@ -335,7 +347,12 @@ School Information
 
 
 
+
+
 <div class="info">
+
+
+
 
 
 <div class="info-box">
@@ -352,6 +369,7 @@ School Name
 
 
 </div>
+
 
 
 
@@ -376,6 +394,7 @@ UDISE Code
 
 
 
+
 <div class="info-box">
 
 <span class="title">
@@ -394,10 +413,13 @@ Form Name
 
 
 
+
 </div>
 
 
+
 </div>
+
 
 
 
@@ -410,7 +432,10 @@ Form Name
 
 
 
-<div id="message"></div>
+<div id="message">
+
+</div>
+
 
 
 
@@ -425,10 +450,13 @@ Loading Form...
 
 
 
+
 <form id="dynamicForm">
 
 
+
 <div id="fields">
+
 
 <div class="loading">
 
@@ -436,7 +464,10 @@ Loading...
 
 </div>
 
+
+
 </div>
+
 
 
 
@@ -450,39 +481,40 @@ id="submitBtn"
 
 class="submit">
 
+
 💾 Submit Form
+
 
 </button>
 
 
 
-
 </form>
-
-
-
-
-</div>
-
-
-
-
-
-
-
   <script>
 
 
+/*========================
+ API CONFIGURATION
+========================*/
+
+
 const API_URL =
+
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
 
 
 
 let formId =
 
 new URLSearchParams(
+
 window.location.search
+
 ).get("id");
+
+
 
 
 
@@ -500,7 +532,11 @@ localStorage.getItem("USER")
 
 
 
+
+
 let locked=false;
+
+
 
 
 
@@ -540,6 +576,9 @@ USER.schoolCode || "-";
 
 
 
+
+
+
 /*========================
  LOAD FORM
 ========================*/
@@ -551,7 +590,7 @@ async function loadForm(){
 try{
 
 
-let res = await fetch(
+let response = await fetch(
 
 API_URL,
 
@@ -591,9 +630,12 @@ formId:formId
 
 
 
+
+
 let result =
 
-await res.json();
+await response.json();
+
 
 
 
@@ -622,6 +664,9 @@ let form=result.data;
 
 
 
+
+
+
 document.getElementById(
 "formName"
 ).innerHTML=
@@ -630,11 +675,16 @@ form.name;
 
 
 
+
+
 document.getElementById(
 "formTitle"
 ).innerHTML=
 
 form.name;
+
+
+
 
 
 
@@ -652,11 +702,13 @@ form.fields.forEach(field=>{
 let type="text";
 
 
+
 if(field.type==="Number"){
 
 type="number";
 
 }
+
 
 
 if(field.type==="Date"){
@@ -668,7 +720,9 @@ type="date";
 
 
 
+
 html+=`
+
 
 <div class="field">
 
@@ -695,6 +749,7 @@ required>
 `;
 
 
+
 });
 
 
@@ -712,7 +767,12 @@ html;
 
 
 
+
+// Lock Check
+
 checkLock();
+
+
 
 
 
@@ -739,15 +799,17 @@ console.log(error);
 
 
 /*========================
- CHECK LOCK
+ CHECK FORM LOCK
 ========================*/
 
 
 async function checkLock(){
 
 
+try{
 
-let res = await fetch(
+
+let response = await fetch(
 
 API_URL,
 
@@ -771,7 +833,7 @@ headers:{
 body:JSON.stringify({
 
 
-action:"checkResponse",
+action:"checkLock",
 
 
 formId:formId,
@@ -793,16 +855,28 @@ USER.schoolCode
 
 
 
-let result=
-
-await res.json();
 
 
+let result =
+
+await response.json();
 
 
 
 
-if(result.locked===true){
+
+
+
+
+if(
+
+result.success
+
+&&
+
+result.locked===true
+
+){
 
 
 
@@ -816,17 +890,19 @@ document.getElementById(
 "message"
 ).innerHTML=
 
-
-
 `
 
 <div class="lock">
 
 🔒 यह Form पहले ही Submit हो चुका है।
 
-<br>
+<br><br>
 
 सभी Field Locked हैं।
+
+<br>
+
+कृपया Admin से संपर्क करें।
 
 </div>
 
@@ -838,9 +914,51 @@ document.getElementById(
 
 
 
+disableForm();
+
+
+
+
+
+}
+
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Lock Check Error",
+error
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
 /*========================
- DISABLE ALL FIELDS
+ DISABLE FORM
 ========================*/
+
+
+function disableForm(){
+
 
 
 document
@@ -851,10 +969,10 @@ document
 
 )
 
-.forEach(function(field){
+.forEach(function(el){
 
 
-field.disabled=true;
+el.disabled=true;
 
 
 });
@@ -872,6 +990,7 @@ document.getElementById(
 
 
 
+
 btn.disabled=true;
 
 
@@ -880,30 +999,13 @@ btn.innerHTML=
 "🔒 Form Locked";
 
 
-
 btn.style.background="#d32f2f";
 
 
 
-
-
 }
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
 /*========================
- SAVE FORM
+ SUBMIT FORM
 ========================*/
 
 
@@ -939,12 +1041,12 @@ return;
 
 
 
-
-let btn=
+let btn =
 
 document.getElementById(
 "submitBtn"
 );
+
 
 
 
@@ -961,7 +1063,9 @@ btn.innerHTML=
 
 
 
-let data={};
+
+let responseData={};
+
 
 
 
@@ -974,7 +1078,8 @@ new FormData(this)
 (value,key)=>{
 
 
-data[key]=value;
+responseData[key]=value;
+
 
 
 }
@@ -991,9 +1096,10 @@ try{
 
 
 
-let res=
+/* SAVE RESPONSE */
 
-await fetch(
+
+let saveResponse = await fetch(
 
 API_URL,
 
@@ -1020,9 +1126,7 @@ body:JSON.stringify({
 action:"saveResponse",
 
 
-
 formId:formId,
-
 
 
 formName:
@@ -1033,11 +1137,25 @@ document.getElementById(
 
 
 
+schoolCode:
+
+USER.schoolCode,
+
+
+
+schoolName:
+
+USER.schoolName,
+
+
+
 user:USER,
 
 
 
-response:data
+response:
+
+responseData
 
 
 
@@ -1054,9 +1172,10 @@ response:data
 
 
 
-let result=
+let result =
 
-await res.json();
+await saveResponse.json();
+
 
 
 
@@ -1067,7 +1186,64 @@ if(result.success){
 
 
 
+
+
+/* CREATE LOCK */
+
+
+await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+action:"createLock",
+
+
+formId:formId,
+
+
+schoolCode:
+
+USER.schoolCode
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+
+
+
+
 locked=true;
+
+
 
 
 
@@ -1081,9 +1257,13 @@ document.getElementById(
 
 ✅ Response Submitted Successfully
 
+<br><br>
+
+🔒 Form Automatically Locked
+
 <br>
 
-🔒 Form Locked
+आपका डेटा सुरक्षित है।
 
 </div>
 
@@ -1093,38 +1273,15 @@ document.getElementById(
 
 
 
-document
 
-.querySelectorAll(
-
-"#dynamicForm input, #dynamicForm select, #dynamicForm textarea"
-
-)
-
-.forEach(function(field){
-
-
-field.disabled=true;
-
-
-});
+disableForm();
 
 
 
-
-
-btn.innerHTML=
-
-"🔒 Form Locked";
-
-
-btn.disabled=true;
 
 
 
 }
-
-
 
 else{
 
@@ -1132,7 +1289,9 @@ else{
 
 alert(
 
-result.message
+result.message ||
+
+"Submit Failed"
 
 );
 
@@ -1144,6 +1303,7 @@ btn.disabled=false;
 btn.innerHTML=
 
 "💾 Submit Form";
+
 
 
 }
@@ -1157,11 +1317,17 @@ btn.innerHTML=
 catch(error){
 
 
+
+console.log(error);
+
+
+
 alert(
 
 "Server Error"
 
 );
+
 
 
 btn.disabled=false;
@@ -1172,11 +1338,16 @@ btn.innerHTML=
 "💾 Submit Form";
 
 
+
 }
 
 
 
-});
+
+
+}
+
+);
 
 
 
@@ -1185,6 +1356,12 @@ btn.innerHTML=
 
 
 
+
+
+
+/*========================
+ BACK
+========================*/
 
 
 function goBack(){
@@ -1200,6 +1377,14 @@ window.location.href=
 
 
 
+
+
+
+
+
+/*========================
+ PAGE LOAD
+========================*/
 
 
 loadUser();
