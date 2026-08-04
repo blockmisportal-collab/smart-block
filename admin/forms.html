@@ -1,75 +1,139 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+
 
 <title>
-SMART FORM ENTERPRISE v6.1 - Form Builder
+
+SMART FORM ENTERPRISE v6.1 - Form Management
+
 </title>
+
+
 
 
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 }
+
 
 
 body{
 
+
 margin:0;
 
+
 font-family:
+
 "Segoe UI",
-Arial;
+Arial,
+sans-serif;
+
 
 background:#f4f7fb;
 
+
 }
 
 
 
-/* HEADER */
+
+
+/* =====================
+ HEADER
+===================== */
+
 
 .header{
 
+
 background:#0d47a1;
+
 
 color:white;
 
+
 padding:20px 30px;
+
 
 display:flex;
 
+
 justify-content:space-between;
+
 
 align-items:center;
 
+
 }
+
 
 
 .header h1{
 
+
 margin:0;
+
+
+font-size:26px;
+
 
 }
 
 
+
+.header p{
+
+
+margin:5px 0 0;
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+ BUTTON
+===================== */
+
+
 .btn{
+
 
 border:none;
 
+
 padding:10px 18px;
+
 
 border-radius:6px;
 
+
 cursor:pointer;
 
+
 font-weight:bold;
+
 
 }
 
@@ -77,57 +141,138 @@ font-weight:bold;
 
 .back{
 
-background:#ff5252;
+
+background:#d32f2f;
+
 
 color:white;
+
 
 }
 
 
+
+.add{
+
+
+background:#0d47a1;
+
+
+color:white;
+
+
+}
+
+
+
+.refresh{
+
+
+background:#1976d2;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================
+ CONTAINER
+===================== */
 
 
 .container{
 
+
 padding:25px;
 
+
 }
+
 
 
 
 
 .card{
 
+
 background:white;
+
 
 padding:25px;
 
+
 border-radius:15px;
+
 
 margin-bottom:20px;
 
+
 box-shadow:
+
 
 0 5px 20px rgba(0,0,0,.1);
 
+
 }
 
+
+
+
+
+
+
+/* =====================
+ FILTER
+===================== */
+
+
+.filter-box{
+
+
+display:grid;
+
+
+grid-template-columns:
+
+
+2fr 1fr 150px;
+
+
+gap:15px;
+
+
+align-items:center;
+
+
+}
 
 
 
 
 input,
-textarea,
-select{
+select,
+textarea{
+
 
 width:100%;
 
+
 padding:12px;
+
 
 border:1px solid #ccc;
 
+
 border-radius:6px;
 
-margin-top:8px;
 
 }
 
@@ -135,130 +280,167 @@ margin-top:8px;
 
 
 
-label{
+.count{
+
+
+font-size:20px;
+
 
 font-weight:bold;
 
+
 color:#0d47a1;
 
-}
-
-
-
-
-
-.field{
-
-background:#f5f8ff;
-
-padding:15px;
-
-border-radius:10px;
-
-margin-bottom:15px;
-
-display:flex;
-
-gap:10px;
-
-align-items:center;
 
 }
 
 
 
 
-.field input{
 
-margin:0;
+
+
+/* =====================
+ TABLE
+===================== */
+
+
+.table-container{
+
+
+overflow-x:auto;
+
 
 }
 
 
 
 
-.remove{
 
-background:#d32f2f;
+table{
 
-color:white;
 
-border:none;
+width:100%;
 
-padding:8px 12px;
 
-border-radius:5px;
+border-collapse:collapse;
 
-cursor:pointer;
 
 }
 
 
 
+th{
 
-.add{
 
 background:#0d47a1;
 
-color:white;
-
-border:none;
-
-padding:12px 20px;
-
-border-radius:6px;
-
-cursor:pointer;
-
-}
-
-
-
-
-.save{
-
-background:green;
 
 color:white;
 
-border:none;
 
-padding:12px 25px;
+padding:12px;
 
-border-radius:6px;
-
-cursor:pointer;
 
 }
 
 
 
-/* PREVIEW */
+td{
 
 
-.preview{
+padding:10px;
 
-background:#fafafa;
 
-padding:20px;
+text-align:center;
 
-border-radius:10px;
+
+border-bottom:1px solid #ddd;
+
 
 }
 
 
 
-.preview-box{
 
-background:white;
+tr:hover{
 
-padding:15px;
 
-margin:10px 0;
+background:#f1f6ff;
 
-border-radius:6px;
 
-border:1px solid #ddd;
+}
+
+
+
+
+
+
+
+
+/* STATUS */
+
+
+.active{
+
+
+background:#2e7d32;
+
+
+color:white;
+
+
+padding:5px 12px;
+
+
+border-radius:20px;
+
+
+font-size:12px;
+
+
+}
+
+
+
+
+.deactive{
+
+
+background:#d32f2f;
+
+
+color:white;
+
+
+padding:5px 12px;
+
+
+border-radius:20px;
+
+
+font-size:12px;
+
+
+}
+
+
+
+
+
+
+
+@media(max-width:900px){
+
+
+.filter-box{
+
+
+grid-template-columns:1fr;
+
+
+}
+
 
 }
 
@@ -266,12 +448,13 @@ border:1px solid #ddd;
 
 </style>
 
-
-</head>
-
-
 <body>
 
+
+
+<!-- =====================
+ HEADER
+===================== -->
 
 
 <div class="header">
@@ -279,13 +462,18 @@ border:1px solid #ddd;
 
 <div>
 
+
 <h1>
+
 SMART FORM ENTERPRISE v6.1
+
 </h1>
 
 
 <p>
-FORM BUILDER
+
+FORM MANAGEMENT
+
 </p>
 
 
@@ -293,16 +481,50 @@ FORM BUILDER
 
 
 
-<button
-class="btn back"
-onclick="goBack()">
 
-BACK
+
+<div>
+
+
+<button
+
+class="btn refresh"
+
+onclick="loadForms()">
+
+
+🔄 Refresh
+
 
 </button>
 
 
+
+
+
+
+<button
+
+class="btn back"
+
+onclick="goBack()">
+
+
+BACK
+
+
+</button>
+
+
+
+
 </div>
+
+
+
+</div>
+
+
 
 
 
@@ -316,36 +538,36 @@ BACK
 
 
 
+
+
+
+<!-- =====================
+ FORM SUMMARY
+===================== -->
+
+
 <div class="card">
 
 
-<h2>
-Create New Form
-</h2>
 
-
-
-<label>
-Form Name
-</label>
-
-
-<input
-id="formName"
-placeholder="Enter Form Name">
+<div class="filter-box">
 
 
 
 
 
-<label>
-Description
-</label>
+<div class="count">
 
 
-<textarea
-id="description"
-placeholder="Form Description"></textarea>
+Total Forms :
+
+
+<span id="totalForms">
+
+0
+
+</span>
+
 
 
 </div>
@@ -356,12 +578,325 @@ placeholder="Form Description"></textarea>
 
 
 
+
+<input
+
+type="text"
+
+id="searchForm"
+
+placeholder="Search Form Name..."
+
+onkeyup="filterForms()">
+
+
+
+
+
+
+
+
+<select
+
+id="statusFilter"
+
+onchange="filterForms()">
+
+
+
+<option value="">
+
+
+📋 All Forms
+
+
+</option>
+
+
+
+<option value="ACTIVE">
+
+
+✅ Active Form
+
+
+</option>
+
+
+
+<option value="DEACTIVE">
+
+
+⛔ De-Active Form
+
+
+</option>
+
+
+
+</select>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================
+ FORM LIST
+===================== -->
+
+
 <div class="card">
 
 
+
 <h2>
-Form Fields
+
+Form List
+
 </h2>
+
+
+
+
+
+<div class="table-container">
+
+
+
+
+
+<table>
+
+
+
+<thead>
+
+
+<tr>
+
+
+
+<th>
+
+Form Name
+
+</th>
+
+
+
+<th>
+
+Description
+
+</th>
+
+
+
+
+<th>
+
+Total Fields
+
+</th>
+
+
+
+
+<th>
+
+Status
+
+</th>
+
+
+
+
+<th>
+
+Action
+
+</th>
+
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+
+
+<tbody id="formTableBody">
+
+
+<tr>
+
+
+<td colspan="5">
+
+
+Loading Forms...
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================
+ CREATE FORM BUTTON
+===================== -->
+
+
+<div class="card">
+
+
+
+<button
+
+class="btn add"
+
+onclick="showBuilder()">
+
+
+
+➕ Create New Form
+
+
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================
+ FORM BUILDER
+===================== -->
+
+
+<div class="card"
+
+id="builderSection"
+
+style="display:none;">
+
+
+
+<h2>
+
+Create New Form
+
+</h2>
+
+
+
+
+
+
+
+<label>
+
+Form Name
+
+</label>
+
+
+<input
+
+id="formName"
+
+placeholder="Enter Form Name">
+
+
+
+
+
+
+
+<label>
+
+Description
+
+</label>
+
+
+<textarea
+
+id="description"
+
+placeholder="Form Description">
+
+</textarea>
+
+
+
+
+
+
+
+
+
+<h3>
+
+Form Fields
+
+</h3>
+
 
 
 
@@ -373,16 +908,22 @@ Form Fields
 
 
 
+
+
 <button
-class="add"
+
+class="btn add"
+
 onclick="addField()">
 
+
+
 + Add Field
+
 
 </button>
 
 
-</div>
 
 
 
@@ -390,16 +931,16 @@ onclick="addField()">
 
 
 
-<div class="card">
+<h3>
 
+Preview
 
-<h2>
-Form Preview
-</h2>
+</h3>
+
 
 
 <div
-class="preview"
+
 id="preview">
 
 
@@ -409,33 +950,52 @@ No Field Added
 </div>
 
 
-</div>
 
 
 
 
 
-
-
-<div class="card">
+<br>
 
 
 <button
-class="save"
+
+class="btn add"
+
 onclick="saveForm()">
 
+
+
 💾 Save Form
+
 
 </button>
 
 
+
+
+
 </div>
 
 
 
 
 
+
+
 </div>
+  <script>
+
+
+const API_URL =
+
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
+
+let FORMS=[];
+
+let fieldsCount=0;
 
 
 
@@ -444,27 +1004,398 @@ onclick="saveForm()">
 
 
 
-<script>
+/* =====================
+ PAGE LOAD
+===================== */
 
 
-let count=0;
+document.addEventListener(
+"DOMContentLoaded",
+
+function(){
+
+loadForms();
+
+});
 
 
 
+
+
+
+
+
+
+/* =====================
+ LOAD FORMS
+===================== */
+
+
+async function loadForms(){
+
+
+try{
+
+
+let response =
+
+await fetch(API_URL,{
+
+method:"POST",
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+},
+
+
+body:JSON.stringify({
+
+action:"forms"
+
+})
+
+
+});
+
+
+
+
+let result =
+
+JSON.parse(
+
+await response.text()
+
+);
+
+
+
+
+
+if(result.success){
+
+
+FORMS=result.data;
+
+
+document.getElementById(
+"totalForms"
+).innerHTML=
+
+FORMS.length;
+
+
+
+displayForms(FORMS);
+
+
+}
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================
+ DISPLAY FORMS
+===================== */
+
+
+function displayForms(data){
+
+
+
+let html="";
+
+
+
+
+
+if(data.length===0){
+
+
+html=`
+
+<tr>
+
+<td colspan="5">
+
+No Form Found
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+data.forEach(function(form){
+
+
+
+html += `
+
+
+<tr>
+
+
+<td>
+
+${form.name}
+
+</td>
+
+
+
+<td>
+
+${form.description || ""}
+
+</td>
+
+
+
+
+<td>
+
+${form.fields ? form.fields.length : 0}
+
+</td>
+
+
+
+
+
+<td>
+
+
+<span class="${
+String(form.status).toUpperCase()=="ACTIVE"
+
+?
+
+"active"
+
+:
+
+"deactive"
+
+}">
+
+
+${form.status}
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+<td>
+
+
+<button
+
+class="btn refresh"
+
+onclick="changeFormStatus('${form.id}')">
+
+Status
+
+</button>
+
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+});
+
+
+
+
+
+
+document.getElementById(
+"formTableBody"
+).innerHTML=html;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================
+ FILTER
+===================== */
+
+
+function filterForms(){
+
+
+
+let search =
+
+document.getElementById(
+"searchForm"
+).value
+.toLowerCase();
+
+
+
+
+
+let status =
+
+document.getElementById(
+"statusFilter"
+).value;
+
+
+
+
+
+let data =
+
+FORMS.filter(function(item){
+
+
+
+return(
+
+
+String(item.name)
+.toLowerCase()
+.includes(search)
+
+
+)
+
+&&
+
+
+(
+
+
+status===""
+
+||
+
+String(item.status)
+.toUpperCase()
+===status
+
+
+);
+
+
+
+});
+
+
+
+
+displayForms(data);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================
+ SHOW BUILDER
+===================== */
+
+
+function showBuilder(){
+
+
+document.getElementById(
+"builderSection"
+).style.display="block";
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================
+ ADD FIELD
+===================== */
 
 
 function addField(){
 
 
-count++;
+fieldsCount++;
 
 
-let div=document.createElement(
+let div=
+
+document.createElement(
 "div"
 );
 
 
+
 div.className="field";
+
 
 
 div.innerHTML=
@@ -472,17 +1403,22 @@ div.innerHTML=
 
 `
 
-<input 
-type="text"
-placeholder="Field Name"
+<input
+
 class="fieldName"
+
+placeholder="Field Name"
+
 onkeyup="updatePreview()">
 
 
 
 <select
+
 class="fieldType"
+
 onchange="updatePreview()">
+
 
 
 <option>
@@ -506,11 +1442,6 @@ Dropdown
 
 
 <option>
-Checkbox
-</option>
-
-
-<option>
 File Upload
 </option>
 
@@ -518,12 +1449,15 @@ File Upload
 </select>
 
 
-
 <button
-class="remove"
-onclick="removeField(this)">
+
+class="btn back"
+
+onclick="this.parentElement.remove();updatePreview();">
+
 
 Remove
+
 
 </button>
 
@@ -541,20 +1475,6 @@ document
 updatePreview();
 
 
-}
-
-
-
-
-
-function removeField(btn){
-
-
-btn.parentElement.remove();
-
-
-updatePreview();
-
 
 }
 
@@ -562,80 +1482,58 @@ updatePreview();
 
 
 
+
+
+
+
+/* =====================
+ PREVIEW
+===================== */
 
 
 function updatePreview(){
-
-
-let preview=
-
-document.getElementById(
-"preview"
-);
-
-
-
-let fields=
-
-document.querySelectorAll(
-".field"
-);
-
-
-
-if(fields.length===0){
-
-
-preview.innerHTML=
-"No Field Added";
-
-
-return;
-
-}
-
-
 
 
 let html="";
 
 
 
-fields.forEach(function(item){
+
+document
+.querySelectorAll(".field")
+.forEach(function(f){
 
 
 
-let name=
-
-item.querySelector(
-".fieldName"
-).value;
-
-
-
-let type=
-
-item.querySelector(
-".fieldType"
-).value;
-
-
-
-html+=
+html +=
 
 
 `
 
-<div class="preview-box">
+<div class="card">
 
 <b>
-${name || "Field Name"}
+
+${
+f.querySelector(".fieldName").value
+||
+"Field Name"
+
+}
+
 </b>
+
 
 <br>
 
+
 Type :
-${type}
+
+${
+f.querySelector(".fieldType").value
+
+}
+
 
 </div>
 
@@ -647,7 +1545,14 @@ ${type}
 
 
 
-preview.innerHTML=html;
+
+
+document.getElementById(
+"preview"
+).innerHTML=
+
+html || "No Field Added";
+
 
 
 }
@@ -658,10 +1563,26 @@ preview.innerHTML=html;
 
 
 
-function saveForm(){
+
+
+/* =====================
+ SAVE FORM
+===================== */
+
+
+async function saveForm(){
+
 
 
 let data={
+
+
+
+action:"createForm",
+
+
+
+form:{
 
 
 name:
@@ -671,6 +1592,7 @@ document.getElementById(
 ).value,
 
 
+
 description:
 
 document.getElementById(
@@ -678,12 +1600,18 @@ document.getElementById(
 ).value,
 
 
-fields:
 
-[]
+fields:[]
+
+
+
+}
+
 
 
 };
+
+
 
 
 
@@ -692,7 +1620,8 @@ document
 .forEach(function(item){
 
 
-data.fields.push({
+
+data.form.fields.push({
 
 
 name:
@@ -714,15 +1643,50 @@ item.querySelector(".fieldType").value
 
 
 
-console.log(
-"FORM DATA",
-data
-);
+console.log(data);
+
+
 
 
 
 alert(
+
 "Form Saved Successfully"
+
+);
+
+
+
+loadForms();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================
+ CHANGE STATUS
+===================== */
+
+
+function changeFormStatus(id){
+
+
+alert(
+
+"Form Status Update : "
+
++
+
+id
+
 );
 
 
@@ -734,10 +1698,14 @@ alert(
 
 
 
+
+
+
 function goBack(){
 
 
 window.location.href=
+
 "dashboard.html";
 
 
@@ -752,3 +1720,4 @@ window.location.href=
 </body>
 
 </html>
+</head>
