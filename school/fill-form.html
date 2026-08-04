@@ -4,31 +4,22 @@
 
 <head>
 
-
 <meta charset="UTF-8">
 
-
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 
 <title>
-SMART FORM ENTERPRISE v6.1
-- Fill Form
+SMART FORM ENTERPRISE v6.1 - Dynamic Form
 </title>
-
-
 
 
 <style>
 
-
 *{
-
 box-sizing:border-box;
-
 }
-
 
 
 body{
@@ -36,7 +27,6 @@ body{
 margin:0;
 
 font-family:
-
 "Segoe UI",
 Arial,
 sans-serif;
@@ -47,15 +37,15 @@ background:#f4f7fb;
 
 
 
-
-/*========================
- HEADER
-========================*/
-
+/* HEADER */
 
 .header{
 
-background:#0d47a1;
+background:linear-gradient(
+135deg,
+#0d47a1,
+#1565c0
+);
 
 color:white;
 
@@ -81,20 +71,29 @@ font-size:26px;
 
 
 
+.header p{
+
+margin:5px 0 0;
+
+}
+
+
+
 
 button{
 
 border:none;
 
-padding:10px 18px;
+padding:12px 18px;
 
-border-radius:6px;
+border-radius:8px;
 
 cursor:pointer;
 
 font-weight:bold;
 
 }
+
 
 
 
@@ -108,29 +107,13 @@ color:white;
 
 
 
-.submit{
-
-background:#2e7d32;
-
-color:white;
-
-}
-
-
-
-
-
-
-/*========================
- CONTAINER
-========================*/
-
 
 .container{
 
 padding:25px;
 
 }
+
 
 
 
@@ -142,14 +125,13 @@ padding:25px;
 
 border-radius:15px;
 
+margin-bottom:20px;
+
 box-shadow:
 
 0 5px 20px rgba(0,0,0,.12);
 
-margin-bottom:20px;
-
 }
-
 
 
 
@@ -160,7 +142,10 @@ display:grid;
 
 grid-template-columns:
 
-repeat(auto-fit,minmax(220px,1fr));
+repeat(
+auto-fit,
+minmax(220px,1fr)
+);
 
 gap:20px;
 
@@ -169,19 +154,19 @@ gap:20px;
 
 
 
-
 .info-box{
 
 background:#f5f9ff;
 
-padding:15px;
+padding:18px;
 
 border-radius:10px;
 
-border-left:5px solid #0d47a1;
+border-left:
+
+5px solid #1565c0;
 
 }
-
 
 
 
@@ -196,25 +181,10 @@ color:#0d47a1;
 
 
 
-.value{
-
-font-size:20px;
-
-font-weight:bold;
-
-margin-top:8px;
-
-}
-
-
-
-
-
-
 
 .field{
 
-margin-bottom:15px;
+margin-bottom:18px;
 
 }
 
@@ -232,9 +202,11 @@ color:#0d47a1;
 
 
 
+
 input,
 select,
 textarea{
+
 
 width:100%;
 
@@ -244,17 +216,42 @@ margin-top:8px;
 
 border:1px solid #ccc;
 
-border-radius:6px;
+border-radius:8px;
+
+font-size:15px;
 
 }
 
 
 
 
+.submit{
 
-/*========================
- STATUS MESSAGE
-========================*/
+background:#2e7d32;
+
+color:white;
+
+width:100%;
+
+font-size:16px;
+
+}
+
+
+
+
+.lock{
+
+background:#c62828;
+
+color:white;
+
+padding:15px;
+
+border-radius:10px;
+
+}
+
 
 
 .success{
@@ -267,44 +264,7 @@ padding:15px;
 
 border-radius:10px;
 
-font-weight:bold;
-
 }
-
-
-
-.lock{
-
-background:#d32f2f;
-
-color:white;
-
-padding:15px;
-
-border-radius:10px;
-
-font-weight:bold;
-
-}
-
-
-
-
-.returned{
-
-background:#f57c00;
-
-color:white;
-
-padding:15px;
-
-border-radius:10px;
-
-font-weight:bold;
-
-}
-
-
 
 
 
@@ -313,6 +273,8 @@ font-weight:bold;
 text-align:center;
 
 padding:20px;
+
+font-weight:bold;
 
 }
 
@@ -324,8 +286,8 @@ padding:20px;
 </head>
 
 
-<body>
 
+<body>
 
 
 <div class="header">
@@ -333,18 +295,13 @@ padding:20px;
 
 <div>
 
-
 <h1>
-
-SMART FORM ENTERPRISE v6.1
-
+🏫 SMART FORM ENTERPRISE v6.1
 </h1>
 
 
 <p>
-
-DYNAMIC SCHOOL FORM
-
+ONLINE SCHOOL FORM SYSTEM
 </p>
 
 
@@ -353,9 +310,7 @@ DYNAMIC SCHOOL FORM
 
 
 <button
-
 class="back"
-
 onclick="goBack()">
 
 BACK
@@ -370,10 +325,6 @@ BACK
 
 
 
-
-
-
-
 <div class="container">
 
 
@@ -382,9 +333,7 @@ BACK
 
 
 <h2>
-
-School Information
-
+🏫 School Information
 </h2>
 
 
@@ -396,23 +345,13 @@ School Information
 
 <div class="info-box">
 
-
-<span class="title">
-
+<div class="title">
 School Name
+</div>
 
-</span>
-
-
-<br>
-
-
-<span id="schoolName">
-
+<div id="schoolName">
 -
-
-</span>
-
+</div>
 
 </div>
 
@@ -422,23 +361,13 @@ School Name
 
 <div class="info-box">
 
-
-<span class="title">
-
+<div class="title">
 UDISE Code
+</div>
 
-</span>
-
-
-<br>
-
-
-<span id="schoolCode">
-
+<div id="schoolCode">
 -
-
-</span>
-
+</div>
 
 </div>
 
@@ -448,31 +377,19 @@ UDISE Code
 
 <div class="info-box">
 
-
-<span class="title">
-
+<div class="title">
 Form Name
+</div>
 
-</span>
-
-
-<br>
-
-
-<span id="formName">
-
+<div id="formName">
 -
-
-</span>
-
+</div>
 
 </div>
 
 
 
-
 </div>
-
 
 
 </div>
@@ -487,9 +404,7 @@ Form Name
 <div class="card">
 
 
-<div id="message">
-
-</div>
+<div id="message"></div>
 
 
 
@@ -501,21 +416,20 @@ Loading Form...
 
 
 
+
 <form id="dynamicForm">
 
 
 <div id="fields">
 
-
 <div class="loading">
 
-Loading...
+Loading Fields...
 
 </div>
 
 
 </div>
-
 
 
 
@@ -528,14 +442,16 @@ id="submitBtn"
 
 class="submit">
 
-
 💾 Submit Form
-
 
 </button>
 
 
+
 </form>
+
+
+</div>
 
 
 
@@ -545,16 +461,11 @@ class="submit">
 
 
 
-
-
-
-
-
 <script>
 
 
 /*========================
- API CONFIG
+ API CONFIGURATION
 ========================*/
 
 
@@ -569,10 +480,10 @@ const API_URL =
 let formId =
 
 new URLSearchParams(
-
 window.location.search
+)
 
-).get("id");
+.get("id");
 
 
 
@@ -597,15 +508,6 @@ localStorage.getItem("USER")
 let locked=false;
 
 
-let editMode=false;
-
-
-let OLD_RESPONSE={};
-
-
-
-
-
 
 
 
@@ -618,9 +520,12 @@ let OLD_RESPONSE={};
 function loadUser(){
 
 
+
 document.getElementById(
 "schoolName"
-).innerHTML =
+)
+
+.innerHTML =
 
 USER.schoolName || "-";
 
@@ -630,14 +535,16 @@ USER.schoolName || "-";
 
 document.getElementById(
 "schoolCode"
-).innerHTML =
+)
+
+.innerHTML =
 
 USER.schoolCode || "-";
 
 
 
 }
-  /*========================
+/*========================
  LOAD FORM
 ========================*/
 
@@ -654,12 +561,9 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 
@@ -667,18 +571,13 @@ headers:{
 
 },
 
-
 body:JSON.stringify({
-
 
 action:"getForm",
 
-
 formId:formId
 
-
 })
-
 
 }
 
@@ -713,7 +612,9 @@ return;
 
 
 
+
 let form=result.data;
+
 
 
 
@@ -724,6 +625,7 @@ document.getElementById(
 ).innerHTML=
 
 form.name;
+
 
 
 
@@ -746,16 +648,21 @@ let html="";
 
 
 
+
 form.fields.forEach(field=>{
+
 
 
 let type="text";
 
 
 
+
 if(field.type==="Number"){
 
+
 type="number";
+
 
 }
 
@@ -763,7 +670,9 @@ type="number";
 
 if(field.type==="Date"){
 
+
 type="date";
+
 
 }
 
@@ -771,15 +680,9 @@ type="date";
 
 
 
-
-html +=
-
-
-
-`
+html+=`
 
 <div class="field">
-
 
 <label>
 
@@ -791,8 +694,6 @@ ${field.name}
 <input
 
 type="${type}"
-
-id="${field.name}"
 
 name="${field.name}"
 
@@ -806,9 +707,8 @@ required>
 
 
 
-
-
 });
+
 
 
 
@@ -817,17 +717,16 @@ required>
 
 document.getElementById(
 "fields"
-).innerHTML=
+)
 
-html;
-
-
+.innerHTML=html;
 
 
 
-// Check Existing Status
 
-checkFormStatus();
+
+
+checkLock();
 
 
 
@@ -838,7 +737,30 @@ checkFormStatus();
 catch(error){
 
 
-console.log(error);
+
+console.log(
+"Form Load Error",
+error
+);
+
+
+
+document.getElementById(
+"fields"
+)
+
+.innerHTML=
+
+`
+
+<div class="lock">
+
+Server Error
+
+</div>
+
+`;
+
 
 
 }
@@ -856,11 +778,11 @@ console.log(error);
 
 
 /*========================
- CHECK FORM STATUS
+ CHECK FORM LOCK
 ========================*/
 
 
-async function checkFormStatus(){
+async function checkLock(){
 
 
 try{
@@ -872,38 +794,28 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 
 "text/plain;charset=utf-8"
 
-
 },
-
 
 body:JSON.stringify({
 
-
-action:"checkResponse",
-
+action:"checkLock",
 
 formId:formId,
-
 
 schoolCode:
 
 USER.schoolCode
 
 
-
 })
-
 
 }
 
@@ -914,22 +826,9 @@ USER.schoolCode
 
 
 
-let result=
-
-await response.json();
+let result = await response.json();
 
 
-
-
-
-
-/*
- APPROVED / PENDING
- LOCK
-
- REJECTED
- EDIT MODE
-*/
 
 
 
@@ -937,25 +836,9 @@ await response.json();
 
 if(
 
-result.status==="REJECTED"
+result.success
 
-){
-
-
-
-editMode=true;
-
-
-
-loadRejectedData();
-
-
-
-}
-
-
-
-else if(
+&&
 
 result.locked===true
 
@@ -966,155 +849,6 @@ result.locked===true
 locked=true;
 
 
-showLock();
-
-
-
-}
-
-
-
-}
-
-catch(error){
-
-
-console.log(error);
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*========================
- LOAD REJECTED DATA
-========================*/
-
-
-async function loadRejectedData(){
-
-
-try{
-
-
-let response = await fetch(
-
-API_URL,
-
-{
-
-
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":
-
-"text/plain;charset=utf-8"
-
-
-},
-
-
-body:JSON.stringify({
-
-
-action:"getRejectedResponse",
-
-
-formId:formId,
-
-
-schoolCode:
-
-USER.schoolCode
-
-
-
-})
-
-
-}
-
-);
-
-
-
-
-
-
-
-let result=
-
-await response.json();
-
-
-
-
-
-
-
-if(result.success){
-
-
-
-OLD_RESPONSE =
-
-result.response || {};
-
-
-
-
-
-
-/*
- AUTO FILL OLD DATA
-*/
-
-
-Object.keys(
-OLD_RESPONSE
-)
-
-.forEach(key=>{
-
-
-let field =
-
-document.getElementById(key);
-
-
-
-
-
-if(field){
-
-
-field.value =
-
-OLD_RESPONSE[key];
-
-
-
-}
-
-
-
-});
-
-
 
 
 
@@ -1124,125 +858,68 @@ document.getElementById(
 )
 
 .innerHTML=
-
-
-
-`
-
-<div class="returned">
-
-
-⚠ Form Nodal द्वारा वापस किया गया है।
-
-
-<br><br>
-
-
-<b>Remark:</b>
-
-${result.remark || "Correction Required"}
-
-
-<br><br>
-
-
-कृपया सुधार करके पुनः Submit करें।
-
-
-</div>
-
-
-`;
-
-
-
-
-
-
-
-let btn=
-
-document.getElementById(
-"submitBtn"
-);
-
-
-
-btn.innerHTML=
-
-"🔄 Update & Submit Again";
-
-
-
-btn.style.background="#1565c0";
-
-
-
-
-
-}
-
-
-
-}
-
-catch(error){
-
-
-console.log(error);
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*========================
- SHOW LOCK MESSAGE
-========================*/
-
-
-function showLock(){
-
-
-
-document.getElementById(
-"message"
-)
-
-.innerHTML=
-
-
 
 `
 
 <div class="lock">
 
-
-🔒 यह Form पहले ही Submit हो चुका है।
+🔒 यह Form पहले Submit हो चुका है।
 
 
 <br><br>
 
-
-सभी Field Locked हैं।
-
+कृपया Nodal/Admin से संपर्क करें।
 
 </div>
-
 
 `;
 
 
+
+
+
+
+
+disableForm();
+
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Lock Check Error",
+error
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ DISABLE FORM
+========================*/
+
+
+function disableForm(){
 
 
 
@@ -1250,17 +927,20 @@ document
 
 .querySelectorAll(
 
-"#dynamicForm input,#dynamicForm select,#dynamicForm textarea"
+"#dynamicForm input"
 
 )
 
-.forEach(el=>{
+.forEach(function(el){
+
 
 
 el.disabled=true;
 
 
+
 });
+
 
 
 
@@ -1272,6 +952,9 @@ let btn=
 document.getElementById(
 "submitBtn"
 );
+
+
+
 
 
 
@@ -1284,8 +967,12 @@ btn.innerHTML=
 
 
 
+btn.style.background="#c62828";
+
+
+
 }
-  /*========================
+/*========================
  SUBMIT FORM
 ========================*/
 
@@ -1311,7 +998,9 @@ e.preventDefault();
 
 if(locked){
 
+
 return;
+
 
 }
 
@@ -1330,6 +1019,7 @@ document.getElementById(
 
 
 btn.disabled=true;
+
 
 btn.innerHTML=
 
@@ -1368,11 +1058,13 @@ responseData[key]=value;
 
 
 
-
-
-
 try{
 
+
+
+/*========================
+ SAVE RESPONSE
+========================*/
 
 
 let saveResponse = await fetch(
@@ -1381,31 +1073,22 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 
 "text/plain;charset=utf-8"
 
-
 },
 
-
 body:JSON.stringify({
-
-
 
 action:"saveResponse",
 
 
-
 formId:formId,
-
 
 
 formName:
@@ -1440,10 +1123,11 @@ responseData
 
 })
 
-
 }
 
 );
+
+
 
 
 
@@ -1460,104 +1144,14 @@ await saveResponse.json();
 
 
 
-
-
 if(result.success){
 
 
 
-/*
- RE-SUBMIT MODE
-*/
-
-if(editMode){
-
-
-
-document.getElementById(
-"message"
-)
-
-.innerHTML=
-
-
-
-`
-
-<div class="success">
-
-
-✅ Form Updated Successfully
-
-
-<br><br>
-
-
-⏳ फिर से Nodal Approval के लिए भेज दिया गया है।
-
-
-</div>
-
-
-`;
-
-
-
-}
-
-else{
-
-
-
-document.getElementById(
-"message"
-)
-
-.innerHTML=
-
-
-
-`
-
-<div class="success">
-
-
-✅ Response Submitted Successfully
-
-
-<br><br>
-
-
-🔒 Form Locked
-
-
-</div>
-
-
-`;
-
-
-
-}
-
-
-
-
-
-
-
-/*
- CREATE LOCK ONLY
- NEW SUBMIT
-
- RE-SUBMIT में नहीं
-
-*/
-
-
-
-
-if(!editMode){
+/*========================
+ RESET APPROVAL
+ AFTER RE-SUBMIT
+========================*/
 
 
 
@@ -1567,28 +1161,26 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 
 "text/plain;charset=utf-8"
 
-
 },
-
 
 body:JSON.stringify({
 
+action:
 
-action:"createLock",
+"resetApprovalAfterResubmit",
 
 
-formId:formId,
+formId:
+
+formId,
 
 
 schoolCode:
@@ -1599,14 +1191,63 @@ USER.schoolCode
 
 })
 
-
 }
 
 );
 
 
 
+
+
+
+
+
+
+/*========================
+ CREATE LOCK
+========================*/
+
+
+await fetch(
+
+API_URL,
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+},
+
+body:JSON.stringify({
+
+action:
+
+"createLock",
+
+
+formId:
+
+formId,
+
+
+schoolCode:
+
+USER.schoolCode
+
+
+
+})
+
 }
+
+);
+
 
 
 
@@ -1621,7 +1262,36 @@ locked=true;
 
 
 
-disableAfterSubmit();
+document.getElementById(
+"message"
+)
+
+.innerHTML=
+
+`
+
+<div class="success">
+
+✅ Response Submitted Successfully
+
+<br><br>
+
+🔒 Form Locked Successfully
+
+</div>
+
+`;
+
+
+
+
+
+
+
+disableForm();
+
+
+
 
 
 
@@ -1645,14 +1315,6 @@ btn.disabled=false;
 
 btn.innerHTML=
 
-editMode
-
-?
-
-"🔄 Update & Submit Again"
-
-:
-
 "💾 Submit Form";
 
 
@@ -1668,7 +1330,11 @@ editMode
 catch(error){
 
 
-console.log(error);
+
+console.log(
+error
+);
+
 
 
 alert(
@@ -1680,16 +1346,7 @@ alert(
 btn.disabled=false;
 
 
-
 btn.innerHTML=
-
-editMode
-
-?
-
-"🔄 Update & Submit Again"
-
-:
 
 "💾 Submit Form";
 
@@ -1699,12 +1356,11 @@ editMode
 
 
 
+
+
 }
 
-
 );
-
-
 
 
 
@@ -1715,59 +1371,6 @@ editMode
 
 
 /*========================
- AFTER SUBMIT LOCK
-========================*/
-
-
-function disableAfterSubmit(){
-
-
-
-document
-
-.querySelectorAll(
-
-"#dynamicForm input,#dynamicForm select,#dynamicForm textarea"
-
-)
-
-.forEach(el=>{
-
-
-el.disabled=true;
-
-
-});
-
-
-
-
-
-
-let btn =
-
-document.getElementById(
-"submitBtn"
-);
-
-
-
-btn.disabled=true;
-
-
-
-btn.innerHTML=
-
-"🔒 Submitted";
-
-
-
-btn.style.background="#2e7d32";
-
-
-
-}
-  /*========================
  BACK
 ========================*/
 
@@ -1777,7 +1380,7 @@ function goBack(){
 
 window.location.href=
 
-"dashboard.html";
+"forms.html";
 
 
 }
@@ -1798,12 +1401,3 @@ window.location.href=
 loadUser();
 
 loadForm();
-
-
-
-</script>
-
-
-</body>
-
-</html>
