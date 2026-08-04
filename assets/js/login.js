@@ -258,10 +258,17 @@ result.message ||
 
 catch(error){
 
-
 console.error(
+"LOGIN ERROR",
 error
 );
+
+message.style.color="red";
+
+message.innerHTML =
+"ERROR : " + error.message;
+
+}
 
 
 message.innerHTML =
