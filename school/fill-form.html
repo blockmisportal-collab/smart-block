@@ -5,7 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
 
 <title>
 SMART FORM ENTERPRISE v6.1 - Fill Form
@@ -23,11 +25,15 @@ body{
 
 margin:0;
 
-font-family:"Segoe UI",Arial,sans-serif;
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
 
 background:#f4f7fb;
 
 }
+
 
 
 .header{
@@ -47,9 +53,13 @@ align-items:center;
 }
 
 
+
 .header h1{
+
 margin:0;
+
 }
+
 
 
 button{
@@ -67,6 +77,7 @@ font-weight:bold;
 }
 
 
+
 .back{
 
 background:#d32f2f;
@@ -74,6 +85,7 @@ background:#d32f2f;
 color:white;
 
 }
+
 
 
 
@@ -85,6 +97,7 @@ padding:25px;
 
 
 
+
 .card{
 
 background:white;
@@ -93,12 +106,14 @@ padding:25px;
 
 border-radius:15px;
 
-box-shadow:
-0 5px 20px rgba(0,0,0,.12);
-
 margin-bottom:20px;
 
+box-shadow:
+
+0 5px 20px rgba(0,0,0,.12);
+
 }
+
 
 
 
@@ -130,15 +145,40 @@ flex:1;
 
 .title{
 
-color:#0d47a1;
-
 font-weight:bold;
+
+color:#0d47a1;
 
 }
 
 
 
-input{
+
+.field{
+
+margin-bottom:15px;
+
+}
+
+
+
+label{
+
+font-weight:bold;
+
+color:#0d47a1;
+
+display:block;
+
+}
+
+
+
+
+input,
+select,
+textarea{
+
 
 width:100%;
 
@@ -154,21 +194,21 @@ border-radius:6px;
 
 
 
-label{
-
-font-weight:bold;
-
-color:#0d47a1;
-
-}
 
 
+input:disabled,
+select:disabled,
+textarea:disabled{
 
-.field{
 
-margin-bottom:15px;
+background:#eeeeee;
+
+cursor:not-allowed;
+
 
 }
+
+
 
 
 
@@ -179,6 +219,8 @@ background:green;
 color:white;
 
 }
+
+
 
 
 
@@ -194,7 +236,12 @@ border-radius:10px;
 
 font-weight:bold;
 
+margin-bottom:15px;
+
 }
+
+
+
 
 
 .success{
@@ -207,15 +254,33 @@ padding:15px;
 
 border-radius:10px;
 
+font-weight:bold;
+
+margin-bottom:15px;
+
 }
+
+
+
+.loading{
+
+text-align:center;
+
+padding:20px;
+
+}
+
 
 
 </style>
 
+
 </head>
 
 
+
 <body>
+
 
 
 <div class="header">
@@ -223,19 +288,23 @@ border-radius:10px;
 
 <div>
 
+
 <h1>
 SMART FORM ENTERPRISE v6.1
 </h1>
 
+
 <p>
-DYNAMIC FORM ENTRY
+DYNAMIC SCHOOL FORM
 </p>
+
 
 </div>
 
 
 
-<button class="back"
+<button
+class="back"
 onclick="goBack()">
 
 BACK
@@ -248,7 +317,13 @@ BACK
 
 
 
+
+
+
 <div class="container">
+
+
+
 
 
 <div class="card">
@@ -280,6 +355,8 @@ School Name
 
 
 
+
+
 <div class="info-box">
 
 <span class="title">
@@ -297,6 +374,8 @@ UDISE Code
 
 
 
+
+
 <div class="info-box">
 
 <span class="title">
@@ -306,17 +385,22 @@ Form Name
 <br>
 
 <span id="formName">
-Loading...
+-
 </span>
 
 
 </div>
 
 
+
+
 </div>
 
 
 </div>
+
+
+
 
 
 
@@ -325,12 +409,19 @@ Loading...
 <div class="card">
 
 
+
 <div id="message"></div>
 
 
-<h2 id="title">
+
+
+<h2 id="formTitle">
+
 Loading Form...
+
 </h2>
+
+
 
 
 
@@ -339,13 +430,24 @@ Loading Form...
 
 <div id="fields">
 
+<div class="loading">
+
+Loading...
+
+</div>
+
 </div>
 
 
 
+
+
 <button
+
 type="submit"
+
 id="submitBtn"
+
 class="submit">
 
 💾 Submit Form
@@ -353,10 +455,11 @@ class="submit">
 </button>
 
 
+
+
 </form>
 
 
-</div>
 
 
 </div>
@@ -365,7 +468,9 @@ class="submit">
 
 
 
-<script>
+
+
+  <script>
 
 
 const API_URL =
@@ -374,17 +479,23 @@ const API_URL =
 
 
 let formId =
+
 new URLSearchParams(
-location.search
+window.location.search
 ).get("id");
 
 
 
 let USER =
+
 JSON.parse(
+
 localStorage.getItem("USER")
+
 ||
+
 "{}"
+
 );
 
 
@@ -395,18 +506,28 @@ let locked=false;
 
 
 
+
+
+/*========================
+ LOAD USER
+========================*/
+
+
 function loadUser(){
 
 
 document.getElementById(
 "schoolName"
 ).innerHTML =
+
 USER.schoolName || "-";
+
 
 
 document.getElementById(
 "schoolCode"
 ).innerHTML =
+
 USER.schoolCode || "-";
 
 
@@ -419,99 +540,157 @@ USER.schoolCode || "-";
 
 
 
+/*========================
+ LOAD FORM
+========================*/
+
+
 async function loadForm(){
 
 
-let response =
-await fetch(
+try{
+
+
+let res = await fetch(
+
 API_URL,
+
 {
+
 
 method:"POST",
 
+
 headers:{
+
+
 "Content-Type":
+
 "text/plain;charset=utf-8"
+
+
 },
 
 
 body:JSON.stringify({
 
+
 action:"getForm",
 
+
 formId:formId
+
 
 })
 
 
-});
+}
+
+);
+
+
 
 
 let result =
-await response.json();
+
+await res.json();
+
+
 
 
 
 if(!result.success){
 
-document.getElementById("title").innerHTML=
-"No Form Found";
+
+document.getElementById(
+"formTitle"
+).innerHTML=
+
+"Form Not Found";
+
 
 return;
 
+
 }
+
+
 
 
 
 let form=result.data;
 
 
+
 document.getElementById(
 "formName"
-).innerHTML =
+).innerHTML=
+
 form.name;
+
 
 
 document.getElementById(
-"title"
-).innerHTML =
+"formTitle"
+).innerHTML=
+
 form.name;
+
+
 
 
 
 let html="";
 
 
-form.fields.forEach(
-field=>{
 
 
-html +=
 
-`
+form.fields.forEach(field=>{
+
+
+let type="text";
+
+
+if(field.type==="Number"){
+
+type="number";
+
+}
+
+
+if(field.type==="Date"){
+
+type="date";
+
+}
+
+
+
+
+html+=`
 
 <div class="field">
 
+
 <label>
+
 ${field.name}
+
 </label>
+
 
 <input
 
-name="${field.name}"
+type="${type}"
 
-type="${
-field.type==="Number"
-?
-"number"
-:
-"text"
-}"
+name="${field.name}"
 
 required>
 
 
 </div>
+
 
 `;
 
@@ -520,12 +699,32 @@ required>
 
 
 
+
+
+
 document.getElementById(
 "fields"
-).innerHTML=html;
+).innerHTML=
+
+html;
+
+
+
 
 
 checkLock();
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+}
 
 
 
@@ -538,53 +737,86 @@ checkLock();
 
 
 
+
+/*========================
+ CHECK LOCK
+========================*/
+
+
 async function checkLock(){
 
 
-let response =
-await fetch(
+
+let res = await fetch(
+
 API_URL,
+
 {
 
 
 method:"POST",
 
+
 headers:{
+
+
 "Content-Type":
+
 "text/plain;charset=utf-8"
+
+
 },
 
 
 body:JSON.stringify({
 
+
 action:"checkResponse",
+
 
 formId:formId,
 
+
 schoolCode:
+
 USER.schoolCode
 
 
 })
 
 
-});
+}
+
+);
 
 
-let result =
-await response.json();
 
 
 
-if(result.locked){
+let result=
+
+await res.json();
+
+
+
+
+
+
+if(result.locked===true){
+
 
 
 locked=true;
 
 
+
+
+
 document.getElementById(
 "message"
 ).innerHTML=
+
+
 
 `
 
@@ -594,7 +826,7 @@ document.getElementById(
 
 <br>
 
-Form Locked
+सभी Field Locked हैं।
 
 </div>
 
@@ -602,45 +834,38 @@ Form Locked
 
 
 
-document.getElementById(
-"submitBtn"
-).disabled=true;
-
-
-}
-
-
-}
 
 
 
 
-
-
+/*========================
+ DISABLE ALL FIELDS
+========================*/
 
 
 document
-.getElementById(
-"dynamicForm"
+
+.querySelectorAll(
+
+"#dynamicForm input, #dynamicForm select, #dynamicForm textarea"
+
 )
-.addEventListener(
-"submit",
-async function(e){
+
+.forEach(function(field){
 
 
-e.preventDefault();
+field.disabled=true;
 
 
-
-if(locked){
-
-return;
-
-}
+});
 
 
 
-let btn =
+
+
+
+let btn=
+
 document.getElementById(
 "submitBtn"
 );
@@ -649,8 +874,88 @@ document.getElementById(
 
 btn.disabled=true;
 
+
 btn.innerHTML=
+
+"🔒 Form Locked";
+
+
+
+btn.style.background="#d32f2f";
+
+
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*========================
+ SAVE FORM
+========================*/
+
+
+document
+
+.getElementById(
+"dynamicForm"
+)
+
+.addEventListener(
+
+"submit",
+
+async function(e){
+
+
+
+e.preventDefault();
+
+
+
+
+
+if(locked){
+
+
+return;
+
+
+}
+
+
+
+
+
+
+let btn=
+
+document.getElementById(
+"submitBtn"
+);
+
+
+
+btn.disabled=true;
+
+
+btn.innerHTML=
+
 "Submitting...";
+
+
 
 
 
@@ -660,67 +965,99 @@ let data={};
 
 
 
+
+
 new FormData(this)
+
 .forEach(
-(v,k)=>{
+
+(value,key)=>{
 
 
-data[k]=v;
+data[key]=value;
 
 
-});
+}
+
+);
 
 
 
 
 
-let response =
+
+
+try{
+
+
+
+let res=
+
 await fetch(
+
 API_URL,
+
 {
 
 
 method:"POST",
 
+
 headers:{
+
+
 "Content-Type":
+
 "text/plain;charset=utf-8"
+
+
 },
 
 
 body:JSON.stringify({
 
+
 action:"saveResponse",
 
 
+
 formId:formId,
+
 
 
 formName:
 
 document.getElementById(
 "formName"
-).innerText,
+).innerHTML,
 
 
 
 user:USER,
 
 
+
 response:data
+
 
 
 })
 
 
-});
+}
+
+);
 
 
 
 
 
-let result =
-await response.json();
+
+
+let result=
+
+await res.json();
+
 
 
 
@@ -729,7 +1066,9 @@ await response.json();
 if(result.success){
 
 
+
 locked=true;
+
 
 
 document.getElementById(
@@ -752,22 +1091,84 @@ document.getElementById(
 
 
 
-btn.style.display="none";
+
+
+document
+
+.querySelectorAll(
+
+"#dynamicForm input, #dynamicForm select, #dynamicForm textarea"
+
+)
+
+.forEach(function(field){
+
+
+field.disabled=true;
+
+
+});
+
+
+
+
+
+btn.innerHTML=
+
+"🔒 Form Locked";
+
+
+btn.disabled=true;
 
 
 
 }
+
+
+
 else{
 
 
+
 alert(
+
 result.message
+
+);
+
+
+
+btn.disabled=false;
+
+
+btn.innerHTML=
+
+"💾 Submit Form";
+
+
+}
+
+
+
+
+
+}
+
+catch(error){
+
+
+alert(
+
+"Server Error"
+
 );
 
 
 btn.disabled=false;
 
+
 btn.innerHTML=
+
 "💾 Submit Form";
 
 
@@ -783,12 +1184,21 @@ btn.innerHTML=
 
 
 
+
+
+
 function goBack(){
 
-location.href=
+
+window.location.href=
+
 "forms.html";
 
+
 }
+
+
+
 
 
 
@@ -797,9 +1207,11 @@ loadUser();
 loadForm();
 
 
+
 </script>
 
 
 </body>
 
 </html>
+</div>
