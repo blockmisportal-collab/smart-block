@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>
@@ -15,9 +15,11 @@ SMART FORM ENTERPRISE v6.1 - Admin Dashboard
 
 <style>
 
+
 *{
 box-sizing:border-box;
 }
+
 
 
 body{
@@ -66,15 +68,16 @@ padding-top:20px;
 
 padding:20px;
 
+text-align:center;
+
 font-size:22px;
 
 font-weight:bold;
 
-text-align:center;
-
 line-height:1.5;
 
-border-bottom:1px solid rgba(255,255,255,.2);
+border-bottom:
+1px solid rgba(255,255,255,.2);
 
 }
 
@@ -89,6 +92,7 @@ margin-top:20px;
 
 
 .menu a{
+
 
 display:block;
 
@@ -114,6 +118,8 @@ background:#1565c0;
 
 
 
+
+
 /* =====================
  MAIN AREA
 ===================== */
@@ -129,6 +135,10 @@ min-height:100vh;
 
 
 
+
+/* =====================
+ HEADER
+===================== */
 
 
 .header{
@@ -146,9 +156,11 @@ align-items:center;
 padding:0 30px;
 
 box-shadow:
+
 0 3px 10px rgba(0,0,0,.1);
 
 }
+
 
 
 
@@ -164,11 +176,6 @@ font-size:24px;
 
 
 
-.logout{
-/* =====================
- FORM STATUS MENU
-===================== */
-
 
 .header-right{
 
@@ -182,6 +189,11 @@ gap:15px;
 
 
 
+
+
+/* FORM DROPDOWN */
+
+
 .form-status-menu select{
 
 
@@ -193,7 +205,7 @@ border-radius:8px;
 
 border:1px solid #ddd;
 
-background:#ffffff;
+background:white;
 
 color:#0d47a1;
 
@@ -201,9 +213,9 @@ font-weight:600;
 
 cursor:pointer;
 
-font-size:14px;
-
 }
+
+
 
 
 
@@ -216,6 +228,17 @@ box-shadow:
 
 
 }
+
+
+
+
+
+
+/* LOGOUT */
+
+
+.logout{
+
 background:#d32f2f;
 
 color:white;
@@ -228,9 +251,18 @@ border-radius:6px;
 
 cursor:pointer;
 
+font-weight:bold;
+
 }
 
 
+
+
+
+
+/* =====================
+ CONTAINER
+===================== */
 
 
 .container{
@@ -261,165 +293,6 @@ margin-bottom:20px;
 
 
 
-/* WELCOME */
-
-.welcome h2{
-
-color:#0d47a1;
-
-margin:0;
-
-}
-/* =====================
- STATISTICS
-===================== */
-
-
-.stats{
-
-display:grid;
-
-grid-template-columns:
-repeat(5,1fr);
-
-gap:15px;
-
-}
-
-
-
-.stat-card{
-
-background:#f1f6ff;
-
-padding:20px;
-
-border-radius:12px;
-
-text-align:center;
-
-border-left:5px solid #0d47a1;
-
-}
-
-
-
-.stat-card h2{
-
-margin:0;
-
-font-size:30px;
-
-color:#0d47a1;
-
-}
-
-
-
-.stat-card p{
-
-margin-top:10px;
-
-font-weight:bold;
-
-}
-
-
-
-
-
-/* =====================
- SERVICES
-===================== */
-
-
-.services-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:20px;
-
-}
-
-
-
-.service-card{
-
-background:#f8fbff;
-
-padding:25px;
-
-border-radius:15px;
-
-text-align:center;
-
-cursor:pointer;
-
-border-top:4px solid #0d47a1;
-
-transition:.3s;
-
-}
-
-
-
-.service-card:hover{
-
-transform:translateY(-5px);
-
-box-shadow:
-
-0 8px 20px rgba(0,0,0,.15);
-
-}
-
-
-
-.service-icon{
-
-font-size:40px;
-
-}
-
-
-
-.service-card h3{
-
-color:#0d47a1;
-
-}
-
-
-
-.service-card p{
-
-color:#555;
-
-}
-
-
-
-
-
-/* =====================
- ACTIVITY
-===================== */
-
-
-.activity{
-
-background:#f8f8f8;
-
-padding:15px;
-
-border-radius:10px;
-
-}
-
-
 
 
 /* =====================
@@ -427,30 +300,8 @@ border-radius:10px;
 ===================== */
 
 
-@media(max-width:1000px){
+@media(max-width:800px){
 
-
-.stats{
-
-grid-template-columns:
-repeat(2,1fr);
-
-}
-
-
-.services-grid{
-
-grid-template-columns:
-1fr;
-
-}
-
-
-}
-
-
-
-@media(max-width:700px){
 
 
 .sidebar{
@@ -460,11 +311,13 @@ width:70px;
 }
 
 
+
 .logo{
 
 font-size:12px;
 
 }
+
 
 
 .menu a{
@@ -476,6 +329,7 @@ padding:15px;
 }
 
 
+
 .main{
 
 margin-left:70px;
@@ -483,19 +337,18 @@ margin-left:70px;
 }
 
 
-.stats{
-
-grid-template-columns:1fr;
-
 }
 
 
-}
 
 </style>
 
+
 </head>
+
+
 <body>
+
 
 
 <!-- =====================
@@ -509,13 +362,17 @@ grid-template-columns:1fr;
 <div class="logo">
 
 SMART FORM<br>
+
 ENTERPRISE v6.1
+
 
 </div>
 
 
 
+
 <div class="menu">
+
 
 
 <a href="dashboard.html">
@@ -569,10 +426,8 @@ ENTERPRISE v6.1
 </div>
 
 
+
 </div>
-
-
-
 
 
 
@@ -590,10 +445,15 @@ ENTERPRISE v6.1
 
 
 
+<!-- HEADER -->
+
+
 <div class="header">
 
 
+
 <div>
+
 
 <h1>
 ADMIN DASHBOARD
@@ -611,16 +471,15 @@ SMART FORM ENTERPRISE v6.1
 
 
 
+
 <div class="header-right">
 
-
-<!-- FORM STATUS DROPDOWN -->
 
 
 <div class="form-status-menu">
 
 
-<select 
+<select
 id="formStatus"
 onchange="openFormStatus(this.value)">
 
@@ -634,11 +493,13 @@ onchange="openFormStatus(this.value)">
 
 
 
+
 <option value="active">
 
 ✅ Active Form
 
 </option>
+
 
 
 
@@ -675,47 +536,29 @@ LOGOUT
 
 
 </div>
-
-
-</div>
-
-
-
-<button
-class="logout"
-onclick="logout()">
-
-LOGOUT
-
-</button>
-
-
-</div>
-
-
-
-
-
-
+<!-- =====================
+ DASHBOARD CONTENT
+===================== -->
 
 
 <div class="container">
 
 
 
-
-
 <!-- WELCOME -->
 
 
-<div class="card welcome">
+<div class="card">
 
 
-<h2>
+<h2 style="color:#0d47a1;">
 
 Welcome,
+
 <span id="adminName">
+
 Administrator
+
 </span>
 
 </h2>
@@ -724,8 +567,11 @@ Administrator
 <p>
 
 Role :
+
 <strong>
+
 ADMIN
+
 </strong>
 
 </p>
@@ -739,8 +585,9 @@ ADMIN
 
 
 
-
-<!-- STATISTICS -->
+<!-- =====================
+ OVERVIEW
+===================== -->
 
 
 <div class="card">
@@ -762,9 +609,11 @@ Dashboard Overview
 0
 </h2>
 
+
 <p>
 Total Users
 </p>
+
 
 </div>
 
@@ -778,9 +627,11 @@ Total Users
 0
 </h2>
 
+
 <p>
 Total Schools
 </p>
+
 
 </div>
 
@@ -794,9 +645,11 @@ Total Schools
 0
 </h2>
 
+
 <p>
 Total Forms
 </p>
+
 
 </div>
 
@@ -810,9 +663,11 @@ Total Forms
 0
 </h2>
 
+
 <p>
 Pending Forms
 </p>
+
 
 </div>
 
@@ -822,17 +677,13 @@ Pending Forms
 
 <div class="stat-card">
 
-<h2 style="color:green">
-
+<h2 style="color:green;">
 ONLINE
-
 </h2>
 
 
 <p>
-
 System Status
-
 </p>
 
 
@@ -852,9 +703,9 @@ System Status
 
 
 
-
-
-<!-- SERVICES -->
+<!-- =====================
+ AVAILABLE SERVICES
+===================== -->
 
 
 <div class="card">
@@ -896,7 +747,7 @@ Form Builder
 
 <p>
 
-Create Dynamic Forms
+Create & Manage Dynamic Forms
 
 </p>
 
@@ -930,13 +781,12 @@ Reports MIS
 
 <p>
 
-Progress Analysis
+Progress & Analysis Reports
 
 </p>
 
 
 </div>
-
 
 
 
@@ -965,7 +815,7 @@ Profile
 
 <p>
 
-User Management
+User Profile Management
 
 </p>
 
@@ -976,7 +826,6 @@ User Management
 
 
 
-
 </div>
 
 
@@ -988,8 +837,9 @@ User Management
 
 
 
-
-<!-- ACTIVITY -->
+<!-- =====================
+ RECENT ACTIVITY
+===================== -->
 
 
 <div class="card">
@@ -1002,30 +852,210 @@ Recent Activity
 </h2>
 
 
+
 <div class="activity">
+
 
 ✅ Admin Dashboard Loaded Successfully
 
+
 <br><br>
+
 
 System Ready
 
-</div>
-
 
 </div>
 
 
 
-
-
-
-
 </div>
+<style>
 
-</div>
+
+/* =====================
+ STATISTICS
+===================== */
 
 
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(5,1fr);
+
+gap:15px;
+
+}
+
+
+
+.stat-card{
+
+
+background:#f1f6ff;
+
+padding:20px;
+
+border-radius:12px;
+
+text-align:center;
+
+border-left:5px solid #0d47a1;
+
+}
+
+
+
+.stat-card h2{
+
+margin:0;
+
+font-size:30px;
+
+color:#0d47a1;
+
+}
+
+
+
+.stat-card p{
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+
+
+
+
+
+/* =====================
+ SERVICES
+===================== */
+
+
+.services-grid{
+
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:20px;
+
+
+}
+
+
+
+.service-card{
+
+
+background:#f8fbff;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+cursor:pointer;
+
+border-top:4px solid #0d47a1;
+
+transition:.3s;
+
+
+}
+
+
+
+.service-card:hover{
+
+
+transform:translateY(-5px);
+
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.15);
+
+
+}
+
+
+
+.service-icon{
+
+font-size:40px;
+
+}
+
+
+
+.service-card h3{
+
+color:#0d47a1;
+
+}
+
+
+
+.service-card p{
+
+color:#555;
+
+}
+
+
+
+
+.activity{
+
+
+background:#f8f8f8;
+
+padding:15px;
+
+border-radius:10px;
+
+}
+
+
+
+
+
+@media(max-width:1000px){
+
+
+.stats{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+
+
+.services-grid{
+
+grid-template-columns:
+1fr;
+
+}
+
+
+}
+
+
+
+
+</style>
 
 
 
@@ -1035,7 +1065,9 @@ System Ready
 <script>
 
 
-// USER LOAD
+/* =====================
+ LOAD USER
+===================== */
 
 
 document.addEventListener(
@@ -1043,11 +1075,16 @@ document.addEventListener(
 function(){
 
 
+
 let user =
 
 localStorage.getItem("USER")
+
 ||
+
 sessionStorage.getItem("USER");
+
+
 
 
 
@@ -1058,27 +1095,44 @@ try{
 
 
 let data =
+
 JSON.parse(user);
+
+
 
 
 document.getElementById(
 "adminName"
 ).innerHTML =
 
+
 data.name
+
 ||
+
 data.username
+
 ||
+
 "Administrator";
 
 
-}
-
-catch(e){}
-
-
 
 }
+
+catch(e){
+
+
+
+console.log(e);
+
+
+}
+
+
+
+}
+
 
 
 });
@@ -1089,27 +1143,13 @@ catch(e){}
 
 
 
-function openFormBuilder(){
-
-window.location.href="forms.html";
-
-}
 
 
-
-function openReports(){
-
-window.location.href="reports.html";
-
-}
+/* =====================
+ FORM STATUS
+===================== */
 
 
-
-function openProfile(){
-
-window.location.href="profile.html";
-
-}
 function openFormStatus(status){
 
 
@@ -1117,27 +1157,29 @@ function openFormStatus(status){
 if(status==="active"){
 
 
-window.location.href=
+window.location.href =
 "forms.html?status=active";
 
 
 }
 
 
+
 else if(status==="deactive"){
 
 
-window.location.href=
+window.location.href =
 "forms.html?status=deactive";
 
 
 }
 
 
+
 else{
 
 
-window.location.href=
+window.location.href =
 "forms.html";
 
 
@@ -1149,18 +1191,78 @@ window.location.href=
 
 
 
+
+
+
+
+
+
+/* =====================
+ SERVICES
+===================== */
+
+
+function openFormBuilder(){
+
+
+window.location.href=
+"forms.html";
+
+
+}
+
+
+
+
+function openReports(){
+
+
+window.location.href=
+"reports.html";
+
+
+}
+
+
+
+
+function openProfile(){
+
+
+window.location.href=
+"profile.html";
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+ LOGOUT
+===================== */
+
+
 function logout(){
 
 
 sessionStorage.clear();
 
+
 localStorage.clear();
 
 
-window.location.href="../index.html";
+
+window.location.href=
+"../index.html";
+
 
 
 }
+
 
 
 </script>
@@ -1170,3 +1272,8 @@ window.location.href="../index.html";
 </body>
 
 </html>
+
+
+
+
+</div>
