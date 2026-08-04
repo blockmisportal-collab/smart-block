@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,11 +7,11 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 
 <title>
-SMART FORM ENTERPRISE v6.1 - School Dashboard
+SMART FORM ENTERPRISE v6.1
 </title>
 
 
@@ -35,142 +36,23 @@ background:#f4f7fb;
 }
 
 
-/* SIDEBAR */
-
-.sidebar{
-
-position:fixed;
-
-left:0;
-
-top:0;
-
-width:260px;
-
-height:100vh;
-
-background:linear-gradient(
-180deg,
-#0d47a1,
-#1565c0
-);
-
-color:white;
-
-padding:20px;
-
-}
-
-
-
-.logo{
-
-text-align:center;
-
-font-size:24px;
-
-font-weight:900;
-
-line-height:1.4;
-
-margin-bottom:30px;
-
-}
-
-
-
-
-
-.menu-item{
-
-padding:14px;
-
-border-radius:8px;
-
-cursor:pointer;
-
-font-weight:bold;
-
-margin-bottom:8px;
-
-}
-
-
-
-.menu-item:hover{
-
-background:rgba(255,255,255,.2);
-
-}
-
-
-
-.menu-title{
-
-font-size:13px;
-
-color:#bbdefb;
-
-margin:15px 0 8px;
-
-}
-
-
-
-.dropdown{
-
-display:none;
-
-padding-left:15px;
-
-}
-
-
-
-.dropdown div{
-
-padding:10px;
-
-cursor:pointer;
-
-border-radius:6px;
-
-}
-
-
-
-.dropdown div:hover{
-
-background:rgba(255,255,255,.15);
-
-}
-
-
-
-
-/* MAIN */
-
-.main{
-
-margin-left:260px;
-
-}
-
-
+/* HEADER */
 
 .header{
+
+height:90px;
 
 background:#0d47a1;
 
 color:white;
 
-padding:20px 30px;
-
 display:flex;
+
+align-items:center;
 
 justify-content:space-between;
 
-align-items:center;
+padding:0 30px;
 
 }
 
@@ -188,20 +70,25 @@ font-size:28px;
 
 .header p{
 
-margin:5px 0 0;
+margin:5px 0;
 
 }
 
 
 
 
-.btn{
+
+.logout{
+
+background:#e53935;
+
+color:white;
 
 border:none;
 
-padding:10px 18px;
+padding:12px 20px;
 
-border-radius:6px;
+border-radius:8px;
 
 cursor:pointer;
 
@@ -211,11 +98,16 @@ font-weight:bold;
 
 
 
-.logout{
 
-background:#d32f2f;
 
-color:white;
+/* LAYOUT */
+
+
+.wrapper{
+
+display:flex;
+
+min-height:calc(100vh - 90px);
 
 }
 
@@ -223,11 +115,71 @@ color:white;
 
 
 
-.container{
+/* SIDEBAR */
+
+
+.sidebar{
+
+width:230px;
+
+background:#1565c0;
+
+color:white;
+
+padding:20px;
+
+}
+
+
+
+.sidebar h2{
+
+font-size:20px;
+
+margin-bottom:30px;
+
+}
+
+
+
+.menu{
+
+padding:12px;
+
+margin-bottom:10px;
+
+cursor:pointer;
+
+border-radius:8px;
+
+}
+
+
+
+.menu:hover{
+
+background:#1976d2;
+
+}
+
+
+
+
+
+/* CONTENT */
+
+
+.content{
+
+flex:1;
 
 padding:25px;
 
 }
+
+
+
+
 
 
 
@@ -239,17 +191,19 @@ padding:25px;
 
 border-radius:15px;
 
+margin-bottom:20px;
+
 box-shadow:
 
-0 5px 20px rgba(0,0,0,.12);
-
-margin-bottom:20px;
+0 5px 15px rgba(0,0,0,.12);
 
 }
 
 
 
-.info{
+
+
+.grid{
 
 display:grid;
 
@@ -263,21 +217,52 @@ gap:20px;
 
 
 
-.box{
+
+.info-box{
 
 background:#f5f9ff;
+
+border-left:
+
+5px solid #1565c0;
 
 padding:18px;
 
 border-radius:10px;
 
-border-left:5px solid #0d47a1;
+}
+
+
+
+
+
+.label{
+
+color:#1565c0;
+
+font-weight:bold;
 
 }
 
 
 
-.label{
+.value{
+
+font-size:18px;
+
+margin-top:8px;
+
+}
+
+
+
+
+
+
+
+.counter{
+
+font-size:30px;
 
 font-weight:bold;
 
@@ -286,184 +271,178 @@ color:#0d47a1;
 }
 
 
-.value{
 
-font-size:20px;
+
+
+
+.section-title{
+
+font-size:22px;
 
 font-weight:bold;
 
-margin-top:8px;
+color:#0d47a1;
+
+margin-bottom:15px;
 
 }
 
 
+
+
+
+.form-item{
+
+background:#f5f9ff;
+
+padding:18px;
+
+border-radius:10px;
+
+margin-bottom:15px;
+
+border-left:
+
+5px solid #1565c0;
+
+}
+
+
+
+.form-item button{
+
+background:#1565c0;
+
+color:white;
+
+border:none;
+
+padding:10px 15px;
+
+border-radius:7px;
+
+cursor:pointer;
+
+}
+
+
+
+
+
+
+
+.returned{
+
+border-left-color:#d32f2f;
+
+}
+
+
+
+.returned h3{
+
+color:#d32f2f;
+
+}
+
+
+
+
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+
+
+th{
+
+background:#1565c0;
+
+color:white;
+
+padding:12px;
+
+}
+
+
+
+td{
+
+padding:12px;
+
+border-bottom:1px solid #ddd;
+
+}
+
+
+
+
+.badge{
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+}
+
+
+
+.pending{
+
+background:#fff3cd;
+
+color:#856404;
+
+}
+
+
+
+.approved{
+
+background:#d4edda;
+
+color:#155724;
+
+}
+
+
+
+.rejected{
+
+background:#f8d7da;
+
+color:#721c24;
+
+}
+
+
+
+.loading{
+
+text-align:center;
+
+padding:20px;
+
+font-weight:bold;
+
+}
+
+
+
 </style>
+
 
 </head>
 
 
 <body>
-  <!-- =========================
- SIDEBAR CONTENT
-========================= -->
-
-
-<div class="sidebar">
-
-
-<div class="logo">
-
-🏫 SMART FORM
-
-<br>
-
-ENTERPRISE v6.1
-
-</div>
-
-
-
-
-<div class="menu-item"
-onclick="goDashboard()">
-
-🏠 Dashboard
-
-</div>
-
-
-
-
-
-<div class="menu-title">
-
-FORMS
-
-</div>
-
-
-
-
-
-<div class="menu-item"
-onclick="toggleForms()">
-
-📝 Available Active Forms ▼
-
-</div>
-
-
-
-
-
-<div id="formMenu"
-class="dropdown">
-
-
-<div onclick="openForms()">
-
-📋 Active Forms
-
-</div>
-
-
-<div>
-
-➕ New Forms
-
-</div>
-
-
-<div>
-
-📂 Assigned Forms
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="menu-item"
-onclick="openSubmission()">
-
-📤 My Submissions
-
-</div>
-
-
-
-
-
-<div class="menu-item"
-onclick="openReturned()">
-
-↩ Returned Forms
-
-</div>
-
-
-
-
-
-<div class="menu-title">
-
-REPORT
-
-</div>
-
-
-
-
-<div class="menu-item">
-
-📊 Reports
-
-</div>
-
-
-
-
-<div class="menu-item">
-
-👤 Profile
-
-</div>
-
-
-
-
-<div class="menu-item"
-onclick="logout()">
-
-🚪 Logout
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- =========================
- MAIN CONTENT
-========================= -->
-
-
-<div class="main">
-
-
-
 
 
 <div class="header">
@@ -471,18 +450,13 @@ onclick="logout()">
 
 <div>
 
-
 <h1>
-
-SMART FORM ENTERPRISE v6.1
-
+🏫 SMART FORM ENTERPRISE v6.1
 </h1>
 
 
 <p>
-
 SCHOOL MANAGEMENT DASHBOARD
-
 </p>
 
 
@@ -492,15 +466,14 @@ SCHOOL MANAGEMENT DASHBOARD
 
 <button
 
-class="btn logout"
+class="logout"
 
 onclick="logout()">
 
-
 Logout
 
-
 </button>
+
 
 
 </div>
@@ -509,18 +482,86 @@ Logout
 
 
 
+<div class="wrapper">
 
 
 
-<div class="container">
+<div class="sidebar">
+
+
+<h2>
+SMART FORM
+</h2>
+
+
+
+<div class="menu"
+onclick="goDashboard()">
+
+🏠 Dashboard
+
+</div>
+
+
+
+
+<div class="menu"
+onclick="openForms()">
+
+📝 Available Active Forms
+
+</div>
+
+
+
+
+<div class="menu"
+onclick="openSubmission()">
+
+📤 My Submissions
+
+</div>
+
+
+
+
+<div class="menu"
+onclick="openReturned()">
+
+↩ Returned Forms
+
+</div>
+
+
+
+
+<div class="menu">
+
+📊 Reports
+
+</div>
+
+
+
+
+<div class="menu">
+
+👤 Profile
+
+</div>
+
+
+
+</div>
 
 
 
 
 
-
-
-<!-- SCHOOL PROFILE -->
+<div class="content">
+<!-- =========================
+ DASHBOARD CONTENT
+========================= -->
 
 
 <div class="card">
@@ -536,25 +577,22 @@ School User
 
 </span>
 
-
 </h2>
 
 
 
 
 
-<div class="info">
+<div class="grid">
 
 
 
-
-
-<div class="box">
+<div class="info-box">
 
 
 <div class="label">
 
-School Name
+🏫 School Name
 
 </div>
 
@@ -576,13 +614,12 @@ id="schoolName">
 
 
 
-
-<div class="box">
+<div class="info-box">
 
 
 <div class="label">
 
-UDISE Code
+🆔 UDISE Code
 
 </div>
 
@@ -604,12 +641,12 @@ id="udiseCode">
 
 
 
-<div class="box">
+<div class="info-box">
 
 
 <div class="label">
 
-Nyaya Panchayat
+📍 Nyaya Panchayat
 
 </div>
 
@@ -631,12 +668,12 @@ id="nyayaPanchayat">
 
 
 
-<div class="box">
+<div class="info-box">
 
 
 <div class="label">
 
-Role
+👤 Role
 
 </div>
 
@@ -668,25 +705,22 @@ SCHOOL
 
 
 
-
-<!-- DASHBOARD COUNT -->
+<!-- =========================
+ COUNTER
+========================= -->
 
 
 <div class="card">
 
 
-<div style="
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-">
+<div class="grid">
 
 
 
 
 
-<div class="box">
+<div class="info-box">
+
 
 <div class="label">
 
@@ -695,7 +729,7 @@ gap:20px;
 </div>
 
 
-<div class="value"
+<div class="counter"
 
 id="totalForms">
 
@@ -712,7 +746,8 @@ id="totalForms">
 
 
 
-<div class="box">
+
+<div class="info-box">
 
 
 <div class="label">
@@ -722,7 +757,7 @@ id="totalForms">
 </div>
 
 
-<div class="value"
+<div class="counter"
 
 id="pendingForms">
 
@@ -739,7 +774,8 @@ id="pendingForms">
 
 
 
-<div class="box">
+
+<div class="info-box">
 
 
 <div class="label">
@@ -749,7 +785,7 @@ id="pendingForms">
 </div>
 
 
-<div class="value"
+<div class="counter"
 
 id="approvedForms">
 
@@ -766,7 +802,8 @@ id="approvedForms">
 
 
 
-<div class="box">
+
+<div class="info-box">
 
 
 <div class="label">
@@ -776,7 +813,7 @@ id="approvedForms">
 </div>
 
 
-<div class="value"
+<div class="counter"
 
 id="returnedForms">
 
@@ -805,7 +842,9 @@ id="returnedForms">
 
 
 
-<!-- RETURNED FORM -->
+<!-- =========================
+ RETURNED FORM
+========================= -->
 
 
 <div class="card"
@@ -816,40 +855,50 @@ style="display:none;">
 
 
 
-<h2 style="color:#d32f2f">
+<div class="section-title"
+style="color:#d32f2f;">
+
 
 ⚠ Returned Forms By Nodal
 
-</h2>
+
+</div>
+
+
 
 
 
 <div id="returnedData">
 
-</div>
-
 
 </div>
 
 
 
+</div>
 
 
 
 
 
 
-<!-- ACTIVE FORMS -->
+
+
+
+<!-- =========================
+ ACTIVE FORMS
+========================= -->
 
 
 <div class="card">
 
 
-<h2 style="color:#0d47a1">
+<div class="section-title">
 
 📝 Available Active Forms
 
-</h2>
+</div>
+
 
 
 
@@ -857,44 +906,48 @@ style="display:none;">
 <div id="activeForms">
 
 
-<div>
+<div class="loading">
 
 Loading Forms...
 
 </div>
 
 
-</div>
-
-
 
 </div>
 
 
 
+</div>
 
 
 
 
 
 
-<!-- SUBMITTED FORMS -->
+
+
+
+<!-- =========================
+ SUBMISSIONS
+========================= -->
 
 
 <div class="card">
 
 
-<h2 style="color:#0d47a1">
+<div class="section-title">
 
 📤 My Submitted Forms
 
-</h2>
+</div>
 
 
 
 
 
-<table width="100%">
+
+<table>
 
 
 <thead>
@@ -945,11 +998,13 @@ Action
 
 <tr>
 
+
 <td colspan="4">
 
 Loading...
 
 </td>
+
 
 </tr>
 
@@ -965,11 +1020,21 @@ Loading...
 </div>
 
 
+
+
+
+
 </div>
 
 
 </div>
-  <script>
+
+
+
+
+
+
+<script>
 
 
 /*========================
@@ -1004,14 +1069,6 @@ localStorage.getItem("USER")
 let FORM_DATA=[];
 
 let RESPONSE_DATA=[];
-
-
-
-
-
-
-
-
 /*========================
  LOAD USER
 ========================*/
@@ -1024,7 +1081,6 @@ document.getElementById(
 "userName"
 ).innerHTML =
 
-
 USER.name ||
 
 USER.username ||
@@ -1033,12 +1089,9 @@ USER.username ||
 
 
 
-
-
 document.getElementById(
 "schoolName"
 ).innerHTML =
-
 
 USER.schoolName ||
 
@@ -1046,12 +1099,9 @@ USER.schoolName ||
 
 
 
-
-
 document.getElementById(
 "udiseCode"
 ).innerHTML =
-
 
 USER.schoolCode ||
 
@@ -1059,12 +1109,9 @@ USER.schoolCode ||
 
 
 
-
-
 document.getElementById(
 "nyayaPanchayat"
 ).innerHTML =
-
 
 USER.nyayaPanchayat ||
 
@@ -1072,12 +1119,9 @@ USER.nyayaPanchayat ||
 
 
 
-
-
 document.getElementById(
 "userRole"
 ).innerHTML =
-
 
 USER.role ||
 
@@ -1102,7 +1146,6 @@ USER.role ||
 async function loadForms(){
 
 
-
 try{
 
 
@@ -1112,35 +1155,26 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 
 "text/plain;charset=utf-8"
-
 
 },
 
 
 body:JSON.stringify({
 
-
 action:"activeForms"
 
-
 })
-
 
 }
 
 );
-
-
 
 
 
@@ -1152,18 +1186,15 @@ let result = await response.json();
 
 
 
-
-
 if(result.success){
-
 
 
 FORM_DATA = result.data || [];
 
 
-
-displayForms(FORM_DATA);
-
+displayForms(
+FORM_DATA
+);
 
 
 }
@@ -1171,19 +1202,19 @@ displayForms(FORM_DATA);
 else{
 
 
-
 document.getElementById(
 "activeForms"
-).innerHTML =
+)
 
+.innerHTML =
 
 `
 
-<p style="color:red">
+<div class="form-item">
 
 ${result.message}
 
-</p>
+</div>
 
 `;
 
@@ -1198,29 +1229,31 @@ ${result.message}
 catch(error){
 
 
-console.log(error);
+console.log(
+error
+);
 
 
 
 document.getElementById(
 "activeForms"
-).innerHTML =
+)
 
+.innerHTML =
 
 `
 
-<p style="color:red">
+<div class="form-item">
 
 Server Error
 
-</p>
+</div>
 
 `;
 
 
 
 }
-
 
 
 }
@@ -1241,10 +1274,7 @@ Server Error
 function displayForms(data){
 
 
-
 let html="";
-
-
 
 
 
@@ -1254,15 +1284,13 @@ if(data.length===0){
 
 html=
 
-
 `
 
-<div class="box">
+<div class="form-item">
 
 कोई Active Form उपलब्ध नहीं है।
 
 </div>
-
 
 `;
 
@@ -1274,25 +1302,21 @@ html=
 
 
 
-
 data.forEach(form=>{
-
 
 
 html +=
 
-
 `
 
-<div class="box">
+<div class="form-item">
 
 
-<div class="label">
+<h3>
 
 ${form.name}
 
-</div>
-
+</h3>
 
 
 <p>
@@ -1305,24 +1329,15 @@ ${form.description || "Online Form"}
 
 <button
 
-class="btn"
-
-style="
-background:#1565c0;
-color:white"
-
 onclick="openForm('${form.id}')">
 
-
 📝 Open Form
-
 
 </button>
 
 
 
 </div>
-
 
 `;
 
@@ -1336,7 +1351,9 @@ onclick="openForm('${form.id}')">
 
 document.getElementById(
 "activeForms"
-).innerHTML = html;
+)
+
+.innerHTML = html;
 
 
 
@@ -1360,8 +1377,7 @@ function openForm(id){
 
 window.location.href =
 
-"fill-form.html?id="+id;
-
+"fill-form.html?id=" + id;
 
 
 }
@@ -1375,13 +1391,7 @@ window.location.href =
 
 
 /*========================
- LOAD SUBMISSIONS
-========================*/
-
-
-/*========================
  LOAD SCHOOL SUBMISSIONS
- FINAL REJECTION FIX
 ========================*/
 
 
@@ -1397,35 +1407,26 @@ API_URL,
 
 {
 
-
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 
 "text/plain;charset=utf-8"
-
 
 },
 
 
 body:JSON.stringify({
 
-
 action:"schoolResponses",
-
 
 schoolCode:
 
 USER.schoolCode
 
-
-
 })
-
 
 }
 
@@ -1442,18 +1443,9 @@ let result = await response.json();
 
 
 
-console.log(
-"School Responses",
-result
-);
-
-
-
-
 
 
 if(result.success){
-
 
 
 RESPONSE_DATA =
@@ -1462,33 +1454,20 @@ result.data || [];
 
 
 
-
-
-
 displaySubmissions(
-
 RESPONSE_DATA
-
 );
-
-
 
 
 
 updateCount(
-
 RESPONSE_DATA
-
 );
 
 
 
-
-
 showReturned(
-
 RESPONSE_DATA
-
 );
 
 
@@ -1498,13 +1477,11 @@ RESPONSE_DATA
 else{
 
 
-
 document.getElementById(
 "submissionTable"
 )
 
 .innerHTML =
-
 
 `
 
@@ -1531,7 +1508,6 @@ ${result.message}
 catch(error){
 
 
-
 console.log(
 "Submission Error",
 error
@@ -1543,6 +1519,29 @@ document.getElementById(
 "submissionTable"
 )
 
+.innerHTML =
+
+`
+
+<tr>
+
+<td colspan="4">
+
+Server Error
+
+</td>
+
+</tr>
+
+`;
+
+
+
+}
+
+
+
+}
 /*========================
  DISPLAY SUBMISSIONS
 ========================*/
@@ -1552,8 +1551,6 @@ function displaySubmissions(data){
 
 
 let html="";
-
-
 
 
 
@@ -1580,37 +1577,65 @@ html=`
 
 
 
-
 data.forEach(item=>{
-
 
 
 let status =
 
-String(item.status || "PENDING")
+String(
+item.status || "PENDING"
+)
 
 .toUpperCase();
 
 
 
 
-let badge = status;
+
+let badge="";
 
 
 
-if(status==="APPROVED")
-
-badge="✅ APPROVED";
+if(status==="APPROVED"){
 
 
-else if(status==="REJECTED")
+badge=
 
-badge="⚠ RETURNED";
+`<span class="badge approved">
+✅ APPROVED
+</span>`;
 
 
-else
 
-badge="⏳ PENDING";
+}
+
+else if(status==="REJECTED"){
+
+
+badge=
+
+`<span class="badge rejected">
+⚠ RETURNED
+</span>`;
+
+
+
+}
+
+else{
+
+
+badge=
+
+`<span class="badge pending">
+⏳ PENDING
+</span>`;
+
+
+
+}
+
+
 
 
 
@@ -1620,30 +1645,25 @@ let action="";
 
 
 
+
+
 if(status==="REJECTED"){
 
 
-action=
 
+action=
 
 `
 
 <button
 
-class="btn"
-
-style="
-background:#1565c0;
-color:white"
+class="form-item button"
 
 onclick="editForm('${item.formId}')">
 
-
 ✏ Edit & Submit Again
 
-
 </button>
-
 
 `;
 
@@ -1656,8 +1676,8 @@ onclick="editForm('${item.formId}')">
 
 
 
-html +=
 
+html +=
 
 `
 
@@ -1671,12 +1691,14 @@ ${item.formName || ""}
 </td>
 
 
+
 <td>
 
 ${new Date(item.date)
 .toLocaleDateString()}
 
 </td>
+
 
 
 <td>
@@ -1686,11 +1708,13 @@ ${badge}
 </td>
 
 
+
 <td>
 
 ${action}
 
 </td>
+
 
 
 </tr>
@@ -1705,9 +1729,12 @@ ${action}
 
 
 
+
 document.getElementById(
 "submissionTable"
-).innerHTML=html;
+)
+
+.innerHTML=html;
 
 
 
@@ -1722,7 +1749,7 @@ document.getElementById(
 
 
 /*========================
- COUNT
+ UPDATE COUNTS
 ========================*/
 
 
@@ -1745,10 +1772,11 @@ let returned=0;
 data.forEach(item=>{
 
 
-
 let status=
 
-String(item.status || "PENDING")
+String(
+item.status || "PENDING"
+)
 
 .toUpperCase();
 
@@ -1756,19 +1784,29 @@ String(item.status || "PENDING")
 
 
 
-if(status==="APPROVED")
+if(status==="APPROVED"){
+
 
 approved++;
 
 
-else if(status==="REJECTED")
+}
+
+else if(status==="REJECTED"){
+
 
 returned++;
 
 
-else
+}
+
+else{
+
 
 pending++;
+
+
+}
 
 
 
@@ -1779,24 +1817,36 @@ pending++;
 
 
 
+
 document.getElementById(
 "totalForms"
-).innerHTML=total;
+)
+
+.innerHTML=total;
+
 
 
 document.getElementById(
 "pendingForms"
-).innerHTML=pending;
+)
+
+.innerHTML=pending;
+
 
 
 document.getElementById(
 "approvedForms"
-).innerHTML=approved;
+)
+
+.innerHTML=approved;
+
 
 
 document.getElementById(
 "returnedForms"
-).innerHTML=returned;
+)
+
+.innerHTML=returned;
 
 
 
@@ -1809,26 +1859,22 @@ document.getElementById(
 
 
 
+
 /*========================
- RETURNED FORM
+ RETURNED FORMS
 ========================*/
 
 
 function showReturned(data){
 
 
+let returned =
 
-let returned = data.filter(item=>
-
-
+data.filter(item=>
 
 String(item.status)
-
 .toUpperCase()
-
 ==="REJECTED"
-
-
 
 );
 
@@ -1839,10 +1885,18 @@ String(item.status)
 if(returned.length===0){
 
 
+document.getElementById(
+"returnedSection"
+)
+
+.style.display="none";
+
+
 return;
 
 
 }
+
 
 
 
@@ -1857,15 +1911,15 @@ let html="";
 returned.forEach(item=>{
 
 
-html +=
 
+html +=
 
 `
 
-<div class="box">
+<div class="form-item returned">
 
 
-<h3 style="color:#d32f2f">
+<h3>
 
 ⚠ ${item.formName}
 
@@ -1875,7 +1929,9 @@ html +=
 
 <p>
 
+<strong>
 Remark:
+</strong>
 
 ${item.remark || "Correction Required"}
 
@@ -1883,26 +1939,18 @@ ${item.remark || "Correction Required"}
 
 
 
+
 <button
-
-class="btn"
-
-style="
-background:#1565c0;
-color:white"
 
 onclick="editForm('${item.formId}')">
 
-
 ✏ Edit Form
-
 
 </button>
 
 
 
 </div>
-
 
 `;
 
@@ -1914,15 +1962,23 @@ onclick="editForm('${item.formId}')">
 
 
 
+
 document.getElementById(
 "returnedData"
-).innerHTML=html;
+)
+
+.innerHTML=html;
+
+
 
 
 
 document.getElementById(
 "returnedSection"
-).style.display="block";
+)
+
+.style.display="block";
+
 
 
 }
@@ -1933,6 +1989,11 @@ document.getElementById(
 
 
 
+
+
+/*========================
+ EDIT FORM
+========================*/
 
 
 function editForm(id){
@@ -1953,35 +2014,9 @@ window.location.href=
 
 
 
-function toggleForms(){
-
-
-let menu=
-
-document.getElementById(
-"formMenu"
-);
-
-
-
-menu.style.display =
-
-menu.style.display==="block"
-
-?
-
-"none"
-
-:
-
-"block";
-
-
-
-}
-
-
-
+/*========================
+ MENU FUNCTIONS
+========================*/
 
 
 function openForms(){
@@ -2022,7 +2057,6 @@ behavior:"smooth"
 
 
 
-
 function openReturned(){
 
 
@@ -2042,18 +2076,31 @@ behavior:"smooth"
 
 
 
-
-
 function goDashboard(){
 
 
-window.scrollTo(0,0);
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
 
 
 }
 
 
 
+
+
+
+
+
+
+/*========================
+ LOGOUT
+========================*/
 
 
 function logout(){
@@ -2074,6 +2121,7 @@ window.location.href="../index.html";
 
 
 
+
 /*========================
  PAGE LOAD
 ========================*/
@@ -2084,6 +2132,7 @@ loadUser();
 loadForms();
 
 loadSubmissions();
+
 
 
 
