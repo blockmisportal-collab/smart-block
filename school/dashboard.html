@@ -1379,8 +1379,13 @@ window.location.href =
 ========================*/
 
 
-async function loadSubmissions(){
+/*========================
+ LOAD SCHOOL SUBMISSIONS
+ FINAL REJECTION FIX
+========================*/
 
+
+async function loadSubmissions(){
 
 
 try{
@@ -1406,6 +1411,161 @@ headers:{
 
 },
 
+
+body:JSON.stringify({
+
+
+action:"schoolResponses",
+
+
+schoolCode:
+
+USER.schoolCode
+
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+
+let result = await response.json();
+
+
+
+
+
+console.log(
+"School Responses",
+result
+);
+
+
+
+
+
+
+if(result.success){
+
+
+
+RESPONSE_DATA =
+
+result.data || [];
+
+
+
+
+
+
+displaySubmissions(
+
+RESPONSE_DATA
+
+);
+
+
+
+
+
+updateCount(
+
+RESPONSE_DATA
+
+);
+
+
+
+
+
+showReturned(
+
+RESPONSE_DATA
+
+);
+
+
+
+}
+
+else{
+
+
+
+document.getElementById(
+"submissionTable"
+)
+
+.innerHTML =
+
+
+`
+
+<tr>
+
+<td colspan="4">
+
+${result.message}
+
+</td>
+
+</tr>
+
+`;
+
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+
+console.log(
+"Submission Error",
+error
+);
+
+
+
+document.getElementById(
+"submissionTable"
+)
+
+.innerHTML =
+
+
+`
+
+<tr>
+
+<td colspan="4">
+
+Server Error
+
+</td>
+
+</tr>
+
+`;
+
+
+
+}
+
+
+}
 
 body:JSON.stringify({
 
