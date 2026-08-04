@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -11,6 +12,7 @@
 <title>
 SMART FORM ENTERPRISE v6.1 - Admin Dashboard
 </title>
+
 
 
 <style>
@@ -93,16 +95,15 @@ margin-top:20px;
 
 .menu a{
 
-
 display:block;
 
-padding:15px 25px;
+padding:14px 25px;
 
 color:white;
 
 text-decoration:none;
 
-font-size:16px;
+font-size:15px;
 
 }
 
@@ -116,12 +117,8 @@ background:#1565c0;
 
 
 
-
-
-
-
 /* =====================
- MAIN AREA
+ MAIN
 ===================== */
 
 
@@ -132,7 +129,6 @@ margin-left:250px;
 min-height:100vh;
 
 }
-
 
 
 
@@ -163,7 +159,6 @@ box-shadow:
 
 
 
-
 .header h1{
 
 margin:0;
@@ -173,7 +168,6 @@ color:#0d47a1;
 font-size:24px;
 
 }
-
 
 
 
@@ -188,53 +182,6 @@ gap:15px;
 }
 
 
-
-
-
-/* FORM DROPDOWN */
-
-
-.form-status-menu select{
-
-
-height:40px;
-
-padding:0 15px;
-
-border-radius:8px;
-
-border:1px solid #ddd;
-
-background:white;
-
-color:#0d47a1;
-
-font-weight:600;
-
-cursor:pointer;
-
-}
-
-
-
-
-
-.form-status-menu select:hover{
-
-
-box-shadow:
-
-0 3px 10px rgba(0,0,0,.15);
-
-
-}
-
-
-
-
-
-
-/* LOGOUT */
 
 
 .logout{
@@ -259,17 +206,12 @@ font-weight:bold;
 
 
 
-
-/* =====================
- CONTAINER
-===================== */
-
-
 .container{
 
 padding:25px;
 
 }
+
 
 
 
@@ -294,689 +236,8 @@ margin-bottom:20px;
 
 
 
-
 /* =====================
- MOBILE
-===================== */
-
-
-@media(max-width:800px){
-
-
-
-.sidebar{
-
-width:70px;
-
-}
-
-
-
-.logo{
-
-font-size:12px;
-
-}
-
-
-
-.menu a{
-
-font-size:0;
-
-padding:15px;
-
-}
-
-
-
-.main{
-
-margin-left:70px;
-
-}
-
-
-}
-
-
-
-</style>
-
-
-</head>
-
-
-<body>
-
-
-
-<!-- =====================
- SIDEBAR
-===================== -->
-
-
-<div class="sidebar">
-
-
-<div class="logo">
-
-SMART FORM<br>
-
-ENTERPRISE v6.1
-
-
-</div>
-
-
-
-
-<div class="menu">
-
-
-
-<a href="dashboard.html">
-
-🏠 Dashboard
-
-</a>
-
-
-
-<!-- USER MANAGEMENT MENU -->
-
-
-<div class="menu-group">
-
-
-<a href="javascript:void(0)"
-onclick="toggleUserMenu()">
-
-👥 User Management ▾
-
-</a>
-
-
-
-
-
-<div id="userSubMenu"
-class="submenu">
-
-
-<a href="users.html">
-
-👤 Total Users Report
-
-</a>
-
-
-
-
-<a href="users.html?status=active">
-
-✅ Active Users
-
-</a>
-
-
-
-
-<a href="users.html?status=deactive">
-
-⛔ De-Active Users
-
-</a>
-
-
-
-
-<a href="users.html?action=add">
-
-➕ Add New User
-
-</a>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-<a href="schools.html">
-
-🏫 School Management
-
-</a>
-
-
-
-<a href="forms.html">
-
-📝 Form Builder
-
-</a>
-<!-- FORM MANAGEMENT MENU -->
-
-
-<div class="menu-group">
-
-
-<a href="javascript:void(0)"
-onclick="toggleFormMenu()">
-
-📋 Form Management ▾
-
-</a>
-
-
-
-<div id="formSubMenu"
-class="submenu">
-
-
-<a href="forms.html">
-
-📋 Form List
-
-</a>
-
-
-
-<a href="forms.html?status=active">
-
-✅ Active Form
-
-</a>
-
-
-
-<a href="forms.html?status=deactive">
-
-⛔ De-Active Form
-
-</a>
-
-
-
-</div>
-
-
-</div>
-
-
-<a href="reports.html">
-
-📊 Reports MIS
-
-</a>
-
-
-
-<a href="settings.html">
-
-⚙ Settings
-
-</a>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<!-- =====================
- MAIN
-===================== -->
-
-
-<div class="main">
-
-
-
-
-
-<!-- HEADER -->
-
-
-<div class="header">
-
-
-
-<div>
-
-
-<h1>
-ADMIN DASHBOARD
-</h1>
-
-
-<small>
-SMART FORM ENTERPRISE v6.1
-</small>
-
-
-</div>
-
-
-
-
-
-
-<div class="header-right">
-
-
-
-<div class="form-status-menu">
-
-
-<select
-id="formStatus"
-onchange="openFormStatus(this.value)">
-
-
-
-<option value="">
-
-📋 Form List
-
-</option>
-
-
-
-
-<option value="active">
-
-✅ Active Form
-
-</option>
-
-
-
-
-<option value="deactive">
-
-⛔ De-Active Form
-
-</option>
-
-
-
-</select>
-
-
-</div>
-
-
-
-
-
-
-<button
-class="logout"
-onclick="logout()">
-
-LOGOUT
-
-</button>
-
-
-
-</div>
-
-
-
-</div>
-<!-- =====================
- DASHBOARD CONTENT
-===================== -->
-
-
-<div class="container">
-
-
-
-<!-- WELCOME -->
-
-
-<div class="card">
-
-
-<h2 style="color:#0d47a1;">
-
-Welcome,
-
-<span id="adminName">
-
-Administrator
-
-</span>
-
-</h2>
-
-
-<p>
-
-Role :
-
-<strong>
-
-ADMIN
-
-</strong>
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- =====================
- OVERVIEW
-===================== -->
-
-
-<div class="card">
-
-
-<h2>
-Dashboard Overview
-</h2>
-
-
-
-<div class="stats">
-
-
-
-<div class="stat-card">
-
-<h2 id="totalUsers">
-0
-</h2>
-
-
-<p>
-Total Users
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="stat-card">
-
-<h2 id="totalSchools">
-0
-</h2>
-
-
-<p>
-Total Schools
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="stat-card">
-
-<h2 id="totalForms">
-0
-</h2>
-
-
-<p>
-Total Forms
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="stat-card">
-
-<h2 id="pendingForms">
-0
-</h2>
-
-
-<p>
-Pending Forms
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="stat-card">
-
-<h2 style="color:green;">
-ONLINE
-</h2>
-
-
-<p>
-System Status
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- =====================
- AVAILABLE SERVICES
-===================== -->
-
-
-<div class="card">
-
-
-<h2>
-
-Available Services
-
-</h2>
-
-
-
-
-<div class="services-grid">
-
-
-
-
-
-<div class="service-card"
-onclick="openFormBuilder()">
-
-
-
-<div class="service-icon">
-
-📝
-
-</div>
-
-
-<h3>
-
-Form Builder
-
-</h3>
-
-
-<p>
-
-Create & Manage Dynamic Forms
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="service-card"
-onclick="openReports()">
-
-
-
-<div class="service-icon">
-
-📊
-
-</div>
-
-
-<h3>
-
-Reports MIS
-
-</h3>
-
-
-<p>
-
-Progress & Analysis Reports
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="service-card"
-onclick="openProfile()">
-
-
-
-<div class="service-icon">
-
-👤
-
-</div>
-
-
-<h3>
-
-Profile
-
-</h3>
-
-
-<p>
-
-User Profile Management
-
-</p>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- =====================
- RECENT ACTIVITY
-===================== -->
-
-
-<div class="card">
-
-
-<h2>
-
-Recent Activity
-
-</h2>
-
-
-
-<div class="activity">
-
-
-✅ Admin Dashboard Loaded Successfully
-
-
-<br><br>
-
-
-System Ready
-
-
-</div>
-
-
-
-</div>
-<style>
-
-
-/* =====================
- STATISTICS
+ STAT CARDS
 ===================== */
 
 
@@ -985,6 +246,7 @@ System Ready
 display:grid;
 
 grid-template-columns:
+
 repeat(5,1fr);
 
 gap:15px;
@@ -994,7 +256,6 @@ gap:15px;
 
 
 .stat-card{
-
 
 background:#f1f6ff;
 
@@ -1026,37 +287,30 @@ color:#0d47a1;
 
 font-weight:bold;
 
-margin-top:10px;
-
 }
 
 
 
 
 
-
-/* =====================
- SERVICES
-===================== */
+/* SERVICES */
 
 
 .services-grid{
 
-
 display:grid;
 
 grid-template-columns:
+
 repeat(3,1fr);
 
 gap:20px;
-
 
 }
 
 
 
 .service-card{
-
 
 background:#f8fbff;
 
@@ -1070,23 +324,15 @@ cursor:pointer;
 
 border-top:4px solid #0d47a1;
 
-transition:.3s;
-
-
 }
 
 
 
 .service-card:hover{
 
-
-transform:translateY(-5px);
-
-
 box-shadow:
 
 0 8px 20px rgba(0,0,0,.15);
-
 
 }
 
@@ -1100,25 +346,9 @@ font-size:40px;
 
 
 
-.service-card h3{
-
-color:#0d47a1;
-
-}
-
-
-
-.service-card p{
-
-color:#555;
-
-}
-
-
 
 
 .activity{
-
 
 background:#f8f8f8;
 
@@ -1132,12 +362,14 @@ border-radius:10px;
 
 
 
+
 @media(max-width:1000px){
 
 
 .stats{
 
 grid-template-columns:
+
 repeat(2,1fr);
 
 }
@@ -1147,35 +379,781 @@ repeat(2,1fr);
 .services-grid{
 
 grid-template-columns:
+
 1fr;
 
 }
 
 
+
+.sidebar{
+
+width:70px;
+
 }
 
+
+
+.main{
+
+margin-left:70px;
+
+}
+
+
+
+.logo{
+
+font-size:12px;
+
+}
+
+
+}
 
 
 
 </style>
 
 
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+
+<div class="logo">
+
+SMART FORM<br>
+
+ENTERPRISE v6.1
+
+
+</div>
+
+
+
+<div class="menu">
+
+
+<a href="dashboard.html">
+
+🏠 Dashboard
+
+</a>
+
+
+<a href="users.html">
+
+👥 User Management
+
+</a>
+
+
+
+<a href="schools.html">
+
+🏫 School Management
+
+</a>
+
+
+
+<a href="forms.html">
+
+📝 Form Builder
+
+</a>
+
+
+
+<a href="responses.html">
+
+📋 Response Report
+
+</a>
+
+
+
+<a href="reports.html">
+
+📊 Reports MIS
+
+</a>
+
+
+
+<a href="settings.html">
+
+⚙ Settings
+
+</a>
+
+
+
+</div>
+
+
+</div>
+<!-- =====================
+ MAIN AREA
+===================== -->
+
+<div class="main">
+
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+
+<div>
+
+<h1>
+ADMIN DASHBOARD
+</h1>
+
+
+<small>
+SMART FORM ENTERPRISE v6.1
+</small>
+
+
+</div>
 
 
 
 
+
+<div class="header-right">
+
+
+<button
+class="logout"
+onclick="logout()">
+
+LOGOUT
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+
+
+<!-- WELCOME CARD -->
+
+
+<div class="card">
+
+
+<h2 style="color:#0d47a1;">
+
+Welcome,
+
+<span id="adminName">
+
+Administrator
+
+</span>
+
+
+</h2>
+
+
+<p>
+
+Role :
+
+<strong>
+
+ADMIN
+
+</strong>
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- DASHBOARD OVERVIEW -->
+
+
+<div class="card">
+
+
+<h2>
+
+Dashboard Overview
+
+</h2>
+
+
+
+
+
+<div class="stats">
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="totalUsers">
+
+0
+
+</h2>
+
+
+<p>
+
+Total Users
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="totalSchools">
+
+0
+
+</h2>
+
+
+<p>
+
+Total Schools
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="totalForms">
+
+0
+
+</h2>
+
+
+<p>
+
+Total Forms
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 id="pendingForms">
+
+0
+
+</h2>
+
+
+<p>
+
+Pending Forms
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="stat-card">
+
+
+<h2 style="color:green;">
+
+ONLINE
+
+</h2>
+
+
+<p>
+
+System Status
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- SERVICES -->
+
+
+<div class="card">
+
+
+<h2>
+
+Available Services
+
+</h2>
+
+
+
+
+
+<div class="services-grid">
+
+
+
+
+
+<div class="service-card"
+onclick="openFormBuilder()">
+
+
+
+<div class="service-icon">
+
+📝
+
+</div>
+
+
+
+<h3>
+
+Form Builder
+
+</h3>
+
+
+<p>
+
+Create & Manage Dynamic Forms
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="service-card"
+onclick="openResponses()">
+
+
+
+<div class="service-icon">
+
+📋
+
+</div>
+
+
+
+<h3>
+
+Response Management
+
+</h3>
+
+
+<p>
+
+View Submitted Responses
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="service-card"
+onclick="openReports()">
+
+
+
+<div class="service-icon">
+
+📊
+
+</div>
+
+
+
+<h3>
+
+Reports MIS
+
+</h3>
+
+
+<p>
+
+Progress & Analysis Reports
+
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- RECENT ACTIVITY -->
+
+
+<div class="card">
+
+
+<h2>
+
+Recent Activity
+
+</h2>
+
+
+
+
+<div class="activity"
+id="activityBox">
+
+
+✅ Dashboard Loaded
+
+<br><br>
+
+System Ready
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+</div>
 <script>
 
 
 /* =====================
- LOAD USER
+ API CONFIGURATION
 ===================== */
 
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
+const API_URL =
 
+"https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
+
+
+
+
+
+/* =====================
+ LOAD DASHBOARD DATA
+===================== */
+
+
+async function loadDashboard(){
+
+
+try{
+
+
+let response = await fetch(
+
+API_URL,
+
+{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":
+
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+action:"dashboard"
+
+
+})
+
+
+}
+
+);
+
+
+
+
+
+let result = await response.json();
+
+
+
+
+
+console.log(
+"Dashboard API",
+result
+);
+
+
+
+
+
+
+if(result.success){
+
+
+
+let data = result.data;
+
+
+
+
+
+document.getElementById(
+"totalUsers"
+).innerHTML =
+
+data.totalUsers || 0;
+
+
+
+
+
+document.getElementById(
+"totalSchools"
+).innerHTML =
+
+data.totalSchools || 0;
+
+
+
+
+
+document.getElementById(
+"totalForms"
+).innerHTML =
+
+data.totalForms || 0;
+
+
+
+
+
+document.getElementById(
+"pendingForms"
+).innerHTML =
+
+data.pendingForms || 0;
+
+
+
+
+
+
+document.getElementById(
+"activityBox"
+).innerHTML =
+
+
+`
+
+✅ Dashboard Updated Successfully
+
+<br><br>
+
+👥 Users : ${data.totalUsers}
+
+<br>
+
+🏫 Schools : ${data.totalSchools}
+
+<br>
+
+📝 Forms : ${data.totalForms}
+
+<br>
+
+📋 Responses : ${data.totalResponses || 0}
+
+`;
+
+
+
+
+}
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Dashboard Error",
+error
+);
+
+
+
+document.getElementById(
+"activityBox"
+).innerHTML =
+
+
+"⚠ Dashboard API Connection Error";
+
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/* =====================
+ LOAD ADMIN USER
+===================== */
+
+
+function loadUser(){
 
 
 let user =
@@ -1236,59 +1214,6 @@ console.log(e);
 }
 
 
-
-});
-
-
-
-
-
-
-
-
-
-/* =====================
- FORM STATUS
-===================== */
-
-
-function openFormStatus(status){
-
-
-
-if(status==="active"){
-
-
-window.location.href =
-"forms.html?status=active";
-
-
-}
-
-
-
-else if(status==="deactive"){
-
-
-window.location.href =
-"forms.html?status=deactive";
-
-
-}
-
-
-
-else{
-
-
-window.location.href =
-"forms.html";
-
-
-}
-
-
-
 }
 
 
@@ -1307,8 +1232,22 @@ window.location.href =
 function openFormBuilder(){
 
 
-window.location.href=
+window.location.href =
+
 "forms.html";
+
+
+}
+
+
+
+
+function openResponses(){
+
+
+window.location.href =
+
+"responses.html";
 
 
 }
@@ -1319,7 +1258,8 @@ window.location.href=
 function openReports(){
 
 
-window.location.href=
+window.location.href =
+
 "reports.html";
 
 
@@ -1327,15 +1267,6 @@ window.location.href=
 
 
 
-
-function openProfile(){
-
-
-window.location.href=
-"profile.html";
-
-
-}
 
 
 
@@ -1351,20 +1282,50 @@ window.location.href=
 function logout(){
 
 
-sessionStorage.clear();
-
 
 localStorage.clear();
 
 
+sessionStorage.clear();
 
-window.location.href=
+
+
+
+window.location.href =
+
 "../index.html";
 
 
 
 }
 
+
+
+
+
+
+
+/* =====================
+ PAGE LOAD
+===================== */
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+function(){
+
+
+
+loadDashboard();
+
+
+loadUser();
+
+
+
+});
 
 
 </script>
@@ -1374,8 +1335,3 @@ window.location.href=
 </body>
 
 </html>
-
-
-
-
-</div>
