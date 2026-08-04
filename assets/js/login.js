@@ -1,25 +1,15 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  Login JavaScript
- CORS Compatible Version
+ FINAL STABLE VERSION
 ======================================================*/
 
 "use strict";
 
 
-
-/*=====================================================
- GOOGLE APPS SCRIPT WEB APP URL
-======================================================*/
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
-
-
-/*=====================================================
- ELEMENTS
-======================================================*/
 
 
 const form =
@@ -36,10 +26,6 @@ document.getElementById("loginBtn");
 
 
 
-/*=====================================================
- LOGIN SUBMIT
-======================================================*/
-
 
 form.addEventListener(
 "submit",
@@ -51,49 +37,26 @@ e.preventDefault();
 
 
 message.innerHTML="";
-message.style.color="red";
-
 
 
 const username =
-document
-.getElementById("username")
-.value
-.trim();
+document.getElementById("username")
+.value.trim();
 
 
 
 const password =
-document
-.getElementById("password")
-.value
-.trim();
+document.getElementById("password")
+.value.trim();
 
 
 
-if(!username){
-
+if(!username || !password){
 
 message.innerHTML =
-"Username Required";
-
-
-return;
-
-
-}
-
-
-
-if(!password){
-
-
-message.innerHTML =
-"Password Required";
-
+"Username / Password Required";
 
 return;
-
 
 }
 
@@ -101,8 +64,7 @@ return;
 
 button.disabled=true;
 
-button.innerHTML =
-"PLEASE WAIT...";
+button.innerHTML="PLEASE WAIT...";
 
 
 
@@ -110,31 +72,21 @@ try{
 
 
 const response =
-
 await fetch(
-
 API_URL,
-
 {
-
 
 method:"POST",
 
-
 headers:{
-
 
 "Content-Type":
 "text/plain;charset=utf-8"
 
-
 },
 
 
-
-body:
-
-JSON.stringify({
+body:JSON.stringify({
 
 action:"login",
 
@@ -151,89 +103,134 @@ password:password
 
 
 
-
-
-const responseText =
+const text =
 await response.text();
 
 
 
 console.log(
-"API RESPONSE:",
-responseText
+"LOGIN RESPONSE",
+text
+);
+
+
+
+const result =
+JSON.parse(text);
+
+
+
+
+if(result.success===true){
+
+
+
+let user =
+result.data || {};
+
+
+
+/*===============================
+ NORMALIZE USER DATA
+================================*/
+
+
+const USER = {
+
+
+username:
+user.username || username,
+
+
+name:
+user.name || "",
+
+
+role:
+String(
+user.role || ""
+)
+.toUpperCase(),
+
+
+schoolCode:
+
+user.schoolCode ||
+user.udise ||
+user.UDISECode ||
+"",
+
+
+
+schoolName:
+
+user.schoolName ||
+user.SchoolName ||
+"",
+
+
+
+nyayaPanchayat:
+
+user.nyayaPanchayat ||
+user.NyayaPanchayat ||
+""
+
+
+
+};
+
+
+
+
+console.log(
+"FINAL USER",
+USER
 );
 
 
 
 
 
-let result;
-
-
-
-try{
-
-
-result =
-JSON.parse(responseText);
-
-
-}
-
-catch(error){
-
-
-throw new Error(
-"Invalid Server Response"
-);
-
-
-}
-
-
-
-
-
-if(result.success === true){
-
-
-
-/* SAVE USER SESSION */
+/* SAVE SESSION */
 
 
 sessionStorage.setItem(
 
 "USER",
 
-JSON.stringify(
-result.data
-
-)
+JSON.stringify(USER)
 
 );
 
 
 
-message.style.color =
-"green";
+localStorage.setItem(
+
+"USER",
+
+JSON.stringify(USER)
+
+);
 
 
-message.innerHTML =
+
+
+
+message.style.color="green";
+
+
+message.innerHTML=
 "Login Successful";
-
 
 
 
 
 setTimeout(
 
-function(){
+()=>{
 
-
-redirect(
-result.data.role
-);
-
+redirect(USER.role);
 
 },
 
@@ -249,9 +246,7 @@ else{
 
 
 message.innerHTML =
-
 result.message ||
-
 "Invalid Login";
 
 
@@ -265,18 +260,11 @@ catch(error){
 
 
 console.error(
-"LOGIN ERROR:",
 error
 );
 
 
-
-message.style.color =
-"red";
-
-
 message.innerHTML =
-
 "Server Connection Failed";
 
 
@@ -286,9 +274,7 @@ message.innerHTML =
 
 button.disabled=false;
 
-
-button.innerHTML =
-"LOGIN";
+button.innerHTML="LOGIN";
 
 
 }
@@ -299,16 +285,12 @@ button.innerHTML =
 
 
 
-/*=====================================================
- ROLE REDIRECT
-======================================================*/
 
 
 function redirect(role){
 
 
 role =
-
 String(role)
 .toUpperCase();
 
@@ -317,13 +299,10 @@ String(role)
 switch(role){
 
 
-
 case "ADMIN":
 
-
-window.location.href =
+location.href=
 "admin/dashboard.html";
-
 
 break;
 
@@ -331,10 +310,8 @@ break;
 
 case "BEO":
 
-
-window.location.href =
+location.href=
 "beo/dashboard.html";
-
 
 break;
 
@@ -342,10 +319,8 @@ break;
 
 case "NODAL":
 
-
-window.location.href =
+location.href=
 "nodal/dashboard.html";
-
 
 break;
 
@@ -353,10 +328,8 @@ break;
 
 case "SCHOOL":
 
-
-window.location.href =
+location.href=
 "school/dashboard.html";
-
 
 break;
 
@@ -366,7 +339,7 @@ default:
 
 
 alert(
-"Invalid User Role : "
+"Invalid Role : "
 +
 role
 );
