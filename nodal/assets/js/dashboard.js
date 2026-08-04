@@ -1,7 +1,7 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
  NODAL DASHBOARD JS
- SCHOOL LIST FINAL VERSION
+ FINAL ENTERPRISE VERSION
 =====================================================*/
 
 "use strict";
@@ -9,7 +9,6 @@
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
-
 
 
 let ALL_SCHOOLS = [];
@@ -22,11 +21,13 @@ let NODAL_USER = {};
 
 document.addEventListener(
 "DOMContentLoaded",
-function(){
+()=>{
+
 
 loadUser();
 
 loadSchools();
+
 
 });
 
@@ -35,14 +36,20 @@ loadSchools();
 
 
 
+
+/*==============================
+ USER SESSION
+==============================*/
+
+
 function loadUser(){
 
 
 let data =
 
-localStorage.getItem("USER")
+sessionStorage.getItem("USER")
 ||
-sessionStorage.getItem("USER");
+localStorage.getItem("USER");
 
 
 
@@ -66,30 +73,40 @@ JSON.parse(data);
 
 document.getElementById(
 "userName"
-).innerHTML =
+).textContent =
 
-NODAL_USER.name ||
-NODAL_USER.username ||
+NODAL_USER.name
+||
+NODAL_USER.username
+||
 "NODAL USER";
+
 
 
 
 
 document.getElementById(
 "nyaya"
-).innerHTML =
+).textContent =
 
-NODAL_USER.nyayaPanchayat ||
-NODAL_USER.NyayaPanchayat ||
+NODAL_USER.nyayaPanchayat
+||
+NODAL_USER.NyayaPanchayat
+||
 "-";
 
 
 
 }
 
-catch(error){
+catch(e){
 
-console.error(error);
+console.error(
+"SESSION ERROR",
+e
+);
+
+location.href="../index.html";
 
 }
 
@@ -101,6 +118,13 @@ console.error(error);
 
 
 
+
+
+
+
+/*==============================
+ LOAD SCHOOL DATA
+==============================*/
 
 
 async function loadSchools(){
@@ -108,6 +132,7 @@ async function loadSchools(){
 
 
 const table =
+
 document.getElementById(
 "schoolList"
 );
@@ -126,7 +151,10 @@ Loading...
 
 
 
+
+
 try{
+
 
 
 const response =
@@ -146,11 +174,15 @@ headers:{
 
 },
 
-body:JSON.stringify({
+
+body:
+
+JSON.stringify({
 
 action:"schools"
 
 })
+
 
 }
 
@@ -169,13 +201,17 @@ JSON.parse(text);
 
 
 console.log(
-"SCHOOL DATA",
+"SCHOOL API",
 result
 );
 
 
 
-if(!result.success){
+
+
+if(
+!result.success
+){
 
 throw new Error(
 result.message
@@ -185,11 +221,26 @@ result.message
 
 
 
-let nyaya =
 
-NODAL_USER.nyayaPanchayat ||
-NODAL_USER.NyayaPanchayat ||
-"";
+
+
+let nodalNyaya =
+
+String(
+
+NODAL_USER.nyayaPanchayat
+||
+NODAL_USER.NyayaPanchayat
+||
+""
+
+)
+
+.trim()
+.toUpperCase();
+
+
+
 
 
 
@@ -197,19 +248,88 @@ NODAL_USER.NyayaPanchayat ||
 
 ALL_SCHOOLS =
 
+
 (result.data || [])
-.filter(function(item){
+
+.filter(
+
+school=>{
 
 
-let itemNyaya =
+let schoolNyaya =
 
-item.NyayaPanchayat ||
-item.nyayaPanchayat ||
-"";
+String(
+
+school.NyayaPanchayat
+||
+school.nyayaPanchayat
+||
+""
+
+)
+
+.trim()
+.toUpperCase();
 
 
 
-return itemNyaya === nyaya;
+return schoolNyaya===nodalNyaya;
+
+
+}
+
+)
+
+.map(item=>{
+
+
+return {
+
+udise:
+
+item.UDISECode
+||
+item.udise
+||
+"-",
+
+
+schoolName:
+
+item.SchoolName
+||
+item.schoolName
+||
+"-",
+
+
+schoolType:
+
+item.SchoolType
+||
+item.schoolType
+||
+"-",
+
+
+status:
+
+item.Status
+||
+item.status
+||
+"ACTIVE",
+
+
+nyayaPanchayat:
+
+item.NyayaPanchayat
+||
+item.nyayaPanchayat
+||
+""
+
+};
 
 
 });
@@ -218,11 +338,15 @@ return itemNyaya === nyaya;
 
 
 
+
+
 document.getElementById(
 "schoolCount"
-).innerHTML =
+).textContent =
 
 ALL_SCHOOLS.length;
+
+
 
 
 
@@ -234,33 +358,15 @@ ALL_SCHOOLS
 
 
 
-let search =
-
-document.getElementById(
-"schoolSearch"
-);
-
-
-
-if(search){
-
-
-search.addEventListener(
-
-"input",
-
-filterSchools
-
-);
-
-
-}
+bindSearch();
 
 
 
 }
+
 
 catch(error){
+
 
 
 console.error(
@@ -275,7 +381,7 @@ table.innerHTML =
 `
 <tr>
 <td colspan="4">
-Server Error
+Server Connection Error
 </td>
 </tr>
 `;
@@ -294,6 +400,126 @@ Server Error
 
 
 
+
+
+/*==============================
+ SEARCH
+==============================*/
+
+
+function bindSearch(){
+
+
+const box =
+
+document.getElementById(
+"schoolSearch"
+);
+
+
+
+if(!box)
+return;
+
+
+
+box.oninput =
+filterSchools;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function filterSchools(){
+
+
+let value =
+
+document.getElementById(
+"schoolSearch"
+)
+
+.value
+
+.toLowerCase()
+
+.trim();
+
+
+
+
+
+let data =
+
+
+ALL_SCHOOLS.filter(
+
+item=>{
+
+
+let text =
+
+
+(
+
+item.udise+
+
+" "+
+
+item.schoolName+
+
+" "+
+
+item.schoolType+
+
+" "+
+
+item.nyayaPanchayat
+
+)
+
+.toLowerCase();
+
+
+
+return text.includes(value);
+
+
+
+}
+
+
+);
+
+
+
+
+renderSchools(data);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/*==============================
+ RENDER TABLE
+==============================*/
 
 
 function renderSchools(data){
@@ -313,24 +539,21 @@ table.innerHTML="";
 
 
 
-if(data.length===0){
+
+if(
+data.length===0
+){
 
 
 table.innerHTML=
 
 `
 <tr>
-
 <td colspan="4">
-
 No School Found
-
 </td>
-
 </tr>
-
 `;
-
 
 return;
 
@@ -339,48 +562,38 @@ return;
 
 
 
-data.forEach(function(item){
 
+data.forEach(
+
+item=>{
 
 
 table.innerHTML +=
 
-
 `
 
-<tr>
+<tr onclick="openSchool('${item.udise}')">
 
 
 <td>
-
-${item.UDISECode || item.udise || "-"}
-
+${item.udise}
 </td>
-
 
 
 <td>
-
-${item.SchoolName || item.schoolName || "-"}
-
+${item.schoolName}
 </td>
-
 
 
 <td>
-
-${item.SchoolType || item.schoolType || "-"}
-
+${item.schoolType}
 </td>
-
 
 
 <td>
 
 <span class="status">
-
-${item.Status || item.status || "ACTIVE"}
-
+${item.status}
 </span>
 
 </td>
@@ -404,58 +617,32 @@ ${item.Status || item.status || "ACTIVE"}
 
 
 
-
-function filterSchools(){
-
-
-
-let value =
-
-document.getElementById(
-"schoolSearch"
-)
-.value
-.toLowerCase()
-.trim();
+/*==============================
+ FUTURE FORM BUILDER LINK
+==============================*/
 
 
+function openSchool(udise){
 
 
-let result =
+sessionStorage.setItem(
 
-ALL_SCHOOLS.filter(function(item){
+"SELECTED_SCHOOL",
 
+udise
 
-let text =
-
-(
-
-item.UDISECode +
-
-" " +
-
-item.SchoolName +
-
-" " +
-
-item.SchoolType
-
-)
-
-.toLowerCase();
+);
 
 
-
-return text.includes(value);
-
+// Future Form Builder
 
 
-});
-
-
-
-renderSchools(result);
-
+// location.href="../forms/index.html";
 
 
 }
+
+
+
+window.loadSchools =
+loadSchools;
