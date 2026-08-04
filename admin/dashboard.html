@@ -1,4 +1,6 @@
-<!-- AVAILABLE SERVICES -->
+<!-- ================================
+     AVAILABLE SERVICES
+================================ -->
 
 <div class="card">
 
@@ -10,6 +12,8 @@ Available Services
 <div class="services-grid">
 
 
+<!-- FORM BUILDER -->
+
 <div class="service-card"
 onclick="openFormBuilder()">
 
@@ -18,6 +22,214 @@ onclick="openFormBuilder()">
 📝
 </div>
 
+
+<h3>
+Form Builder
+</h3>
+
+
+<p>
+Create & Manage Dynamic Forms
+</p>
+
+
+</div>
+
+
+
+
+<!-- REPORTS -->
+
+<div class="service-card"
+onclick="openReports()">
+
+
+<div class="service-icon">
+📊
+</div>
+
+
+<h3>
+Reports
+</h3>
+
+
+<p>
+Progress & Analysis Reports
+</p>
+
+
+</div>
+
+
+
+
+<!-- PROFILE -->
+
+<div class="service-card"
+onclick="openProfile()">
+
+
+<div class="service-icon">
+👤
+</div>
+
+
+<h3>
+Profile
+</h3>
+
+
+<p>
+User Profile Management
+</p>
+
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+<!-- ================================
+     SERVICE STYLE
+================================ -->
+
+
+<style>
+
+
+.services-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.service-card{
+
+
+background:#f5f8ff;
+
+border-top:4px solid #0d47a1;
+
+padding:30px;
+
+text-align:center;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+
+}
+
+
+
+.service-card:hover{
+
+
+transform:translateY(-5px);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.15);
+
+
+}
+
+
+
+.service-icon{
+
+font-size:40px;
+
+margin-bottom:10px;
+
+}
+
+
+
+.service-card h3{
+
+color:#0d47a1;
+
+margin:10px 0;
+
+}
+
+
+
+.service-card p{
+
+color:#555;
+
+font-size:15px;
+
+}
+
+
+
+@media(max-width:800px){
+
+
+.services-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+}
+
+
+</style>
+
+
+
+<!-- ================================
+     SERVICE SCRIPT
+================================ -->
+
+
+<script>
+
+
+function openFormBuilder(){
+
+window.location.href="forms.html";
+
+}
+
+
+
+function openReports(){
+
+window.location.href="reports.html";
+
+}
+
+
+
+function openProfile(){
+
+window.location.href="profile.html";
+
+}
+
+
+</script>
 
 <h3>
 Form Builder
