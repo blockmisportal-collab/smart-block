@@ -1,1 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>
+SMART FORM ENTERPRISE v6.1 - NODAL Dashboard
+</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
+
+background:#f4f7fb;
+
+}
+
+
+
+.header{
+
+background:#0d47a1;
+color:white;
+
+padding:20px 30px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+
+
+.header h1{
+
+margin:0;
+
+}
+
+
+
+.btn{
+
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+
+.logout{
+
+background:#d32f2f;
+color:white;
+
+}
+
+
+
+.container{
+
+padding:25px;
+
+}
+
+
+
+.card{
+
+background:white;
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.1);
+
+margin-bottom:20px;
+
+}
+
+
+
+.info{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:20px;
+
+}
+
+
+
+.box{
+
+background:#f1f6ff;
+
+padding:20px;
+
+border-radius:10px;
+
+}
+
+
+
+.label{
+
+color:#0d47a1;
+
+font-weight:bold;
+
+}
+
+
+
+.value{
+
+font-size:20px;
+
+margin-top:10px;
+
+}
+
+
+
+.services button{
+
+margin-right:10px;
+
+background:#0d47a1;
+
+color:white;
+
+}
+
+
+
+@media(max-width:800px){
+
+.info{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="header">
+
+
+<div>
+
+<h1>
+SMART FORM ENTERPRISE v6.1
+</h1>
+
+
+<p>
+NODAL DASHBOARD
+</p>
+
+
+</div>
+
+
+
+<button 
+class="btn logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+
+<h2>
+Welcome <span id="userName">NODAL USER</span>
+</h2>
+
+
+
+<div class="info">
+
+
+
+<div class="box">
+
+<div class="label">
+Nyaya Panchayat
+</div>
+
+<div class="value" id="nyaya">
+
+-
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="box">
+
+<div class="label">
+Assigned Schools
+</div>
+
+<div class="value" id="schoolCount">
+
+0
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="box">
+
+<div class="label">
+Role
+</div>
+
+<div class="value">
+
+NODAL
+
+</div>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Available Services
+</h2>
+
+
+
+<div class="services">
+
+
+<button onclick="openForms()">
+📝 Forms
+</button>
+
+
+<button onclick="openReports()">
+📊 Reports
+</button>
+
+
+<button onclick="openProfile()">
+👤 Profile
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script src="assets/js/dashboard.js"></script>
+
+
+<script>
+
+
+function logout(){
+
+sessionStorage.clear();
+
+localStorage.clear();
+
+window.location.href="../index.html";
+
+}
+
+
+
+function openForms(){
+
+alert("Form Builder Coming Soon");
+
+}
+
+
+function openReports(){
+
+alert("Reports Module Coming Soon");
+
+}
+
+
+function openProfile(){
+
+alert("Profile Module Coming Soon");
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
