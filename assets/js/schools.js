@@ -1,58 +1,44 @@
 /*=====================================================
  SMART FORM ENTERPRISE v6.1
- SCHOOL MANAGEMENT JS
- FINAL FIXED VERSION
+ SCHOOL MANAGEMENT JAVASCRIPT
+ File : schools.js
+ FINAL VERSION
 =====================================================*/
+
 
 "use strict";
 
 
+
 const API_URL =
+
 "https://script.google.com/macros/s/AKfycbwKTmGemqiI-Lyd-YQCIVaxkCLZfYUyENpSuKL_B7z7ZMLAmv_xtL7LbciUVI2YI9JIfw/exec";
 
 
-let ALL_SCHOOLS = [];
 
+
+let SCHOOLS=[];
+
+
+
+
+
+
+
+
+/*===============================
+ LOAD SCHOOLS
+================================*/
 
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
-
+function(){
 
 loadSchools();
 
-
-const search =
-document.getElementById("searchBox");
-
-
-if(search){
-
-search.addEventListener(
-"input",
-filterSchools
-);
-
-}
-
-
-
-const nyaya =
-document.getElementById("nyayaFilter");
-
-
-if(nyaya){
-
-nyaya.addEventListener(
-"change",
-filterSchools
-);
-
-}
-
-
 });
+
 
 
 
@@ -62,37 +48,28 @@ filterSchools
 async function loadSchools(){
 
 
-const tbody =
-document.getElementById(
-"schoolTableBody"
-);
-
-
-tbody.innerHTML =
-`
-<tr>
-<td colspan="5">
-Loading...
-</td>
-</tr>
-`;
-
-
 
 try{
 
 
+
 const response =
-await fetch(
-API_URL,
-{
+
+await fetch(API_URL,{
 
 method:"POST",
 
+
 headers:{
+
+
 "Content-Type":
+
 "text/plain;charset=utf-8"
+
+
 },
+
 
 body:JSON.stringify({
 
@@ -100,147 +77,79 @@ action:"schools"
 
 })
 
-}
 
-);
-
+});
 
 
-const text =
-await response.text();
 
-
-console.log(
-"API RESPONSE",
-text
-);
 
 
 
 const result =
-JSON.parse(text);
 
+JSON.parse(
 
-
-if(
-!result.success
-){
-
-throw new Error(
-result.message
-);
-
-}
-
-
-
-ALL_SCHOOLS =
-(result.data || []).map(
-row=>{
-
-
-return {
-
-
-udise:
-String(
-row.UDISECode ??
-row.udise ??
-""
-),
-
-
-
-schoolName:
-String(
-row.SchoolName ??
-row.schoolName ??
-""
-),
-
-
-
-nyayaPanchayat:
-String(
-row.NyayaPanchayat ??
-row.nyayaPanchayat ??
-""
-),
-
-
-
-schoolType:
-String(
-row.SchoolType ??
-row.schoolType ??
-""
-),
-
-
-
-status:
-String(
-row.Status ??
-row.status ??
-"ACTIVE"
-)
-
-
-
-};
-
-
-}
+await response.text()
 
 );
 
 
 
-console.log(
-"FINAL DATA",
-ALL_SCHOOLS
-);
+
+
+
+if(result.success){
+
+
+
+SCHOOLS = result.data;
 
 
 
 document.getElementById(
 "totalSchools"
-).innerText =
-ALL_SCHOOLS.length;
+).innerHTML =
+
+SCHOOLS.length;
 
 
 
-createNyayaList();
+createNyayaFilter();
 
 
 
-renderSchools(
-ALL_SCHOOLS
+displaySchools(SCHOOLS);
+
+
+
+}
+
+else{
+
+
+alert(result.message);
+
+
+}
+
+
+
+}
+
+
+catch(error){
+
+
+console.log(error);
+
+
+alert(
+"Server Connection Failed"
 );
 
 
-
 }
 
-catch(err){
-
-
-console.error(
-"School Load Error",
-err
-);
-
-
-tbody.innerHTML =
-`
-<tr>
-<td colspan="5">
-${err.message}
-</td>
-</tr>
-`;
-
-}
 
 
 }
@@ -252,36 +161,62 @@ ${err.message}
 
 
 
-function createNyayaList(){
 
 
-const select =
+/*===============================
+ NYAYA FILTER
+================================*/
+
+
+function createNyayaFilter(){
+
+
+
+let select =
+
 document.getElementById(
 "nyayaFilter"
 );
 
 
 
-if(!select)
-return;
+
+
+let list=[];
 
 
 
-let old =
-select.value;
+
+
+SCHOOLS.forEach(function(item){
 
 
 
-let list =
-[
-...new Set(
-ALL_SCHOOLS
-.map(
-x=>x.nyayaPanchayat
+if(
+
+item.NyayaPanchayat
+
+&&
+
+!list.includes(
+item.NyayaPanchayat
 )
-.filter(Boolean)
-)
-];
+
+){
+
+
+list.push(
+item.NyayaPanchayat
+);
+
+
+}
+
+
+
+});
+
+
 
 
 
@@ -289,112 +224,182 @@ list.sort();
 
 
 
-select.innerHTML =
-`
-<option value="">
-All Nyaya Panchayat
-</option>
-`;
+
+
+list.forEach(function(nyaya){
 
 
 
-list.forEach(
-item=>{
+let option =
 
-
-select.innerHTML +=
-`
-<option value="${item}">
-${item}
-</option>
-`;
-
-
-}
-
+document.createElement(
+"option"
 );
 
 
 
-if(
-list.includes(old)
-){
+option.value=nyaya;
 
-select.value=old;
+
+option.textContent=nyaya;
+
+
+
+select.appendChild(option);
+
+
+
+});
+
+
 
 }
 
 
 
-}
 
 
 
 
 
 
+/*===============================
+ DISPLAY SCHOOL
+================================*/
+
+
+function displaySchools(data){
 
 
 
-function renderSchools(data){
-
-
-const tbody =
-document.getElementById(
-"schoolTableBody"
-);
+let html="";
 
 
 
-tbody.innerHTML="";
+
+
+if(data.length===0){
 
 
 
-if(
-data.length===0
-){
+html=`
 
-tbody.innerHTML=
-`
 <tr>
-<td colspan="5">
+
+<td colspan="6">
+
 No School Found
+
 </td>
+
 </tr>
+
 `;
 
-return;
+
 
 }
 
 
 
 
-data.forEach(
-school=>{
 
 
-tbody.innerHTML +=
-`
+data.forEach(function(school){
+
+
+
+html +=`
+
 
 <tr>
 
-<td>${school.udise}</td>
 
-<td>${school.schoolName}</td>
-
-<td>${school.nyayaPanchayat}</td>
-
-<td>${school.schoolType}</td>
 
 <td>
-<span class="status">
-${school.status}
-</span>
+
+${school.UDISECode}
+
 </td>
 
 
+
+
+<td>
+
+${school.SchoolName}
+
+</td>
+
+
+
+
+<td>
+
+${school.NyayaPanchayat}
+
+</td>
+
+
+
+
+<td>
+
+${school.SchoolType}
+
+</td>
+
+
+
+
+<td>
+
+
+<span class="${
+String(school.Status)
+.toUpperCase()==="ACTIVE"
+?
+"active"
+:
+"inactive"
+}">
+
+
+${school.Status}
+
+
+</span>
+
+
+
+</td>
+
+
+
+
+
+<td>
+
+
+<button
+
+class="btn refresh"
+
+onclick="viewSchool('${school.UDISECode}')">
+
+
+View
+
+
+</button>
+
+
+</td>
+
+
+
 </tr>
+
 
 `;
 
@@ -403,6 +408,17 @@ ${school.status}
 });
 
 
+
+
+
+document.getElementById(
+
+"schoolTableBody"
+
+).innerHTML=html;
+
+
+
 }
 
 
@@ -412,84 +428,182 @@ ${school.status}
 
 
 
+
+/*===============================
+ FILTER
+================================*/
 
 
 function filterSchools(){
 
 
+
 let search =
-(
+
 document.getElementById(
-"searchBox"
-)?.value ||
-""
+"searchSchool"
 )
-.toLowerCase()
-.trim();
+.value
+.toLowerCase();
+
 
 
 
 
 let nyaya =
+
 document.getElementById(
 "nyayaFilter"
-)?.value ||
-"";
-
-
-
-
-
-let result =
-ALL_SCHOOLS.filter(
-school=>{
-
-
-let data =
-
-(
-school.udise+
-" "+
-school.schoolName+
-" "+
-school.nyayaPanchayat+
-" "+
-school.schoolType
 )
-
-.toLowerCase();
-
+.value;
 
 
-return
 
-data.includes(search)
+
+
+let status =
+
+document.getElementById(
+"statusFilter"
+)
+.value;
+
+
+
+
+
+
+
+let filtered =
+
+SCHOOLS.filter(function(item){
+
+
+
+return(
+
+
+
+
+String(item.UDISECode)
+.toLowerCase()
+.includes(search)
+
+
+
+
+||
+
+String(item.SchoolName)
+.toLowerCase()
+.includes(search)
+
+
+
+
+)
 
 &&
 
+
+
+
 (
-nyaya==="" ||
-school.nyayaPanchayat===nyaya
+
+nyaya===""
+
+||
+
+item.NyayaPanchayat===nyaya
+
+
+)
+
+&&
+
+
+
+
+(
+
+status===""
+
+||
+
+
+String(item.Status)
+.toUpperCase()
+===status
+
+
+
+);
+
+
+
+});
+
+
+
+
+
+
+
+displaySchools(filtered);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*===============================
+ VIEW SCHOOL
+================================*/
+
+
+function viewSchool(code){
+
+
+alert(
+
+"School UDISE Code : "
+
++
+
+code
+
 );
 
 
 
 }
 
-);
 
 
 
-renderSchools(
-result
-);
+
+
+
+
+
+/*===============================
+ BACK
+================================*/
+
+
+function goBack(){
+
+
+window.location.href=
+
+"dashboard.html";
 
 
 }
-
-
-
-
-
-window.loadSchools =
-loadSchools;
