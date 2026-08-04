@@ -34,8 +34,8 @@ Create & Manage Dynamic Forms
 
 
 
-
-<div class="service-card">
+<div class="service-card"
+onclick="openReports()">
 
 
 <div class="service-icon">
@@ -58,8 +58,8 @@ Progress & Analysis Reports
 
 
 
-
-<div class="service-card">
+<div class="service-card"
+onclick="openProfile()">
 
 
 <div class="service-icon">
@@ -84,11 +84,20 @@ User Profile Management
 </div>
 
 </div>
+
+
+
+
+
+<style>
+
+
 .services-grid{
 
 display:grid;
 
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:
+repeat(3,1fr);
 
 gap:20px;
 
@@ -96,7 +105,9 @@ gap:20px;
 
 
 
+
 .service-card{
+
 
 background:#f5f8ff;
 
@@ -112,18 +123,24 @@ cursor:pointer;
 
 transition:.3s;
 
+
 }
 
 
 
 .service-card:hover{
 
+
 transform:translateY(-5px);
 
+
 box-shadow:
+
 0 5px 15px rgba(0,0,0,.15);
 
+
 }
+
 
 
 
@@ -153,19 +170,58 @@ color:#555;
 
 @media(max-width:800px){
 
+
 .services-grid{
 
 grid-template-columns:1fr;
 
 }
 
+
 }
+
+
+</style>
+
+
+
+
+
 <script>
+
 
 function openFormBuilder(){
 
-window.location.href="forms.html";
+
+window.location.href=
+"forms.html";
+
 
 }
+
+
+
+function openReports(){
+
+
+alert(
+"Reports Module Coming Soon"
+);
+
+
+}
+
+
+
+function openProfile(){
+
+
+alert(
+"Profile Module Coming Soon"
+);
+
+
+}
+
 
 </script>
